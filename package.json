@@ -1,18 +1,15 @@
 {
 	"name": "chrelyonly-wechat-bot",
 	"version": "1.0.0",
-	"main": "index.js",
 	"author": "chrelyonly",
 	"type": "module",
-	"bin": "./index.js",
 	"scripts": {
-		"dev": "node ./index.js"
+		"dev": "node main.js"
 	},
 	"dependencies": {
 		"express": "^4.18.3",
 		"file-box": "^1.4.15",
 		"node-cache": "^5.1.2",
-		"pkg": "^5.8.1",
 		"qrcode-terminal": "^0.12.0",
 		"wechaty": "^1.20.2",
 		"wechaty-puppet-wechat": "^1.18.4"

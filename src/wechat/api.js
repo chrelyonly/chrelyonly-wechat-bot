@@ -42,6 +42,7 @@ export async  function onMessage(message,bot) {
                 log.info("不支持的消息类型")
                 return;
             }
+            log.info('消息id:',message.id)
             log.info('消息类型:',txtType)
             log.info('群名称:',res + ",收到群消息:" + talker.name() + ",他/她/它说:" + msg)
             // 6 是图片
