@@ -84,12 +84,10 @@ export async  function onMessage(message,bot) {
                 //     room.say(fileBox)
                 // }
                 //
-                // if (msg.toString().includes("来点真视频")){
-                //     // 生成1到10之间的随机整数
-                //     let randomNumber = Math.floor(Math.random() * 4) + 1 + 10;
-                //     const fileBox = FileBox.fromFile("C:\\Users\\chrelyonly\\Downloads\\testqqq\\" + randomNumber + ".mp4")
-                //     room.say(fileBox)
-                // }
+                if (msg.toString().includes("点歌qqq")){
+                    const fileBox = FileBox.fromFile("C:\\Users\\chrelyonly\\Downloads\\testqqq\\" + 1 + ".mp3")
+                    room.say(fileBox)
+                }
                 //     执行复读机,复读机只复读文字消息
                 // room.say(message.text() + "\n-测试")
             }
