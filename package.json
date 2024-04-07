@@ -3,6 +3,8 @@
 	"version": "1.0.0",
 	"author": "chrelyonly",
 	"type": "module",
+	"main": "main.js",
+	"bin": "main.js",
 	"scripts": {
 		"dev": "node main.js",
 		"pnpm-install": "pnpm install"
