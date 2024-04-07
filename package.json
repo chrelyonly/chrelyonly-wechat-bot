@@ -4,7 +4,8 @@
 	"author": "chrelyonly",
 	"type": "module",
 	"scripts": {
-		"dev": "node main.js"
+		"dev": "node main.js",
+		"pnpm-install": "pnpm install"
 	},
 	"dependencies": {
 		"express": "^4.18.3",
