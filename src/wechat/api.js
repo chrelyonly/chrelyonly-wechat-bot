@@ -79,16 +79,11 @@ export async  function onMessage(message,bot) {
                 // 如果缓存包含测试字符串则发送视频
                 // if (msg.toString().includes("来点视频")){
                 //     // 生成1到10之间的随机整数
-                //     let randomNumber = Math.floor(Math.random() * 10) + 1;
+                //     let randomNumber = Math.floor(Math.random() * 10) + 1;WechatGroup
                 //     const fileBox = FileBox.fromFile("C:\\Users\\chrelyonly\\Downloads\\testqqq\\" + randomNumber + ".jpg")
                 //     room.say(fileBox)
                 // }
                 //
-                if (msg.toString().includes("点歌qqq")){
-                    const fileBox = FileBox.fromFile("C:\\Users\\chrelyonly\\Downloads\\testqqq\\" + 1 + ".mp3")
-                    room.say(fileBox)
-                }
-                //     执行复读机,复读机只复读文字消息
                 // room.say(message.text() + "\n-测试")
             }
             if(txtType === 13){
