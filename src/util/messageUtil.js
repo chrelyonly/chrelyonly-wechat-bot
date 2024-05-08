@@ -2,7 +2,7 @@ import {FileBox} from "file-box";
 import {http} from "./https.js";
 
 // 自定义更据消息回复事件
-export async function myOnMessage(message,room, bot) {
+export function myOnMessage(message,room, bot) {
     // 根据消息内容回复
     let text = message.text();
     // 获取发送者
@@ -22,29 +22,28 @@ export async function myOnMessage(message,room, bot) {
             "name": apiItem.msg,
             "msg": apiItem.msg,
         }
-        http(apiItem.url,"get",params,apiItem.requestType,{}).then( res=> {
-            const someMembers = [talker.id]
-            if (apiItem.type === 1){
-                room.say(res.data.data,...someMembers)
-            }else if (apiItem.type === 2){
-                room.say(res.data.data.output,...someMembers)
-            }else if (apiItem.type === 3){
-                const fileBox = FileBox.fromBuffer(res.data,"1.png")
-                room.say(fileBox,...someMembers)
-            }else if (apiItem.type === 4){
-                const fileBox = FileBox.fromUrl(res.data.text,"1.png")
-                room.say(fileBox,...someMembers)
-            }else if (apiItem.type === 5){
-                const fileBox = FileBox.fromUrl(res.data.data.image,"1.png")
-                room.say(fileBox,...someMembers)
-            }else if (apiItem.type === 6){
-                const fileBox = FileBox.fromUrl(res.data.data.data[0],"1.png")
-                room.say(fileBox,...someMembers)
-            }else if (apiItem.type === 7) {
-                room.say(res.data,...someMembers)
-            }else if (apiItem.type === 8){
-                const fileBox = FileBox.fromBuffer(res.data,"1.gif")
-                room.say(fileBox,...someMembers)
+        http(apiItem.url,"get",params,apiItem.requestType,{}).then( res => {
+            if (apiItem.type === 1) {
+                room.say(res.data.data)
+            } else if (apiItem.type === 2) {
+                room.say(res.data.data.output)
+            } else if (apiItem.type === 3) {
+                const fileBox = FileBox.fromBuffer(res.data, "1.png")
+                room.say(fileBox)
+            } else if (apiItem.type === 4) {
+                const fileBox = FileBox.fromUrl(res.data.text, "1.png")
+                room.say(fileBox)
+            } else if (apiItem.type === 5) {
+                const fileBox = FileBox.fromUrl(res.data.data.image, "1.png")
+                room.say(fileBox)
+            } else if (apiItem.type === 6) {
+                const fileBox = FileBox.fromUrl(res.data.data.data[0], "1.png")
+                room.say(fileBox)
+            } else if (apiItem.type === 7) {
+                room.say(res.data)
+            } else if (apiItem.type === 8) {
+                const fileBox = FileBox.fromBuffer(res.data, "1.gif")
+                room.say(fileBox)
             }
         })
     }
