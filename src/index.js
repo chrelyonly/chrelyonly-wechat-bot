@@ -16,8 +16,8 @@ bot.on('room-topic', roomTopic)
 // 异常
 bot.on('error', onError)
 // 收到消息
-bot.on('message', async message => {
-    await onMessage(message, bot)
+bot.on('message',  message => {
+     onMessage(message, bot)
 })
     bot
         .start()

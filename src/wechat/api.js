@@ -5,6 +5,7 @@ import qrTerminal from "qrcode-terminal";
 // 引入缓存工具
 import {getCache, setCache} from "../util/cacheUtil.js";
 import {FileBox} from "file-box";
+import {myOnMessage} from "../util/messageUtil.js";
 export function onScan(qrcode, status) {
     if (status === ScanStatus.Waiting || status === ScanStatus.Timeout) {
         // 在控制台显示二维码
@@ -26,7 +27,7 @@ export function roomTopic(room, topic, oldTopic, changer) {
 /**
  * 消息监听
  */
-export async  function onMessage(message,bot) {
+export  function onMessage(message,bot) {
     // 消息类型是否为文本
     const txtType = message.type()
     // 获取发送者
@@ -45,7 +46,7 @@ export async  function onMessage(message,bot) {
             log.info('消息id:',message.id)
             log.info('消息类型:',txtType)
             log.info('群名称:',res + ",收到群消息:" + talker.name() + ",他/她/它说:" + msg)
-            // 6 是图片
+            // 6 正常发送的图片
             if(txtType === 6){
                 // 保存缓存
                 message.toFileBox().then(function (res) {
@@ -75,23 +76,11 @@ export async  function onMessage(message,bot) {
                     text: msg
                 }
                 setCache(message.id,JSON.stringify(cacheJson))
+                myOnMessage(message,room,bot)
 
-                // 如果缓存包含测试字符串则发送视频
-                // if (msg.toString().includes("来点视频")){
-                //     // 生成1到10之间的随机整数
-                //     let randomNumber = Math.floor(Math.random() * 10) + 1;WechatGroup
-                //     const fileBox = FileBox.fromFile("C:\\Users\\chrelyonly\\Downloads\\testqqq\\" + randomNumber + ".jpg")
-                //     room.say(fileBox)
-                // }
-                //
-                // room.say(message.text() + "\n-测试")
             }
             if(txtType === 13){
-            //     撤回事件
                 let text = msg;
-                // console.log("撤回消息")
-                // console.log(text)
-                // 获取撤回的消息id,获取旧oldmsgid的值
                 let reg = /<msgid>(.*?)<\/msgid>/;
                 let result = reg.exec(text);
                 if(result){
@@ -100,7 +89,6 @@ export async  function onMessage(message,bot) {
                     // 从缓存中获取消息
                     let cacheTxt = getCache(oldmsgid)
                     if(cacheTxt){
-
                         // 由于是xml格式,获取replacemsg的值
                         reg = /<replacemsg><!\[CDATA\[(.*?)]]><\/replacemsg>/;
                         result = reg.exec(text);
