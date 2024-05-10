@@ -10,8 +10,8 @@
 		"pnpm-install": "pnpm install"
 	},
 	"dependencies": {
+		"express": "^4.19.2",
 		"axios": "^1.6.8",
-		"express": "^4.18.3",
 		"file-box": "^1.4.15",
 		"node-cache": "^5.1.2",
 		"qrcode-terminal": "^0.12.0",
