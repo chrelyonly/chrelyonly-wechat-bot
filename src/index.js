@@ -1,12 +1,19 @@
 // 导入微信包
 import {WechatyBuilder,log} from 'wechaty'
 import {onError, onLogin, onMessage, onScan, roomTopic} from "./wechat/api.js";
+import {roomEventInit} from "./util/roomUtil.js";
+import {saveFileToJson} from "./util/fileUtil.js";
 
 // 初始化机器人
 const bot = WechatyBuilder.build({
     name: "cm",
+    puppet: 'wechaty-puppet-wechat4u',
+    puppetOptions: {
+        uos: true,
+    },
 })
-
+// 初始化房间事件
+roomEventInit(bot)
 // 扫码
 bot.on('scan', onScan)
 // 登录
@@ -16,8 +23,8 @@ bot.on('room-topic', roomTopic)
 // 异常
 bot.on('error', onError)
 // 收到消息
-bot.on('message', async message => {
-    await onMessage(message, bot)
+bot.on('message',  message => {
+     onMessage(message, bot)
 })
     bot
         .start()
