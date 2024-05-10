@@ -6,6 +6,8 @@ import qrTerminal from "qrcode-terminal";
 import {getCache, setCache} from "../util/cacheUtil.js";
 import {FileBox} from "file-box";
 import {myOnMessage} from "../util/messageUtil.js";
+import {roomEventInit} from "../util/roomUtil.js";
+import {saveWaterGroups} from "../util/waterGroupsUtil.js";
 export function onScan(qrcode, status) {
     if (status === ScanStatus.Waiting || status === ScanStatus.Timeout) {
         // 在控制台显示二维码
@@ -37,6 +39,14 @@ export  function onMessage(message,bot) {
     if (room) {
         //     判断群名称
         room.topic().then(function (res) {
+            // 定义支持的群
+            // if (!res.toString().includes("🍓酱の后🌸园  SVIP内部群1")){
+            //     // 不支持的群
+            //     log.info("不支持的群")
+            //     return;
+            // }
+            // 保存水群次数
+            saveWaterGroups(res,room,talker)
             let msg = message.text();
             if (msg === ""){
             //    不支持的消息类型
@@ -76,6 +86,7 @@ export  function onMessage(message,bot) {
                     text: msg
                 }
                 setCache(message.id,JSON.stringify(cacheJson))
+                // 自定义文本回复内容
                 myOnMessage(message,room,bot)
 
             }
@@ -129,7 +140,7 @@ export  function onMessage(message,bot) {
  */
 export function onError(msg) {
     log.info("启动失败,请检查是否实名,是否绑定手机号,是否绑定银行卡")
-    log.info(msg)
+    console.log(msg)
     // 停止node
     process.exit()
 }
