@@ -3,6 +3,7 @@ import {WechatyBuilder,log} from 'wechaty'
 import {onError, onLogin, onMessage, onScan, roomTopic} from "./wechat/api.js";
 import {roomEventInit} from "./util/roomUtil.js";
 import {saveFileToJson} from "./util/fileUtil.js";
+import {isTimeTo} from "./util/pointUtil.js";
 
 // 初始化机器人
 const bot = WechatyBuilder.build({
@@ -38,3 +39,8 @@ bot.on('message',  message => {
             log.info("启动失败")
             console.error(e)
         })
+// 一秒执行一次判断是否到整点
+const interval = setInterval(function() {
+    isTimeTo(bot);
+}, 1000);
+
