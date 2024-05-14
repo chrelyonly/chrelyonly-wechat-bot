@@ -53,9 +53,9 @@ export  function onMessage(message,bot) {
                 log.info("不支持的消息类型")
                 return;
             }
-            log.info('消息id:',message.id)
-            log.info('消息类型:',txtType)
-            log.info('群名称:',res + ",收到群消息:" + talker.name() + ",他/她/它说:" + msg)
+            // log.info('消息id:',message.id)
+            // log.info('消息类型:',txtType)
+            // log.info('群名称:',res + ",收到群消息:" + talker.name() + ",他/她/它说:" + msg)
             // 6 正常发送的图片
             if(txtType === 6){
                 // 保存缓存
@@ -139,8 +139,8 @@ export  function onMessage(message,bot) {
  * 失败操作
  */
 export function onError(msg) {
-    log.info("启动失败,请检查是否实名,是否绑定手机号,是否绑定银行卡")
+    // log.info("启动失败,请检查是否实名,是否绑定手机号,是否绑定银行卡")
     console.log(msg)
     // 停止node
-    process.exit()
+    // process.exit()
 }
