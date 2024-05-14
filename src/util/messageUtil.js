@@ -120,7 +120,8 @@ export function myOnMessage(message,room, bot) {
             }else if (apiItem.type === 13) {
                 room.say(res.data.data.Msg, talker)
             }else if (apiItem.type === 14) {
-                room.say(res.data.data.Msg, talker)
+                const fileBox = FileBox.fromStream(res.data, "1.png")
+                room.say(fileBox)
             }
         })
     }
