@@ -204,16 +204,6 @@ export const apiList = [
         requestMethod: "get",
         requestType: 3
     },
-    // 这个返回的太大了,等待重新找一个
-    // {
-    //     name: "#可莉吃",
-    //     url: "https://api.lolimi.cn/API/chi/?type=json",
-    //     type: 11,
-    //     header: {
-,    //     requestMethod: "get
-,    //     requestType: 1,
-    //     des: "#可莉吃+QQ号"
-    // },
     {
         name: "#吃",
         url: "https://api.lolimi.cn/API/face_bite/?type=json",
