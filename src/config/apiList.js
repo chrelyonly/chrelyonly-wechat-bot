@@ -383,7 +383,7 @@ export const apiList = [
         // 请求协议
         requestMethod: "post",
         // 请求数据存放位置以及响应模式
-        requestType: 2,
+        requestType: 4,
         // 菜单描述
         des: "#绘画XXX"
     }

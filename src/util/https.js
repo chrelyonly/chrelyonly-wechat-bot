@@ -73,6 +73,6 @@ function requestApi4(url,method,params,type,headers){
     method: method,
     headers: headers,
     data: params,
-    responseType: 'blob'
+    responseType: 'stream'
   })
 }
