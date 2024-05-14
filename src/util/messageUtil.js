@@ -9,7 +9,7 @@ export function myOnMessage(message,room, bot) {
     let text = message.text();
     // 获取发送者
     let talker = message.talker()
-    if (text.toString().includes("菜单")) {
+    if (text.toString().includes("#菜单")) {
         let menu = "菜单：\n";
         for (let i = 0; i < getAllApiName().length; i++) {
             menu += (i + 1) + "." + getAllApiName()[i] + "\n";
@@ -18,7 +18,7 @@ export function myOnMessage(message,room, bot) {
         return;
     }
     // 水群王
-    if (text.toString().includes("水群王")) {
+    if (text.toString().includes("#水群王")) {
         getWaterGroupsWin(room,bot)
         return;
     }
@@ -26,7 +26,7 @@ export function myOnMessage(message,room, bot) {
     if (apiItem){
         // 定义参数
         let params = {}
-        // 不同接口的请求参数不同单独区分一下
+        // 不同接口的请求参数不同单独区分一下,9点歌 点歌有两步骤,单独判断下
         if (apiItem.type === 9){
             //musicjx.com/
             let n = null;
@@ -42,15 +42,18 @@ export function myOnMessage(message,room, bot) {
                 n: n,
             }
         }else{
-            //api.lolimi.cn
             params = {
                 "QQ": apiItem.msg,
                 "name": apiItem.msg,
                 "msg": apiItem.msg,
+                // 类型12时拼接qq头像地址
                 "url": apiItem.type === 12?"https://qlogo2.store.qq.com/qzone/" + apiItem.msg + "/" + apiItem.msg + "/100":null,
+                "prompt": apiItem.msg,
+                // 结构一下默认自带参数
+                ...apiItem.params,
             }
         }
-        http(apiItem.url,"get",params,apiItem.requestType,{}).then( res => {
+        http(apiItem.url,apiItem.requestMethod,params,apiItem.requestType,apiItem.headers).then( res => {
             if (apiItem.type === 1) {
                 room.say(res.data.data,talker)
             } else if (apiItem.type === 2) {
@@ -114,6 +117,10 @@ export function myOnMessage(message,room, bot) {
             } else if (apiItem.type === 12) {
                 const fileBox = FileBox.fromBuffer(res.data, "1.png")
                 room.say(fileBox)
+            }else if (apiItem.type === 13) {
+                room.say(res.data.data.Msg, talker)
+            }else if (apiItem.type === 14) {
+                room.say(res.data.data.Msg, talker)
             }
         })
     }
