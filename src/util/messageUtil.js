@@ -5,6 +5,10 @@ import {getWaterGroupsWin} from "./waterGroupsUtil.js";
 
 // 自定义更据消息回复事件
 export function myOnMessage(message,room, bot) {
+    // 判断是否机器人自己发送的
+    if (message.self()) {
+        return;
+    }
     // 根据消息内容回复
     let text = message.text();
     // 获取发送者
