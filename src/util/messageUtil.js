@@ -31,7 +31,7 @@ export function myOnMessage(message,room, bot) {
     if (text.toString().includes("#语音合成")) {
         let msg = text.replace("#语音合成","")
         textToVideo(room,bot,msg).then( res=> {
-            const fileBox = FileBox.fromBuffer(res, "1.wav")
+            const fileBox = FileBox.fromBuffer(res, "1.mp3")
             room.say(fileBox)
         },error=>{
             room.say(error)

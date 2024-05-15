@@ -54,13 +54,13 @@ export const textToVideo = (room,bot,msg) => {
                 }
                 synthesizer.close();
                 synthesizer = null;
-                error(result.errorDetails)
+                error("合成失败")
             },
             err=>{
                 console.trace("err - " + err);
                 synthesizer.close();
                 synthesizer = null;
-                error(err.message)
+                error("合成失败")
             });
     })
 }
