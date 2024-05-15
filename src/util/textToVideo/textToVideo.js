@@ -42,9 +42,10 @@ export const textToVideo = (room,bot,msg) => {
         synthesizer.speakTextAsync(msg,result=> {
                 if (result.reason === sdk.ResultReason.SynthesizingAudioCompleted) {
                     console.log("合成完成.");
-                    synthesizer.close();
+                    // synthesizer.close();
                     // 浏览器流转换常规流
                     // result.audioData
+                    // synthesizer = null;
                     success(Buffer.from(result.audioData))
                     return;
                 } else {
@@ -52,13 +53,13 @@ export const textToVideo = (room,bot,msg) => {
                         "\n请填写秘钥以及地区?");
                 }
                 synthesizer.close();
-                // synthesizer = null;
+                synthesizer = null;
                 error(result.errorDetails)
             },
             err=>{
                 console.trace("err - " + err);
                 synthesizer.close();
-                // synthesizer = null;
+                synthesizer = null;
                 error(err.message)
             });
     })
