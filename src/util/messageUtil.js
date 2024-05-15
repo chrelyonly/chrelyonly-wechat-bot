@@ -50,6 +50,7 @@ export function myOnMessage(message,room, bot) {
                 "QQ": apiItem.msg,
                 "name": apiItem.msg,
                 "msg": apiItem.msg,
+                "city": apiItem.msg,
                 // 类型12时拼接qq头像地址
                 "url": apiItem.type === 12?"https://qlogo2.store.qq.com/qzone/" + apiItem.msg + "/" + apiItem.msg + "/100":null,
                 "prompt": apiItem.msg,
@@ -126,6 +127,18 @@ export function myOnMessage(message,room, bot) {
             }else if (apiItem.type === 14) {
                 const fileBox = FileBox.fromStream(res.data, "1.png")
                 room.say(fileBox)
+            }else if (apiItem.type === 15) {
+                let weatherStr = "";
+                let data = res.data.data
+                weatherStr += "城市：" + data.current.city + "\n"
+                weatherStr += "天气：" + data.current.weather + "\n"
+                weatherStr += "温度：" + data.current.temp + "\n"
+                weatherStr += "风向：" + data.current.wind + "\n"
+                weatherStr += "风向等级：" + data.current.windSpeed + "\n"
+                weatherStr += "湿度：" + data.current.humidity + "\n"
+                room.say(weatherStr,talker)
+            }else if (apiItem.type === 16) {
+                room.say(res.data.msg,talker)
             }
         })
     }

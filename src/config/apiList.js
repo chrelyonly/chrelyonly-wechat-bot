@@ -376,5 +376,45 @@ export const apiList = [
         requestType: 4,
         // 菜单描述
         des: "#绘画XXX"
+    },
+    {
+        // 关键词
+        name: "#天气",
+        // 请求地址
+        url: "https://api.lolimi.cn/API/weather",
+        // 数据返回类型
+        type: 15,
+        // 请求头
+        headers: {
+        },
+        // 请求参数, 该参数与requestType有关,通过requestType来判断参数的位置是在?后还是body,以后有时间的话,把requestType拆分成requestType和responseType
+        params: {
+        },
+        // 请求协议
+        requestMethod: "get",
+        // 请求数据存放位置以及响应模式
+        requestType: 1,
+        // 菜单描述
+        des: "#天气XXX"
+    },
+    {
+        // 关键词
+        name: "#vivo50",
+        // 请求地址
+        url: "https://api.52starxi.cn/api/kdj-w4/kfc.php?type=json",
+        // 数据返回类型
+        type: 16,
+        // 请求头
+        headers: {
+        },
+        // 请求参数, 该参数与requestType有关,通过requestType来判断参数的位置是在?后还是body,以后有时间的话,把requestType拆分成requestType和responseType
+        params: {
+        },
+        // 请求协议
+        requestMethod: "get",
+        // 请求数据存放位置以及响应模式
+        requestType: 1,
+        // 菜单描述
+        des: "#vivo50"
     }
 ]
