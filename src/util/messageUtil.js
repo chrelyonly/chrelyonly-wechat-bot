@@ -2,6 +2,7 @@ import {FileBox} from "file-box";
 import {http} from "./https.js";
 import {apiList} from "../config/apiList.js";
 import {getWaterGroupsWin} from "./waterGroupsUtil.js";
+import {textToVideo} from "./textToVideo/textToVideo.js";
 
 // 自定义更据消息回复事件
 export function myOnMessage(message,room, bot) {
@@ -24,6 +25,17 @@ export function myOnMessage(message,room, bot) {
     // 水群王
     if (text.toString().includes("#水群王")) {
         getWaterGroupsWin(room,bot)
+        return;
+    }
+    // 语音合成
+    if (text.toString().includes("#语音合成")) {
+        let msg = text.replace("#语音合成","")
+        textToVideo(room,bot,msg).then( res=> {
+            const fileBox = FileBox.fromBuffer(res, "1.wav")
+            room.say(fileBox)
+        },error=>{
+            room.say(error)
+        })
         return;
     }
     let apiItem = getApi(text);
