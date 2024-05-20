@@ -39,8 +39,28 @@ bot.on('message',  message => {
             log.info("启动失败")
             console.error(e)
         })
-// 一秒执行一次判断是否到整点
+// 一秒执行一次判断是否到整点,定时事件
 const interval = setInterval(function() {
     isTimeTo(bot);
 }, 1000);
+
+
+// web api事件
+import express from "express";
+import {testInit} from "./util/test/testUtil.js";
+const app = express();
+app.get('/', (req, res) => {
+    res.send('hello world')
+});
+app.get('/testInit', (req, res) => {
+    testInit(bot,req.query).then(r => {
+        res.send(r)
+    },e => {
+        res.send(e)
+    })
+});
+app.listen(3000, () => {
+    console.log('web监听3000端口')
+})
+
 

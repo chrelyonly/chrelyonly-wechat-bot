@@ -6,7 +6,6 @@ import qrTerminal from "qrcode-terminal";
 import {getCache, setCache} from "../util/cacheUtil.js";
 import {FileBox} from "file-box";
 import {myOnMessage} from "../util/messageUtil.js";
-import {roomEventInit} from "../util/roomUtil.js";
 import {saveWaterGroups} from "../util/waterGroupsUtil.js";
 export function onScan(qrcode, status) {
     if (status === ScanStatus.Waiting || status === ScanStatus.Timeout) {
