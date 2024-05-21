@@ -1,5 +1,4 @@
 import {FileBox} from "file-box";
-import "../newDate.js";
 import {log} from "wechaty";
 import {http} from "../https.js";
 /**
