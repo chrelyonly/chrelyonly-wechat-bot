@@ -2,8 +2,6 @@ import {http} from "../../https.js";
 import {FileBox} from "file-box";
 import  gifResize  from '@gumlet/gif-resize'
 import _ from "lodash"
-import FormData from "form-data"
-import Blob from "blob"
 // 接口目录
 const url = "http://www.itukuai.top:2233/memes/"
 /**
