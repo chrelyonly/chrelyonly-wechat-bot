@@ -3,6 +3,8 @@ import {http} from "./https.js";
 import {apiList} from "../config/apiList.js";
 import {getWaterGroupsWin} from "./waterGroupsUtil.js";
 import {textToVideo} from "./textToVideo/textToVideo.js";
+import {pluginsInit} from "./plugins/pluginMain.js";
+import {getAuthUserInfo, getUserInfo} from "./wxmp/wxmpMain.js";
 // 导入插件
 // import {apps} from "./plugins/index.js";
 
@@ -16,12 +18,16 @@ export function myOnMessage(message,room, bot) {
     let text = message.text();
     // 获取发送者
     let talker = message.talker()
-    if (text.toString().includes("#插件")) {
-        // let menu = "插件：\n";
-        // for (let i = 0; i < apps.length; i++) {
-        //     menu += (i + 1) + "." + apps[i].name + "\n";
-        // }
-        // room.say(menu)
+    // if (text.toString().includes("#插件")) {
+    pluginsInit(message,room,bot)
+        // return;
+    // }
+    if (text.toString().includes("#获取信息A")) {
+        getUserInfo(talker,message,room,bot)
+        return;
+    }
+    if (text.toString().includes("#获取信息B")) {
+        getAuthUserInfo(talker,message,room,bot)
         return;
     }
     if (text.toString().includes("#菜单")) {

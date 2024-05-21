@@ -10,7 +10,7 @@ import axios from 'axios';
 axios.defaults.timeout = 60000;
 //返回其他状态码
 axios.defaults.validateStatus = function (status) {
-  return status >= 200 && status <= 500;
+  return status >= 200 && status <= 600;
 };
 //跨域请求，允许保存cookie
 axios.defaults.withCredentials = true;

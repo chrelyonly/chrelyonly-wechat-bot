@@ -48,9 +48,16 @@ const interval = setInterval(function() {
 // web api事件
 import express from "express";
 import {testInit} from "./util/test/testUtil.js";
+import {resUserinfo} from "./util/wxmp/wxmpMain.js";
 const app = express();
+// 解析JSON数据的中间件
+app.use(express.json());
 app.get('/', (req, res) => {
     res.send('hello world')
+});
+app.post('/resUserinfo', (req, res) => {
+    resUserinfo(req,bot)
+    res.send('ok')
 });
 app.get('/testInit', (req, res) => {
     testInit(bot,req.query).then(r => {
