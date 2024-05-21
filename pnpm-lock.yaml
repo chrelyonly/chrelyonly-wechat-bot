@@ -11,6 +11,9 @@ dependencies:
   axios:
     specifier: ^1.6.8
     version: 1.6.8(debug@2.6.9)
+  blob:
+    specifier: ^0.1.0
+    version: 0.1.0
   express:
     specifier: ^4.19.2
     version: 4.19.2
@@ -898,6 +901,12 @@ packages:
       readable-stream: 3.6.2
     dev: false
 
+  /blob@0.1.0:
+    resolution: {integrity: sha512-k+GwK+4Rj+MPNT4qu+y6+kHp+mPmmNd+28zdrIo69QM9UvypK5Vhcw7jnRiY4KaOMAiOdn0NtPQGTb+Ox1Dtng==}
+    dependencies:
+      esm: 3.2.25
+    dev: false
+
   /bmp-js@0.1.0:
     resolution: {integrity: sha512-vHdS19CnY3hwiNdkaqk93DvjVLfbEcI8mys4UjuWrlX1haDmroo8o4xCzh4wD6DGV6HxRCyauwhHRqMTfERtjw==}
     dev: false
@@ -1579,6 +1588,11 @@ packages:
   /escape-string-regexp@1.0.5:
     resolution: {integrity: sha512-vbRorB5FUQWvla16U8R/qgaFIya2qGzwDrNmCZuYKrbdSUMG6I1ZCGQRefkRVhuOkIGVne7BQ35DSfo1qvJqFg==}
     engines: {node: '>=0.8.0'}
+    dev: false
+
+  /esm@3.2.25:
+    resolution: {integrity: sha512-U1suiZ2oDVWv4zPO56S0NcR5QriEahGtdN2OR6FiOG4WJvcjBVFB0qI4+eKoWFH483PKGuLuu6V8Z4T5g63UVA==}
+    engines: {node: '>=6'}
     dev: false
 
   /etag@1.8.1:

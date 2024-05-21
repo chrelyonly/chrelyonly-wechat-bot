@@ -7,9 +7,9 @@ import  "../newdate.js";
 import {log} from "wechaty";
 import {FileBox} from "file-box";
 // 密钥
-const SPEECH_KEY = "";
+const SPEECH_KEY = "65d7e8a8deea4461967c3a627549d793";
 // 区域
-const SPEECH_REGION = "";
+const SPEECH_REGION = "japaneast";
 // 语音合成器对象
 let synthesizer = null;
 /**
