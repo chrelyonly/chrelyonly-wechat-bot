@@ -88,7 +88,7 @@ export  function onMessage(message,bot) {
                 setCache(message.id,JSON.stringify(cacheJson))
                 // 判断是否处于游戏内
                 // if (gameStatus && gameStatus !== 0){
-                    startGame(message,room,bot,msg)
+                //     startGame(message,room,bot,msg)
                 // }else{
                     // 自定义文本回复内容
                     myOnMessage(message,room,bot)

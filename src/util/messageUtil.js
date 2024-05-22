@@ -19,9 +19,9 @@ export function myOnMessage(message,room, bot) {
     let text = message.text();
     // 获取发送者
     let talker = message.talker()
-    if (text.toString().includes("你画我猜")) {
-        youDrawIGuess(message, room, bot, text)
-    }
+    // if (text.toString().includes("你画我猜")) {
+    //     youDrawIGuess(message, room, bot, text)
+    // }
     // if (text.toString().includes("#插件")) {
     pluginsInit(message,room,bot)
         // return;
