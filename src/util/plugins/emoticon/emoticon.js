@@ -26,7 +26,7 @@ export const sendApi = (item,room,bot,text)=> {
       if(name === "gif"){
         // 尝试压缩
         const buffer = Buffer.from(res.data)
-        gifResize({ width: 200,optimizationLevel:3})(buffer).then( res2=> {
+        gifResize({ width: 200,optimizationLevel:2})(buffer).then( res2=> {
           const fileBox = FileBox.fromBuffer(res2,item.key + "." + name)
           // let msgTemp = "信息:\n";
           // msgTemp += "压缩前大小:" + res.data.length/1024 + "KB\n"
