@@ -32,7 +32,7 @@ export const getWaterGroupsWin = (room,bot)=> {
  */
 export const saveWaterGroups = (groupName,room,talker)=> {
     // 从文件中读取并设置缓存
-    let todayLog = './src/config/waterGroups' + room.id + (new Date().Format("yyyyMMdd"))+ '.json';
+    let todayLog = './src/log/waterGroups' + room.id + (new Date().Format("yyyyMMdd"))+ '.json';
     //如果文件2.txt存在，则删除
     if(fs.existsSync(todayLog)){
 // 读取缓存配置

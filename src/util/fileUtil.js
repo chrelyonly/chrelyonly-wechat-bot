@@ -22,7 +22,7 @@ export const saveFileToJson = (id)=>{
             });
             let str = JSON.stringify(sortData);
             // 打开文件,如果没有的话则创建,有的话则写入新数据
-            fs.open('./src/config/waterGroups' + id + (new Date().Format("yyyyMMdd"))+ '.json','w',function (err,fd) {
+            fs.open('./src/log/waterGroups' + id + (new Date().Format("yyyyMMdd"))+ '.json','w',function (err,fd) {
                 if (err){
                     console.log("打开文件失败")
                     console.log(err)

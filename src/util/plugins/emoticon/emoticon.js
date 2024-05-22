@@ -27,7 +27,7 @@ export const sendApi = async (item,room,bot,text)=> {
     let url = await http("https://q1.qlogo.cn/g?b=qq&nk=" + text + "&s=640","get",{},3,{})
     formData.append("images", new Blob([url.data]))
   }
-  if(item.params.min_texts !== 0){
+  if(item.params.min_texts === 1){
     formData.append("texts",text)
   }
   if (item.params.args.length > 0){
