@@ -36,14 +36,14 @@ export const sendApi = (item,room,bot,text)=> {
           room.say(fileBox)
         },err=>{
           console.log(err)
-          // room.say("压缩图片异常" + err.message)
-          const fileBox = FileBox.fromBuffer(res.data,item.key + ".gif")
-          room.say(fileBox)
+          room.say("压缩图片异常" + err.message)
+          // const fileBox = FileBox.fromBuffer(res.data,item.key + ".gif")
+          // room.say(fileBox)
         }).catch(err=>{
             console.log(err)
-            // room.say("接口通信异常" + err.message)
-          const fileBox = FileBox.fromBuffer(res.data,item.key + ".gif")
-          room.say(fileBox)
+            room.say("接口通信异常" + err.message)
+          // const fileBox = FileBox.fromBuffer(res.data,item.key + ".gif")
+          // room.say(fileBox)
         })
         return
       }
