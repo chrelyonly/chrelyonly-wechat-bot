@@ -16,14 +16,18 @@ export const pluginsInit = (message,room,bot) => {
     //     emojiPlugin()
 
     // }
-    if (text.toString().includes("插件菜单")){
+    if (text.includes("插件菜单")){
         getMenu(room,bot);
         return;
     }
+    // 遍历 emojiApi 列表
     emojiApi.forEach(emoji => {
-        if (emoji.match.some(m => text.toString().includes(m))) {
-            text = text.toString().split(emoji.match[0])[1];
-            getEmoji(emoji, room, bot, text);
+        if (emoji.match && emoji.match.some(m => text.includes(m))) {
+            const splitText = text.split(emoji.match[0]);
+            if (splitText.length > 1) {
+                text = splitText[1];
+                getEmoji(emoji, room, bot, text);
+            }
         }
     });
 }
