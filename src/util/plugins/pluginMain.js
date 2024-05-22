@@ -22,7 +22,7 @@ export const pluginsInit = (message,room,bot) => {
     }
     emojiApi.forEach(emoji => {
         if (emoji.match.some(m => text.toString().includes(m))) {
-            text = text.toString().replace(emoji.match[0], "");
+            text = text.toString().split(emoji.match[0])[1];
             getEmoji(emoji, room, bot, text);
         }
     });

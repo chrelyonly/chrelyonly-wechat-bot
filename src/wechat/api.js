@@ -7,6 +7,7 @@ import {getCache, setCache} from "../util/cacheUtil.js";
 import {FileBox} from "file-box";
 import {myOnMessage} from "../util/messageUtil.js";
 import {saveWaterGroups} from "../util/waterGroupsUtil.js";
+import {gameStatus, startGame} from "../util/game/gameMain.js";
 export function onScan(qrcode, status) {
     if (status === ScanStatus.Waiting || status === ScanStatus.Timeout) {
         // 在控制台显示二维码
@@ -85,9 +86,13 @@ export  function onMessage(message,bot) {
                     text: msg
                 }
                 setCache(message.id,JSON.stringify(cacheJson))
-                // 自定义文本回复内容
-                myOnMessage(message,room,bot)
-
+                // 判断是否处于游戏内
+                // if (gameStatus && gameStatus !== 0){
+                    startGame(message,room,bot,msg)
+                // }else{
+                    // 自定义文本回复内容
+                    myOnMessage(message,room,bot)
+                // }
             }
             if(txtType === 13){
                 let text = msg;

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>画画专用</title>
+    <!-- Import style -->
+    <link rel="stylesheet" href="//unpkg.com/element-plus/dist/index.css" />
+    <!-- Import Vue 3 -->
+    <script src="//unpkg.com/vue@3"></script>
+    <!-- Import component library -->
+    <script src="//unpkg.com/element-plus"></script>
+    <script src="/cdn/avue/avue.min.js" charset="utf-8"></script>
+    <link rel="stylesheet" href="/cdn/avue/index.css">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body>
+<div id="app">
+    <el-button>{{ message }}</el-button>
+<!--   画画版-->
+    <div >
+        <avue-sign width="200px" height="200px" ref="sign"></avue-sign>
+    </div>
+    <el-button type="primary"
+               @click="handleSubmit">生成</el-button>
+<!--    <el-button type="danger"-->
+<!--               @click="$refs.sign.getStar('这里是用途','这里是单位的名称','123456')">图章</el-button>-->
+    <el-button @click="$refs.sign.clear()">清空</el-button>
+    <div style="width: 300px;height: 300px">
+        结果
+        <img  :src="img" style="width: 250px;height: 250px"/>
+    </div>
+    <div>
+        <el-button type="primary"
+                   @click="submitImage">提交</el-button>
+        <el-input v-model="answer" placeholder="请输入答案"></el-input>
+    </div>
+</div>
+<script>
+    const App = {
+        data() {
+            return {
+                message: "画画接口",
+                //
+                sign:"",
+                // 图片内容
+                img: "",
+            //    答案
+                answer:""
+            };
+        },
+        methods: {
+            // 生成内容
+            handleSubmit () {
+                this.img = this.$refs.sign.submit(80, 50);
+                console.log(this.$refs.sign)
+                console.log(this.img)
+            },
+            submitImage(){
+                if(!this.img){
+                    this.$message.error("请先画画后点击生成并填写答案在提交")
+                    return;
+                }
+                // 提交至系统
+                let params = {
+                    answerImg: this.img,
+                    answer: this.answer,
+                }
+                this.requestApi("/okDraw","post",params,{})
+
+            },
+            /**
+             * 请求提交接口
+             * 作为一个对象传输
+             */
+            requestApi(url,method,params,headers) {
+                return window.axios({
+                    url: url,
+                    method: method,
+                    headers: headers,
+                    data: params
+                })
+            }
+        }
+    };
+    const app = Vue.createApp(App);
+    app.use(ElementPlus);
+    app.use(window.AVUE);
+    app.use(window.axios);
+    app.mount("#app");
+</script>
+</body>
+</html>

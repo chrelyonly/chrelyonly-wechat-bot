@@ -49,12 +49,18 @@ const interval = setInterval(function() {
 import express from "express";
 import {testInit} from "./util/test/testUtil.js";
 import {resUserinfo} from "./util/wxmp/wxmpMain.js";
+import {okDraw} from "./util/game/youDrawIguess/youDrawIGuess.js";
 const app = express();
 // 解析JSON数据的中间件
 app.use(express.json());
-app.get('/', (req, res) => {
-    res.send('hello world')
+// 访问本地静态文件， __dirname 代表本脚本的路径
+app.use('/', express.static("./static/"));
+// 提交画画文件
+app.post('/okDraw', (req, res) => {
+    okDraw(req,bot)
+    res.send('ok')
 });
+
 app.post('/resUserinfo', (req, res) => {
     resUserinfo(req,bot)
     res.send('ok')

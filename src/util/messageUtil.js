@@ -5,6 +5,7 @@ import {getWaterGroupsWin} from "./waterGroupsUtil.js";
 import {textToVideo} from "./textToVideo/textToVideo.js";
 import {pluginsInit} from "./plugins/pluginMain.js";
 import {getAuthUserInfo, getUserInfo} from "./wxmp/wxmpMain.js";
+import {youDrawIGuess} from "./game/youDrawIguess/youDrawIGuess.js";
 // 导入插件
 // import {apps} from "./plugins/index.js";
 
@@ -18,6 +19,9 @@ export function myOnMessage(message,room, bot) {
     let text = message.text();
     // 获取发送者
     let talker = message.talker()
+    if (text.toString().includes("你画我猜")) {
+        youDrawIGuess(message, room, bot, text)
+    }
     // if (text.toString().includes("#插件")) {
     pluginsInit(message,room,bot)
         // return;
