@@ -10,7 +10,7 @@ import axios from 'axios';
 axios.defaults.timeout = 60000;
 //返回其他状态码
 axios.defaults.validateStatus = function (status) {
-  return status >= 200 && status <= 600;
+  return status >= 200 && status <= 500;
 };
 //跨域请求，允许保存cookie
 axios.defaults.withCredentials = true;
@@ -25,18 +25,10 @@ axios.interceptors.response.use(res => {
   //获取状态码
   const status =  res.status;
   if (status !== 200) {
-    return Promise.reject(new Error(res.data))
+    return Promise.resolve(new Error(res.data))
   }
   return res;
 }, error => {
   return Promise.reject(new Error(error));
 });
-//表单序列化
-const serialize = data => {
-  let list = [];
-  Object.keys(data).forEach(ele => {
-    list.push(`${ele}=${data[ele]}`)
-  })
-  return list.join('&');
-};
 export default axios;
