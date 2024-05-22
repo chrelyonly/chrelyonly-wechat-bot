@@ -25,26 +25,26 @@ export const sendApi = (item,room,bot,text)=> {
       // 如果是gif
       if(name === "gif"){
         // 尝试压缩
-        const buffer = Buffer.from(res.data)
-        gifResize({ width: 200,optimizationLevel:2})(buffer).then( res2=> {
-          const fileBox = FileBox.fromBuffer(res2,item.key + "." + name)
+        // const buffer = Buffer.from(res.data)
+        // gifResize({ width: 200,optimizationLevel:2})(buffer).then( res2=> {
+        //   const fileBox = FileBox.fromBuffer(res2,item.key + "." + name)
           // let msgTemp = "信息:\n";
           // msgTemp += "压缩前大小:" + res.data.length/1024 + "KB\n"
           // msgTemp += "压缩后大小:" + fileBox.size/1024 + "KB\n"
           // msgTemp += "压缩模式:3"
           // room.say(msgTemp)
+          // room.say(fileBox)
+        // },err=>{
+        //   console.log(err)
+        //   room.say("压缩图片异常" + err.message)
+          // const fileBox = FileBox.fromBuffer(res.data,item.key + ".gif")
+          // room.say(fileBox)
+        // }).catch(err=>{
+        //     console.log(err)
+            // room.say("接口通信异常" + err.message)
+          const fileBox = FileBox.fromBuffer(res.data,item.key + ".gif")
           room.say(fileBox)
-        },err=>{
-          console.log(err)
-          room.say("压缩图片异常" + err.message)
-          // const fileBox = FileBox.fromBuffer(res.data,item.key + ".gif")
-          // room.say(fileBox)
-        }).catch(err=>{
-            console.log(err)
-            room.say("接口通信异常" + err.message)
-          // const fileBox = FileBox.fromBuffer(res.data,item.key + ".gif")
-          // room.say(fileBox)
-        })
+        // })
         return
       }
       // 如果是图片
