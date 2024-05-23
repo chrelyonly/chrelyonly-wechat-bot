@@ -21,15 +21,30 @@ export const pluginsInit = (message,room,bot) => {
         return;
     }
     // 遍历 emojiApi 列表
-    emojiApi.forEach(emoji => {
-        if (emoji.match && emoji.match.some(m => text.includes(m))) {
-            const splitText = text.split(emoji.match[0]);
-            if (splitText.length > 1) {
-                text = splitText[1];
-                getEmoji(emoji, room, bot, text);
+    // emojiApi.forEach(emoji => {
+    //     if (emoji.match && emoji.match.some(m => text.includes(m))) {
+    //         const splitText = text.split(emoji.match[0]);
+    //         if (splitText.length > 1) {
+    //             text = splitText[1];
+    //             getEmoji(emoji, room, bot, text);
+    //         }
+    //     }
+    // });
+    // 遍历 emojiApi 列表
+    for (const emoji of emojiApi) {
+        if (emoji.match) {
+            for (const m of emoji.match) {
+                const matchIndex = text.indexOf(m);
+                if (matchIndex !== -1) {
+                    const splitText = text.substring(matchIndex + m.length);
+                    console.log("插件关键字: " + splitText)
+                    getEmoji(emoji, room, bot, splitText);
+                    return; // 假设只需要处理第一个匹配到的 emoji
+                }
             }
         }
-    });
+    }
+
 }
 /**
  * 表情插件

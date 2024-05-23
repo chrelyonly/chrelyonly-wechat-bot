@@ -32,7 +32,7 @@ export const sendApi = (item,room,bot,text)=> {
         gifResize({ width: 200,optimizationLevel:1})(res.data).then( res2=> {
           const fileBox = FileBox.fromBuffer(res2,item.key + "." + name)
           msgTemp += "压缩后大小:" + fileBox.size/1024 + "KB\n"
-          msgTemp += "压缩模式:2"
+          msgTemp += "压缩模式:1"
           room.say(msgTemp)
           room.say(fileBox)
         },err=>{
