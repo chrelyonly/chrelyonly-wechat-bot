@@ -33,7 +33,8 @@ export const sendApi = (item,room,bot,text)=> {
           const fileBox = FileBox.fromBuffer(res2,item.key + "." + name)
           msgTemp += "压缩后大小:" + fileBox.size/1024 + "KB\n"
           msgTemp += "压缩模式:1"
-          room.say(msgTemp)
+          console.log("压缩结束: " + msgTemp)
+          // room.say(msgTemp)
           room.say(fileBox)
         },err=>{
           console.log(err)
