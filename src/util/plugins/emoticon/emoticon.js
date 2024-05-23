@@ -28,11 +28,11 @@ export const sendApi = (item,room,bot,text)=> {
         let msgTemp = "信息:\n";
         msgTemp += "压缩前大小:" + res.data.length/1024 + "KB\n"
         console.log("压缩前大小: " + msgTemp)
-        const buffer = Buffer.from(res.data)
-        gifResize({ width: 200,optimizationLevel:2})(buffer).then( res2=> {
+        // const buffer = Buffer.from(res.data)
+        gifResize({ width: 200,optimizationLevel:2})(res.data).then( res2=> {
           const fileBox = FileBox.fromBuffer(res2,item.key + "." + name)
           msgTemp += "压缩后大小:" + fileBox.size/1024 + "KB\n"
-          msgTemp += "压缩模式:3"
+          msgTemp += "压缩模式:2"
           room.say(msgTemp)
           room.say(fileBox)
         },err=>{
