@@ -26,7 +26,7 @@ export const apiList = [
         headers: {},
         requestMethod: "get",
         requestType: 3,
-        des: "#求婚+QQ号"
+        des: "求婚+QQ号"
     },
     {
         name: "感动哭了",
@@ -36,7 +36,7 @@ export const apiList = [
         headers: {},
         requestMethod: "get",
         requestType: 3,
-        des: "#感动哭了+QQ号"
+        des: "感动哭了+QQ号"
     },
     {
         name: "高质量",
@@ -46,7 +46,7 @@ export const apiList = [
         headers: {},
         requestMethod: "get",
         requestType: 3,
-        des: "#高质量+QQ号"
+        des: "高质量+QQ号"
     },
     {
         name: "咸鱼",
@@ -56,7 +56,7 @@ export const apiList = [
         headers: {},
         requestMethod: "get",
         requestType: 3,
-        des: "#咸鱼+QQ号"
+        des: "咸鱼+QQ号"
     },
     {
         name: "摸摸",
@@ -66,7 +66,7 @@ export const apiList = [
         headers: {},
         requestMethod: "get",
         requestType: 3,
-        des: "#摸摸+QQ号"
+        des: "摸摸+QQ号"
     },
     {
         name: "膜拜",
@@ -76,7 +76,7 @@ export const apiList = [
         headers: {},
         requestMethod: "get",
         requestType: 3,
-        des: "#膜拜+QQ号"
+        des: "膜拜+QQ号"
     },
     {
         name: "想看",
@@ -86,7 +86,7 @@ export const apiList = [
         headers: {},
         requestMethod: "get",
         requestType: 3,
-        des: "#想看+QQ号"
+        des: "想看+QQ号"
     },
     {
         name: "咬",
@@ -96,7 +96,7 @@ export const apiList = [
         headers: {},
         requestMethod: "get",
         requestType: 3,
-        des: "#咬+QQ号"
+        des: "咬+QQ号"
     },
     {
         name: "捣",
@@ -106,7 +106,7 @@ export const apiList = [
         headers: {},
         requestMethod: "get",
         requestType: 3,
-        des: "#捣+QQ号"
+        des: "捣+QQ号"
     },
     {
         name: "玩",
@@ -116,7 +116,7 @@ export const apiList = [
         headers: {},
         requestMethod: "get",
         requestType: 3,
-        des: "#玩+QQ号"
+        des: "玩+QQ号"
     },
     {
         name: "你可能需要它",
@@ -126,7 +126,7 @@ export const apiList = [
         headers: {},
         requestMethod: "get",
         requestType: 3,
-        des: "#你可能需要它+QQ号"
+        des: "你可能需要它+QQ号"
     },
     {
         name: "吃掉",
@@ -136,7 +136,7 @@ export const apiList = [
         headers: {},
         requestMethod: "get",
         requestType: 3,
-        des: "#吃掉+QQ号"
+        des: "吃掉+QQ号"
     },
     {
         name: "拍",
@@ -146,7 +146,7 @@ export const apiList = [
         headers: {},
         requestMethod: "get",
         requestType: 3,
-        des: "#拍+QQ号"
+        des: "拍+QQ号"
     },
     {
         name: "兽语加密",
@@ -156,7 +156,7 @@ export const apiList = [
         headers: {},
         requestMethod: "get",
         requestType: 1,
-        des: "#兽语加密+文字"
+        des: "兽语加密+文字"
     },
     {
         name: "龙怒",
@@ -184,7 +184,7 @@ export const apiList = [
         headers: {},
         requestMethod: "get",
         requestType: 3,
-        des: "#撕了你+QQ号"
+        des: "撕了你+QQ号"
     },
     {
         name: "哦哈哟",
@@ -212,7 +212,7 @@ export const apiList = [
         headers: {},
         requestMethod: "get",
         requestType: 1,
-        des: "#吃+QQ号"
+        des: "吃+QQ号"
     },
     {
         name: "添",
@@ -222,7 +222,7 @@ export const apiList = [
         headers: {},
         requestMethod: "get",
         requestType: 3,
-        des: "#添+QQ号"
+        des: "添+QQ号"
     },
     {
         name: "腿",
@@ -259,7 +259,7 @@ export const apiList = [
         headers: {},
         requestMethod: "get",
         requestType: 3,
-        des: "#爬+QQ号"
+        des: "爬+QQ号"
     },
     {
         name: "丢",
@@ -269,7 +269,7 @@ export const apiList = [
         headers: {},
         requestMethod: "get",
         requestType: 3,
-        des: "#丢+QQ号"
+        des: "丢+QQ号"
     },
     {
         name: "点赞",
@@ -279,7 +279,7 @@ export const apiList = [
         headers: {},
         requestMethod: "get",
         requestType: 3,
-        des: "#点赞+QQ号"
+        des: "点赞+QQ号"
     },
     // 文字内容
     {
@@ -290,7 +290,7 @@ export const apiList = [
         headers: {},
         requestMethod: "get",
         requestType: 1,
-        des: "#发病XXX"
+        des: "发病XXX"
 
     },
     {
@@ -302,7 +302,7 @@ export const apiList = [
         headers: {},
         requestMethod: "get",
         requestType: 1,
-        des: "#你说得对XXX"
+        des: "你说得对XXX"
     },
     {
         name: "动漫一言",
@@ -340,7 +340,7 @@ export const apiList = [
         headers: {},
         requestMethod: "get",
         requestType: 1,
-        des: "#提问XXX"
+        des: "提问XXX"
     },
 //     点歌发送语音
     {
@@ -352,7 +352,7 @@ export const apiList = [
         headers: {},
         requestMethod: "get",
         requestType: 1,
-        des: "#点歌XXX"
+        des: "点歌XXX"
     },
     {
         // 关键词
@@ -375,7 +375,7 @@ export const apiList = [
         // 请求数据存放位置以及响应模式
         requestType: 4,
         // 菜单描述
-        des: "#绘画XXX"
+        des: "绘画XXX"
     },
     {
         // 关键词
@@ -395,7 +395,7 @@ export const apiList = [
         // 请求数据存放位置以及响应模式
         requestType: 1,
         // 菜单描述
-        des: "#天气XXX"
+        des: "天气XXX"
     },
     {
         // 关键词
@@ -415,6 +415,6 @@ export const apiList = [
         // 请求数据存放位置以及响应模式
         requestType: 1,
         // 菜单描述
-        des: "#vivo50"
+        des: "vivo50"
     }
 ]

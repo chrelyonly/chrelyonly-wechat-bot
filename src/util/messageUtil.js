@@ -23,6 +23,7 @@ export function myOnMessage(message,room, bot) {
     //     youDrawIGuess(message, room, bot, text)
     // }
     // if (text.toString().includes("#插件")) {
+    // 插件接口
     pluginsInit(message,room,bot)
         // return;
     // }
@@ -58,7 +59,7 @@ export function myOnMessage(message,room, bot) {
         })
         return;
     }
-    let apiItem = getApi(text);
+    let apiItem = getApi(text,room);
     if (apiItem){
         // 定义参数
         let params = {}
@@ -188,7 +189,16 @@ const getAllApiName = () => {
     }
     return nameList;
 }
-const getApi = (name) => {
+const getApi = (name,room) => {
+    if(name === "?"){
+        room("捏寄个问号是神魔意思")
+        return null;
+    }
+    if(name.includes("拉尔戈")){
+        const fileBox = FileBox.fromFile("./src/static/img/dnf/1716433273045.jpg")
+        room.say(fileBox)
+        return null;
+    }
     if(name.includes("#")){
         for (let i = 0; i < apiList.length; i++) {
             let item = apiList[i]
