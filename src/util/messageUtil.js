@@ -181,22 +181,24 @@ const getAllApiName = () => {
     let nameList = []
     for (let i = 0; i < apiList.length; i++) {
         if(apiList[i].des){
-            nameList.push(apiList[i].des)
+            nameList.push("#" + apiList[i].des)
         }else{
-            nameList.push(apiList[i].name)
+            nameList.push("#" + apiList[i].name)
         }
     }
     return nameList;
 }
 const getApi = (name) => {
-    for (let i = 0; i < apiList.length; i++) {
-        let item = apiList[i]
-        if (name.includes(item.name)){
-            item.msg = name.split(item.name)[1].trim()
-            if (!item.msg.trim()){
-                item.msg = "1172576293"
+    if(name.includes("#")){
+        for (let i = 0; i < apiList.length; i++) {
+            let item = apiList[i]
+            if (name.includes(item.name)){
+                item.msg = name.split(item.name)[1].trim()
+                if (!item.msg.trim()){
+                    item.msg = "1172576293"
+                }
+                return item;
             }
-            return item;
         }
     }
     return null;

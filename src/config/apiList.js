@@ -1,7 +1,7 @@
 
 export const apiList = [
     {
-        name: "#表情包",
+        name: "表情包",
         url: "https://api.lolimi.cn/API/bqb/api.php?type=动漫表情",
         type: 3,
         params: {},
@@ -10,7 +10,7 @@ export const apiList = [
         requestType: 3
     },
     {
-        name: "#柴郡",
+        name: "柴郡",
         url: "https://api.lolimi.cn/API/chaiq/c.php",
         type: 3,
         params: {},
@@ -19,7 +19,7 @@ export const apiList = [
         requestType: 3
     },
     {
-        name: "#求婚",
+        name: "求婚",
         url: "https://api.lolimi.cn/API/face_propose/",
         type: 3,
         params: {},
@@ -29,7 +29,7 @@ export const apiList = [
         des: "#求婚+QQ号"
     },
     {
-        name: "#感动哭了",
+        name: "感动哭了",
         url: "https://api.lolimi.cn/API/face_touch/",
         type: 3,
         params: {},
@@ -39,7 +39,7 @@ export const apiList = [
         des: "#感动哭了+QQ号"
     },
     {
-        name: "#高质量",
+        name: "高质量",
         url: "https://api.lolimi.cn/API/face_gao/",
         type: 3,
         params: {},
@@ -49,7 +49,7 @@ export const apiList = [
         des: "#高质量+QQ号"
     },
     {
-        name: "#咸鱼",
+        name: "咸鱼",
         url: "https://api.lolimi.cn/API/face_yu/",
         type: 3,
         params: {},
@@ -59,7 +59,7 @@ export const apiList = [
         des: "#咸鱼+QQ号"
     },
     {
-        name: "#摸摸",
+        name: "摸摸",
         url: "https://api.lolimi.cn/API/face_petpet/",
         type: 8,
         params: {},
@@ -69,7 +69,7 @@ export const apiList = [
         des: "#摸摸+QQ号"
     },
     {
-        name: "#膜拜",
+        name: "膜拜",
         url: "https://api.lolimi.cn/API/face_worship/",
         type: 8,
         params: {},
@@ -79,7 +79,7 @@ export const apiList = [
         des: "#膜拜+QQ号"
     },
     {
-        name: "#想看",
+        name: "想看",
         url: "https://api.lolimi.cn/API/face_thsee/",
         type: 3,
         params: {},
@@ -89,7 +89,7 @@ export const apiList = [
         des: "#想看+QQ号"
     },
     {
-        name: "#咬",
+        name: "咬",
         url: "https://api.lolimi.cn/API/face_suck/",
         type: 8,
         params: {},
@@ -99,7 +99,7 @@ export const apiList = [
         des: "#咬+QQ号"
     },
     {
-        name: "#捣",
+        name: "捣",
         url: "https://api.lolimi.cn/API/face_pound/",
         type: 8,
         params: {},
@@ -109,7 +109,7 @@ export const apiList = [
         des: "#捣+QQ号"
     },
     {
-        name: "#玩",
+        name: "玩",
         url: "https://api.lolimi.cn/API/face_play/",
         type: 8,
         params: {},
@@ -119,7 +119,7 @@ export const apiList = [
         des: "#玩+QQ号"
     },
     {
-        name: "#你可能需要它",
+        name: "你可能需要它",
         url: "https://api.lolimi.cn/API/face_need/",
         type: 3,
         params: {},
@@ -129,7 +129,7 @@ export const apiList = [
         des: "#你可能需要它+QQ号"
     },
     {
-        name: "#吃掉",
+        name: "吃掉",
         url: "https://api.lolimi.cn/API/face_bite/",
         type: 8,
         params: {},
@@ -139,7 +139,7 @@ export const apiList = [
         des: "#吃掉+QQ号"
     },
     {
-        name: "#拍",
+        name: "拍",
         url: "https://api.lolimi.cn/API/face_pat/",
         type: 8,
         params: {},
@@ -149,7 +149,7 @@ export const apiList = [
         des: "#拍+QQ号"
     },
     {
-        name: "#兽语加密",
+        name: "兽语加密",
         url: "https://api.lolimi.cn/API/sho_u/",
         type: 10,
         params: {},
@@ -159,7 +159,7 @@ export const apiList = [
         des: "#兽语加密+文字"
     },
     {
-        name: "#龙怒",
+        name: "龙怒",
         url: "https://api.lolimi.cn/API/longt/l.php",
         type: 3,
         params: {},
@@ -168,7 +168,7 @@ export const apiList = [
         requestType: 3
     },
     {
-        name: "#摸鱼人日历",
+        name: "摸鱼人日历",
         url: "https://api.lolimi.cn/API/moyu/",
         type: 3,
         params: {},
@@ -177,7 +177,7 @@ export const apiList = [
         requestType: 3
     },
     {
-        name: "#撕了你",
+        name: "撕了你",
         url: "https://api.lolimi.cn/API/si/",
         type: 3,
         params: {},
@@ -187,7 +187,7 @@ export const apiList = [
         des: "#撕了你+QQ号"
     },
     {
-        name: "#哦哈哟",
+        name: "哦哈哟",
         url: "https://api.lolimi.cn/API/image-zw/",
         type: 3,
         params: {},
@@ -196,7 +196,7 @@ export const apiList = [
         requestType: 3
     },
     {
-        name: "#晚上好",
+        name: "晚上好",
         url: "https://api.lolimi.cn/API/image-zw/",
         type: 3,
         params: {},
@@ -205,7 +205,7 @@ export const apiList = [
         requestType: 3
     },
     {
-        name: "#吃",
+        name: "吃",
         url: "https://api.lolimi.cn/API/face_bite/?type=json",
         type: 11,
         params: {},
@@ -215,7 +215,7 @@ export const apiList = [
         des: "#吃+QQ号"
     },
     {
-        name: "#添",
+        name: "添",
         url: "https://api.lolimi.cn/API/tian/",
         type: 12,
         params: {},
@@ -225,7 +225,7 @@ export const apiList = [
         des: "#添+QQ号"
     },
     {
-        name: "#腿",
+        name: "腿",
         url: "https://api.lolimi.cn/API/meizi/api.php",
         type: 4,
         params: {},
@@ -234,7 +234,7 @@ export const apiList = [
         requestType: 1,
     },
     {
-        name: "#抽签",
+        name: "抽签",
         url: "https://api.lolimi.cn/API/chouq/api.php",
         type: 5,
         params: {},
@@ -243,7 +243,7 @@ export const apiList = [
         requestType: 1
     },
     {
-        name: "#随机cosplay",
+        name: "随机cosplay",
         url: "https://api.lolimi.cn/API/cosplay/api.php",
         type: 6,
         params: {},
@@ -252,7 +252,7 @@ export const apiList = [
         requestType: 1
     },
     {
-        name: "#爬",
+        name: "爬",
         url: "https://api.lolimi.cn/API/pa/api.php",
         type: 3,
         params: {},
@@ -262,7 +262,7 @@ export const apiList = [
         des: "#爬+QQ号"
     },
     {
-        name: "#丢",
+        name: "丢",
         url: "https://api.lolimi.cn/API/diu/api.php",
         type: 3,
         params: {},
@@ -272,7 +272,7 @@ export const apiList = [
         des: "#丢+QQ号"
     },
     {
-        name: "#点赞",
+        name: "点赞",
         url: "https://api.lolimi.cn/API/zan/api.php",
         type: 3,
         params: {},
@@ -283,7 +283,7 @@ export const apiList = [
     },
     // 文字内容
     {
-        name: "#发病",
+        name: "发病",
         url: "https://api.lolimi.cn/API/fabing/fb.php",
         type: 1,
         params: {},
@@ -295,7 +295,7 @@ export const apiList = [
     },
     {
         // 狗屁不通文章生成
-        name: "#你说得对",
+        name: "你说得对",
         url: "https://api.lolimi.cn/API/dog/api.php?num=500&type=text",
         type: 7,
         params: {},
@@ -305,7 +305,7 @@ export const apiList = [
         des: "#你说得对XXX"
     },
     {
-        name: "#动漫一言",
+        name: "动漫一言",
         url: "https://api.lolimi.cn/API/dmyiyan/api.php",
         type: 7,
         params: {},
@@ -314,7 +314,7 @@ export const apiList = [
         requestType: 1
     },
     {
-        name: "#绕口令",
+        name: "绕口令",
         url: "https://api.lolimi.cn/API/rao/api.php",
         type: 13,
         params: {},
@@ -323,7 +323,7 @@ export const apiList = [
         requestType: 1
     },
     {
-        name: "#舔狗日记",
+        name: "舔狗日记",
         url: "https://api.lolimi.cn/API/tgrj/api.php",
         type: 7,
         params: {},
@@ -333,7 +333,7 @@ export const apiList = [
     },
     // ai问答
     {
-        name: "#提问",
+        name: "提问",
         url: "https://api.lolimi.cn/API/AI/mm.php",
         type: 2,
         params: {},
@@ -344,7 +344,7 @@ export const apiList = [
     },
 //     点歌发送语音
     {
-        name: "#点歌",
+        name: "点歌",
         url: "https://api.yaohud.cn/api/music/qq",
         // 数据返回类型
         type: 9,
@@ -356,7 +356,7 @@ export const apiList = [
     },
     {
         // 关键词
-        name: "#绘画",
+        name: "绘画",
         // 请求地址
         url: "https://api.leafyee.xyz/painter/generate",
         // 数据返回类型
@@ -379,7 +379,7 @@ export const apiList = [
     },
     {
         // 关键词
-        name: "#天气",
+        name: "天气",
         // 请求地址
         url: "https://api.lolimi.cn/API/weather",
         // 数据返回类型
@@ -399,7 +399,7 @@ export const apiList = [
     },
     {
         // 关键词
-        name: "#vivo50",
+        name: "vivo50",
         // 请求地址
         url: "https://api.52starxi.cn/api/kdj-w4/kfc.php?type=json",
         // 数据返回类型
