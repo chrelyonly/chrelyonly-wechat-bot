@@ -58,7 +58,9 @@ export const emojiApi = [
             // 资源类型
             type:"gif",
         //     资源id
-            id: "1822"
+            id: "1822",
+            //     默认文字
+            subTitle: "我爱草莓！"
         }
     },
     {

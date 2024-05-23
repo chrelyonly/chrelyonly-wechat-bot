@@ -10,7 +10,7 @@ const url = "https://api.chrelyonly.cn/api/emoji"
 export const sendApi = (item,room,bot,text)=> {
   let params = {
     ...item.params,
-    "subtitle":text !== ""?text:item.params.subTitle
+    "subTitle":text !== ""?text:item.params.subTitle
   }
   let headers = {
   }
