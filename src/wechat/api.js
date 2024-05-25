@@ -11,7 +11,7 @@ import {gameStatus, startGame} from "../util/game/gameMain.js";
 export function onScan(qrcode, status) {
     if (status === ScanStatus.Waiting || status === ScanStatus.Timeout) {
         // 在控制台显示二维码
-        qrTerminal.generate(qrcode)
+        qrTerminal.generate(qrcode,{small:true})
         log.info('等待扫码:', ScanStatus[status], status)
     } else {
         console.log('已扫码,请确认登录: %s(%s)', ScanStatus[status], status)
