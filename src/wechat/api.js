@@ -70,13 +70,19 @@ export  function onMessage(message,bot) {
             // 5 是收藏表情,不知如何解密微信的表情包连接
             if(txtType === 5){
                 // 保存缓存
-                message.toFileBox().then(function (res) {
-                    let cacheJson = {
-                        type: 5,
-                        text: res.buffer.toString("base64")
-                    }
-                    setCache(message.id,JSON.stringify(cacheJson))
-                })
+                // message.toFileBox().then(function (res) {
+                    // res.toBuffer().then(res2 => {
+                    //     console.log(res2)
+                    // })
+                    // res.toFile(res.name).then(res2 => {
+                    //     console.log(res2)
+                    // })
+                    // let cacheJson = {
+                    //     type: 5,
+                    //     text: res.buffer.toString("base64")
+                    // }
+                    // setCache(message.id,JSON.stringify(cacheJson))
+                // })
             }
             // 7是文本
             if(txtType === 7){
