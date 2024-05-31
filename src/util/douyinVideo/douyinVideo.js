@@ -3,15 +3,16 @@ import {FileBox} from "file-box";
 import {log} from "wechaty";
 
 
-export const douyinVideo = (talker,message,room,bot)=>{
+export const douyinVideo = (talker,text,room,bot)=>{
 //     进行视频解析
     let api = "https://douyin.dy114.com/parse/index";
-    let url = message.text();
-
     let params = {
-        pageUrl: url,
+        pageUrl: text,
     }
-    http(api,"post",params, 1,{}).then( res=> {
+    let headers = {
+        "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"
+    }
+    http(api,"post",params, 2,headers).then( res=> {
         console.log(res)
         let fileBox = FileBox.fromUrl(res.data.data.data.voideurl);
         room.say(fileBox)

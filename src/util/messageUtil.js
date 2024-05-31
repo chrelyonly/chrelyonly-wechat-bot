@@ -38,7 +38,7 @@ export function myOnMessage(roomName,message,room, bot) {
     }
     // 抖音视频解析
     if (text.toString().includes("抖音") && text.toString().includes("v.douyin.com")) {
-        douyinVideo(talker,message,room,bot)
+        douyinVideo(talker,text,room,bot)
         return;
     }
     if (text.toString().includes("#菜单")) {
