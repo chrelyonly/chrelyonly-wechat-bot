@@ -12,7 +12,7 @@ export const douyinVideo = (talker,message,room,bot)=>{
         pageUrl: url,
     }
     http(api,"post",params, 1,{}).then( res=> {
-        log.info(res)
+        console.log(res)
         let fileBox = FileBox.fromUrl(res.data.data.data.voideurl);
         room.say(fileBox)
     },err =>{
