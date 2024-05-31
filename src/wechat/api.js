@@ -46,7 +46,7 @@ export  function onMessage(message,bot) {
             //     return;
             // }
             // 保存水群次数
-            saveWaterGroups(res,room,talker)
+            saveWaterGroups(res,room,talker,1)
             let msg = message.text();
             if (msg === ""){
             //    不支持的消息类型
@@ -97,7 +97,7 @@ export  function onMessage(message,bot) {
                 //     startGame(message,room,bot,msg)
                 // }else{
                     // 自定义文本回复内容
-                    myOnMessage(message,room,bot)
+                    myOnMessage(res,message,room,bot)
                 // }
             }
             if(txtType === 13){

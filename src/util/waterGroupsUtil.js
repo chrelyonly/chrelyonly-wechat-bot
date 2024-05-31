@@ -31,7 +31,7 @@ export const getWaterGroupsWin = (room,bot)=> {
  * room 房间体
  * talker 用户体
  */
-export const saveWaterGroups = (groupName,room,talker)=> {
+export const saveWaterGroups = (groupName,room,talker,number)=> {
     // 从文件中读取并设置缓存
     let todayLog = './src/log/waterGroups' + room.id + (new Date().Format("yyyyMMdd"))+ '.json';
     //如果文件存在
@@ -52,7 +52,7 @@ export const saveWaterGroups = (groupName,room,talker)=> {
                 // 判断写入缓存
                 let oldData = getCache("waterGroups"  +  room.id + talker.id);
                 if (oldData){
-                    oldData.number = oldData.number + 1;
+                    oldData.number = oldData.number + +number;
                 }else{
                     oldData = {
                         // 保存群名称,方便区分

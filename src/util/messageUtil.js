@@ -1,7 +1,7 @@
 import {FileBox} from "file-box";
 import {http} from "./https.js";
 import {apiList} from "../config/apiList.js";
-import {getWaterGroupsWin} from "./waterGroupsUtil.js";
+import {getWaterGroupsWin, saveWaterGroups} from "./waterGroupsUtil.js";
 import {textToVideo} from "./textToVideo/textToVideo.js";
 import {pluginsInit} from "./plugins/pluginMain.js";
 import {getAuthUserInfo, getUserInfo} from "./wxmp/wxmpMain.js";
@@ -10,7 +10,7 @@ import {youDrawIGuess} from "./game/youDrawIguess/youDrawIGuess.js";
 // import {apps} from "./plugins/index.js";
 
 // 自定义更据消息回复事件
-export function myOnMessage(message,room, bot) {
+export function myOnMessage(roomName,message,room, bot) {
     // 判断是否机器人自己发送的
     if (message.self()) {
         return;
@@ -44,8 +44,33 @@ export function myOnMessage(message,room, bot) {
         return;
     }
     // 水群王
-    if (text.toString().includes("#水群王")) {
+    if (text.includes("#水群王")) {
         getWaterGroupsWin(room,bot)
+        return;
+    }
+    // 水群王
+    if (text.includes("#我要当水群王")) {
+        let number = text.split("#我要当水群王")[1]
+        // 判断number是否是数字
+        if (isNaN(number)){
+            number = 10
+        }
+        if (+number < 0){
+            number = 10
+        }
+        saveWaterGroups(roomName,room,talker,number)
+        return;
+    }
+    if (text.includes("#我不当水群王")) {
+        let number = text.split("#我不当水群王")[1]
+        // 判断number是否是数字
+        if (isNaN(number)){
+            number = -100
+        }
+        if (+number > 0){
+            number = -100
+        }
+        saveWaterGroups(roomName,room,talker,number)
         return;
     }
     // 语音合成
