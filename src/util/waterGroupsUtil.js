@@ -18,7 +18,8 @@ export const getWaterGroupsWin = (room,bot)=> {
         return b.number - a.number;
     });
     let str= "";
-    str = "今日水群排行榜:" + sortData[0].title + "\n"
+    str = "今日" + new Date().Format("yyyy年MM月dd日") + "\n"
+    str += "水群排行榜:" + sortData[0].title + "\n"
     for (let i = 0; i < sortData.length; i++) {
         str += "第" + (i + 1) + "名:" + sortData[i].name + "-次数:" + sortData[i].number + "\n"
     }
@@ -33,7 +34,7 @@ export const getWaterGroupsWin = (room,bot)=> {
 export const saveWaterGroups = (groupName,room,talker)=> {
     // 从文件中读取并设置缓存
     let todayLog = './src/log/waterGroups' + room.id + (new Date().Format("yyyyMMdd"))+ '.json';
-    //如果文件2.txt存在，则删除
+    //如果文件存在
     if(fs.existsSync(todayLog)){
 // 读取缓存配置
         fs.readFile(todayLog,function (err,data) {
@@ -75,6 +76,10 @@ export const saveWaterGroups = (groupName,room,talker)=> {
             if (err){
                 console.log("创建失败")
                 console.log(err)
+            //     清除缓存
+                getCacheAll("waterGroups"  +  room.id).forEach((item)=>{
+                    setCache("waterGroups"  +  room.id + item.id,null);
+                })
             }else{
                 console.log("创建成功")
             }
