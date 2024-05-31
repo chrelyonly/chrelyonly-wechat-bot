@@ -6,6 +6,7 @@ import {textToVideo} from "./textToVideo/textToVideo.js";
 import {pluginsInit} from "./plugins/pluginMain.js";
 import {getAuthUserInfo, getUserInfo} from "./wxmp/wxmpMain.js";
 import {youDrawIGuess} from "./game/youDrawIguess/youDrawIGuess.js";
+import {douyinVideo} from "./douyinVideo/douyinVideo.js";
 // 导入插件
 // import {apps} from "./plugins/index.js";
 
@@ -33,6 +34,11 @@ export function myOnMessage(roomName,message,room, bot) {
     }
     if (text.toString().includes("#获取信息B")) {
         getAuthUserInfo(talker,message,room,bot)
+        return;
+    }
+    // 抖音视频解析
+    if (text.toString().includes("抖音") && text.toString().includes("v.douyin.com")) {
+        douyinVideo(talker,message,room,bot)
         return;
     }
     if (text.toString().includes("#菜单")) {
