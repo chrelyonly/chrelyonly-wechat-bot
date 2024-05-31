@@ -59,6 +59,9 @@ export function myOnMessage(roomName,message,room, bot) {
             number = 10
         }
         saveWaterGroups(roomName,room,talker,number)
+        setTimeout(() => {
+            getWaterGroupsWin(room,bot)
+        },5000)
         return;
     }
     if (text.includes("#我不当水群王")) {
@@ -71,6 +74,9 @@ export function myOnMessage(roomName,message,room, bot) {
             number = -100
         }
         saveWaterGroups(roomName,room,talker,number)
+        setTimeout(() => {
+            getWaterGroupsWin(room,bot)
+        },5000)
         return;
     }
     // 语音合成
