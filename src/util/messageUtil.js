@@ -228,7 +228,7 @@ const getAllApiName = () => {
 }
 const getApi = (name,room) => {
     if(name === "?"){
-        room("捏寄个问号是神魔意思")
+        room.say("捏寄个问号是神魔意思?")
         return null;
     }
     if(name.includes("拉尔戈")){

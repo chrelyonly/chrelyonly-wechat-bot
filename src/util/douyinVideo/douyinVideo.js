@@ -13,8 +13,7 @@ export const douyinVideo = (talker,text,room,bot)=>{
         "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"
     }
     http(api,"post",params, 2,headers).then( res=> {
-        console.log(res)
-        let fileBox = FileBox.fromUrl(res.data.data.data.voideurl);
+        let fileBox = FileBox.fromUrl(res.data.data.data.voideurl, {name:"oduyin.mp4"});
         room.say(fileBox)
     },err =>{
         log.error(err)
