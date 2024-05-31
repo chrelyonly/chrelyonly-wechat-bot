@@ -11,7 +11,7 @@ import {gameStatus, startGame} from "../util/game/gameMain.js";
 export function onScan(qrcode, status) {
     if (status === ScanStatus.Waiting || status === ScanStatus.Timeout) {
         // 在控制台显示二维码
-        qrTerminal.generate(qrcode, {small: true})
+        qrTerminal.generate(qrcode,{small:true})
         log.info('等待扫码:', ScanStatus[status], status)
     } else {
         console.log('已扫码,请确认登录: %s(%s)', ScanStatus[status], status)
@@ -68,16 +68,16 @@ export  function onMessage(message,bot) {
                 })
             }
             // 5 是收藏表情,不知如何解密微信的表情包连接
-            if(txtType === 5){
-                // 保存缓存
-                message.toFileBox().then(function (res) {
-                    let cacheJson = {
-                        type: 5,
-                        text: res.buffer.toString("base64")
-                    }
-                    setCache(message.id,JSON.stringify(cacheJson))
-                })
-            }
+            // if(txtType === 5){
+            //     // 保存缓存
+            //     message.toFileBox().then(function (res) {
+            //         let cacheJson = {
+            //             type: 5,
+            //             text: res.remoteUrl
+            //         }
+            //         setCache(message.id,JSON.stringify(cacheJson))
+            //     })
+            // }
             // 7是文本
             if(txtType === 7){
                 // 保存缓存
@@ -116,12 +116,12 @@ export  function onMessage(message,bot) {
                             room.say(text + ",撤回的消息是:[ " + oldMsg.text + " ]")
                         }
                         // // 回复表情包
-                        if (oldMsg.type === 5){
-                            // 从xml中解析图片地址
-                            let base64 = oldMsg.text;
-                            let fileBox = FileBox.fromBase64(base64,"temp.gif");
-                            room.say(fileBox)
-                        }
+                        // if (oldMsg.type === 5){
+                        //     // 从xml中解析图片地址
+                        //     let url = oldMsg.text;
+                        //     let fileBox = FileBox.fromUrl(url);
+                        //     room.say(fileBox)
+                        // }
                         // 回复图片
                         if (oldMsg.type === 6){
                             // 从xml中解析图片地址
