@@ -1,10 +1,11 @@
-import {http} from "../https.js";
-import {FileBox} from "file-box";
+import { http } from "../https.js";
+import { FileBox } from "file-box";
 import fs from "fs";
 import path from "path";
-import archiver from "archiver";
+import { archiveFolder } from "zip-lib";
 import { dirname } from "node:path"
 import { fileURLToPath } from "node:url"
+import  "../newdate.js"
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 const downloadImage = async (url, filepath) => {
@@ -42,28 +43,24 @@ export const r18 = async (room, bot) => {
         const filepath = path.join(tempDir, `image${index + 1}.jpg`);
         return downloadImage(url, filepath);
     });
+
     try {
         await Promise.all(downloadPromises);
-        const output = fs.createWriteStream(path.join(__dirname, 'images.zip'));
-        const archive = archiver('zip', {
-            zlib: { level: 9 }
-        });
-        output.on('close', async () => {
-            const fileBox = FileBox.fromFile(path.join(__dirname, '不准打开哦.zip'));
-            await room.say(fileBox);
 
-            // 删除临时目录和压缩文件
-            fs.rmdirSync(tempDir, { recursive: true });
-            fs.unlinkSync(path.join(__dirname, 'images.zip'));
+        const zipPath = path.join(__dirname, 'images.zip');
+
+        // 使用 zip-lib 创建带密码保护的压缩包
+        await archiveFolder(tempDir, zipPath, {
+            password: new Date().Format("yyyyMMddhh"), // 设置压缩包密码
+            zlib: { level: 9 } // 设置压缩级别
         });
 
-        archive.on('error', (err) => {
-            throw err;
-        });
+        const fileBox = FileBox.fromFile(zipPath);
+        await room.say(fileBox);
 
-        archive.pipe(output);
-        archive.directory(tempDir, false);
-        await archive.finalize();
+        // 删除临时目录和压缩文件
+        fs.rmdirSync(tempDir, { recursive: true });
+        fs.unlinkSync(zipPath);
     } catch (error) {
         console.error("Error downloading images or creating zip file:", error);
         fs.rmdirSync(tempDir, { recursive: true });
