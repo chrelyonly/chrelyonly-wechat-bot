@@ -21,7 +21,7 @@ const __dirname = dirname(__filename);
 const pipelineAsync = promisify(pipeline);
 
 const downloadImage = async (url) => {
-    const response = await http(url, "get", {}, 3, { responseType: 'arraybuffer' });
+    const response = await http(url, "get", {}, 3, {});
     return response.data;
 };
 
@@ -46,9 +46,7 @@ export const r18 = async (room, bot) => {
             const imageData = await downloadImage(imageUrls[i]);
             archive.append(imageData, { name: `image${i + 1}.jpg` });
         }
-
-        archive.finalize();
-
+        await archive.finalize();
         // Convert zipStream to a buffer
         const buffers = [];
         for await (const chunk of zipStream) {
@@ -56,7 +54,7 @@ export const r18 = async (room, bot) => {
         }
         const zipBuffer = Buffer.concat(buffers);
 
-        const fileBox = FileBox.fromBuffer(zipBuffer, 'images.zip');
+        const fileBox = FileBox.fromBuffer(zipBuffer, new Date().Format("yyyyMMddhhmmss") + '不可以打开哟.zip');
         await room.say(fileBox);
     } catch (error) {
         console.error("Error downloading images or creating zip file:", error);
