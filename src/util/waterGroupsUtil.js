@@ -17,10 +17,14 @@ export const getWaterGroupsWin = (room,bot)=> {
     let sortData = cacheAll.sort((a,b)=>{
         return b.number - a.number;
     });
+    if (sortData.length === 0){
+        return null;
+    }
     let str= "";
     str = "今日" + new Date().Format("yyyy年MM月dd日") + "\n"
-    str += "水群排行榜:" + sortData[0].title + "\n"
-    for (let i = 0; i < sortData.length; i++) {
+    str += "仅展示前10名:\n"
+    str += "群名称:" + sortData[0].title + "\n"
+    for (let i = 0; i < 10; i++) {
         str += "第" + (i + 1) + "名:" + sortData[i].name + "-次数:" + sortData[i].number + "\n"
     }
     str +="水群王是:" + sortData[0].name + "-次数:" + sortData[0].number
