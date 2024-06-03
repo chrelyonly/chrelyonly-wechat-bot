@@ -4,6 +4,9 @@ const myCache = new NodeCache({ stdTTL: 120 }); // 缓存有效时间为60秒，
 export function setCache(key, value,time = 60 * 60 * 24 * 30 * 12) {
     myCache.set(key, value,time);
 }
+export function delCache(key) {
+    myCache.del(key);
+}
 export function getCache(key) {
     return myCache.get(key);
 }

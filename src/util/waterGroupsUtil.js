@@ -1,6 +1,6 @@
 
 // 引入缓存工具
-import {getCache, getCacheAll, setCache} from "./cacheUtil.js";
+import {delCache, getCache, getCacheAll, setCache} from "./cacheUtil.js";
 import { saveFileToJson} from "./fileUtil.js";
 import fs from "fs";
 /**
@@ -80,7 +80,7 @@ export const saveWaterGroups = (groupName,room,talker,number)=> {
                 console.log("创建成功")
                 //     清除缓存
                 getCacheAll("waterGroups"  +  room.id).forEach((item)=>{
-                    setCache("waterGroups"  +  room.id + item.id,null);
+                    delCache("waterGroups"  +  room.id + item.id);
                 })
             }
         })
