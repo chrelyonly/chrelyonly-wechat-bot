@@ -54,15 +54,57 @@ export function myOnMessage(roomName,message,room, bot) {
         getWaterGroupsWin(room,bot)
         return;
     }
-    // 水群王
+    // redis
     if (text.includes("redis")) {
         let msg = "redis下载地址: \nhttp://47.102.159.60:11725/down/rrj4eGHz0nlx?fname=/";
         room.say(msg)
         return;
     }
-    // 水群王
+    // minio
     if (text.includes("minio")) {
         let msg = "minio下载地址: \nhttp://47.102.159.60:11725/down/7ks1hZaryUFD";
+        room.say(msg)
+        return;
+    }
+    // windows
+    if (text.includes("windows")) {
+        let msg = "windows停用更新软件\n下载地址: \nhttp://47.102.159.60:11725/down/pSl2GTFvWRBs";
+        room.say(msg)
+        return;
+    }
+    // CE
+    if (text.includes("CE")) {
+        let msg = "CE\n下载地址: \nhttp://47.102.159.60:11725/down/CCSgFbl46m5l";
+        room.say(msg)
+        return;
+    }
+    // 抓包
+    if (text.includes("抓包")) {
+        let msg = "抓包软件\n下载地址: \nhttp://47.102.159.60:11725/down/JkLs3RFwsWg1";
+        room.say(msg)
+        return;
+    }
+    // ssl
+    if (text.includes("ssl")) {
+        let msg = "ssl申请工具\n食用教程\nhttps://temp-img.chrelyonly.cn/ssl\n下载地址: \nhttp://47.102.159.60:11725/down/XWm4GaT0AELA";
+        room.say(msg)
+        return;
+    }
+    // 软通牒
+    if (text.includes("uiso") || text.includes("软通牒")) {
+        let msg = "uiso下载地址: \nhttp://47.102.159.60:11725/down/iJNz3Pkbj7wK";
+        room.say(msg)
+        return;
+    }
+    // navicat
+    if (text.includes("navicat")) {
+        let msg = "navicat激活工具下载地址: \nhttp://47.102.159.60:11725/down/QspoSUpIKQKL";
+        room.say(msg)
+        return;
+    }
+    // jrebel
+    if (text.includes("jrebel")) {
+        let msg = "jrebel激活工具下载地址: \nhttp://47.102.159.60:11725/down/d8spIutME3sk";
         room.say(msg)
         return;
     }
