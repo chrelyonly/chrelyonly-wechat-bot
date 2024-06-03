@@ -55,6 +55,18 @@ export function myOnMessage(roomName,message,room, bot) {
         return;
     }
     // 水群王
+    if (text.includes("redis")) {
+        let msg = "redis下载地址: \nhttp://47.102.159.60:11725/down/rrj4eGHz0nlx?fname=/";
+        room.say(msg)
+        return;
+    }
+    // 水群王
+    if (text.includes("minio")) {
+        let msg = "minio下载地址: \nhttp://47.102.159.60:11725/down/7ks1hZaryUFD";
+        room.say(msg)
+        return;
+    }
+    // 水群王
     if (text.includes("#我要当水群王")) {
         let number = text.split("#我要当水群王")[1]
         // 判断number是否是数字
