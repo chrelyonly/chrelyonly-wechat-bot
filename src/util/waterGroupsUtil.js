@@ -43,7 +43,7 @@ export const saveWaterGroups = (groupName,room,talker,number)=> {
                 console.log(err)
             }else{
                 // console.log("读取成功")
-                let list = JSON.parse(data.toString());
+                let list = JSON.parse(data);
                 for (let i = 0; i < list.length; i++) {
                     let item = list[i];
                     //     保存到缓存
@@ -66,7 +66,7 @@ export const saveWaterGroups = (groupName,room,talker,number)=> {
                         //    暂时不记录时间
                     }
                 }
-                setCache("waterGroups"  +  room.id + talker.id,oldData,60 * 60 * 24 * 30);
+                setCache("waterGroups"  +  room.id + talker.id,JSON.stringify(oldData),60 * 60 * 24 * 30);
                 saveFileToJson(room.id);
             }
         })
