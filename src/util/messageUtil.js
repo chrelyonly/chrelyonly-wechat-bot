@@ -136,8 +136,10 @@ export function myOnMessage(roomName,message,room, bot) {
         if (isNaN(number)){
             number = -100
         }
-        if (+number > 0){
+        if (+number < 0){
             number = -100
+        }else{
+            number = -number
         }
         saveWaterGroups(roomName,room,talker,number)
         setTimeout(() => {
