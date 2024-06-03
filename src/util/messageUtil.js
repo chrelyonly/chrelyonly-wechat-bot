@@ -56,7 +56,7 @@ export function myOnMessage(roomName,message,room, bot) {
     }
     // 水群王
     if (text.includes("#全部水群王")) {
-        getWaterGroupsWin(room,bot,999)
+        getWaterGroupsWin(room,bot,null)
         return;
     }
     // redis
