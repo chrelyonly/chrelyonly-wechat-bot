@@ -3,69 +3,62 @@ import { FileBox } from "file-box";
 import fs from "fs";
 import path from "path";
 import { archiveFolder } from "zip-lib";
+
+import archiver from "archiver";
+import { PassThrough } from "stream";
+import { promisify } from "util";
+import { pipeline } from "stream";
 import { dirname } from "node:path"
 import { fileURLToPath } from "node:url"
 import  "../newdate.js"
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
-const downloadImage = async (url, filepath) => {
-    const response = await http(url, "get", {}, 4, {});
-    const writer = fs.createWriteStream(filepath);
-    response.data.pipe(writer);
-    return new Promise((resolve, reject) => {
-        writer.on('finish', () => {
-            writer.close(resolve);
-        });
-        writer.on('error', (err) => {
-            writer.close(() => reject(err));
-        });
-    });
+
+
+
+
+
+const pipelineAsync = promisify(pipeline);
+
+const downloadImage = async (url) => {
+    const response = await http(url, "get", {}, 3, { responseType: 'arraybuffer' });
+    return response.data;
 };
 
 export const r18 = async (room, bot) => {
     let msg = "禁止色色,达咩哟!";
     await room.say(msg);
-
     const imageUrls = [
         "https://image.anosu.top/pixiv/direct?r18=1&keyword=honkai",
-        "https://image.anosu.top/pixiv/direct?r18=1&keyword=honkai",
-        "https://image.anosu.top/pixiv/direct?r18=1&keyword=genshinimpact",
-        "https://image.anosu.top/pixiv/direct?r18=1&keyword=genshinimpact",
         "https://image.anosu.top/pixiv/direct?r18=1&keyword=genshinimpact"
     ];
 
-    const tempDir = path.join(__dirname, 'temp');
-    if (!fs.existsSync(tempDir)) {
-        fs.mkdirSync(tempDir);
-    }
-
-    const downloadPromises = imageUrls.map((url, index) => {
-        const filepath = path.join(tempDir, `image${index + 1}.jpg`);
-        return downloadImage(url, filepath);
-    });
-
     try {
-        await Promise.all(downloadPromises);
-
-        const zipPath = path.join(__dirname, 'images.zip');
-
-        // 使用 zip-lib 创建带密码保护的压缩包
-        await archiveFolder(tempDir, zipPath, {
-            password: new Date().Format("yyyyMMddhh"), // 设置压缩包密码
-            zlib: { level: 9 } // 设置压缩级别
+        const archive = archiver('zip', {
+            zlib: { level: 9 }
         });
 
-        const fileBox = FileBox.fromFile(zipPath, "不可以打开哟.zip");
-        await room.say(fileBox);
+        // PassThrough stream to collect the zip data in memory
+        const zipStream = new PassThrough();
+        archive.pipe(zipStream);
 
-        // 删除临时目录和压缩文件
-        fs.rmdirSync(tempDir, { recursive: true });
-        fs.unlinkSync(zipPath);
+        for (let i = 0; i < imageUrls.length; i++) {
+            const imageData = await downloadImage(imageUrls[i]);
+            archive.append(imageData, { name: `image${i + 1}.jpg` });
+        }
+
+        archive.finalize();
+
+        // Convert zipStream to a buffer
+        const buffers = [];
+        for await (const chunk of zipStream) {
+            buffers.push(chunk);
+        }
+        const zipBuffer = Buffer.concat(buffers);
+
+        const fileBox = FileBox.fromBuffer(zipBuffer, 'images.zip');
+        await room.say(fileBox);
     } catch (error) {
         console.error("Error downloading images or creating zip file:", error);
-        fs.rmdirSync(tempDir, { recursive: true });
-        if (fs.existsSync(path.join(__dirname, 'images.zip'))) {
-            fs.unlinkSync(path.join(__dirname, 'images.zip'));
-        }
     }
 };
