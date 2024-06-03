@@ -76,12 +76,12 @@ export const saveWaterGroups = (groupName,room,talker,number)=> {
             if (err){
                 console.log("创建失败")
                 console.log(err)
-            //     清除缓存
+            }else{
+                console.log("创建成功")
+                //     清除缓存
                 getCacheAll("waterGroups"  +  room.id).forEach((item)=>{
                     setCache("waterGroups"  +  room.id + item.id,null);
                 })
-            }else{
-                console.log("创建成功")
             }
         })
     }
