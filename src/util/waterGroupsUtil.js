@@ -51,7 +51,7 @@ export const saveWaterGroups = (groupName,room,talker,number)=> {
                 }
                 // 判断写入缓存
                 let oldData = getCache("waterGroups"  +  room.id + talker.id);
-                if (oldData.number){
+                if (oldData && oldData.number){
                     oldData.number = oldData.number + +number;
                 }else{
                     oldData = {
