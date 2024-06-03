@@ -43,7 +43,7 @@ export const saveWaterGroups = (groupName,room,talker,number)=> {
                 console.log(err)
             }else{
                 // console.log("读取成功")
-                let list = JSON.parse(data);
+                let list = JSON.parse(data.toString()) || [];
                 for (let i = 0; i < list.length; i++) {
                     let item = list[i];
                     //     保存到缓存
