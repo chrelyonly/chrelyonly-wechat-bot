@@ -6,7 +6,7 @@ import fs from "fs";
 /**
  * 获取水群王
  */
-export const getWaterGroupsWin = (room,bot)=> {
+export const getWaterGroupsWin = (room,bot,number = 10)=> {
 //     取出所有waterGroups开头的次数
     let cacheAll = getCacheAll("waterGroups"  +  room.id);
 //     如果没有数据
@@ -22,9 +22,8 @@ export const getWaterGroupsWin = (room,bot)=> {
     }
     let str= "";
     str = "今日" + new Date().Format("yyyy年MM月dd日") + "\n"
-    str += "仅展示前10名:\n"
     str += "群名称:" + sortData[0].title + "\n"
-    for (let i = 0; i < 10; i++) {
+    for (let i = 0; i < number; i++) {
         str += "第" + (i + 1) + "名:" + sortData[i].name + "-次数:" + sortData[i].number + "\n"
     }
     str +="水群王是:" + sortData[0].name + "-次数:" + sortData[0].number

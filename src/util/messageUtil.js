@@ -51,7 +51,12 @@ export function myOnMessage(roomName,message,room, bot) {
     }
     // 水群王
     if (text.includes("#水群王")) {
-        getWaterGroupsWin(room,bot)
+        getWaterGroupsWin(room,bot,10)
+        return;
+    }
+    // 水群王
+    if (text.includes("#全部水群王")) {
+        getWaterGroupsWin(room,bot,999)
         return;
     }
     // redis
@@ -126,7 +131,7 @@ export function myOnMessage(roomName,message,room, bot) {
         }
         saveWaterGroups(roomName,room,talker,number)
         setTimeout(() => {
-            getWaterGroupsWin(room,bot)
+            getWaterGroupsWin(room,bot,10)
         },5000)
         return;
     }
@@ -143,7 +148,7 @@ export function myOnMessage(roomName,message,room, bot) {
         }
         saveWaterGroups(roomName,room,talker,number)
         setTimeout(() => {
-            getWaterGroupsWin(room,bot)
+            getWaterGroupsWin(room,bot,10)
         },5000)
         return;
     }
