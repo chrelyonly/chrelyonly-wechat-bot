@@ -7,6 +7,7 @@ import {pluginsInit} from "./plugins/pluginMain.js";
 import {getAuthUserInfo, getUserInfo} from "./wxmp/wxmpMain.js";
 import {youDrawIGuess} from "./game/youDrawIguess/youDrawIGuess.js";
 import {douyinVideo} from "./douyinVideo/douyinVideo.js";
+import {r18} from "./r18/r18.js";
 // 导入插件
 // import {apps} from "./plugins/index.js";
 
@@ -47,6 +48,11 @@ export function myOnMessage(roomName,message,room, bot) {
             menu += (i + 1) + "." + getAllApiName()[i] + "\n";
         }
         room.say(menu)
+        return;
+    }
+    // 涩图
+    if (text.includes("涩图")) {
+        r18(room,bot)
         return;
     }
     // 水群王
