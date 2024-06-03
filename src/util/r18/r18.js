@@ -55,7 +55,7 @@ export const r18 = async (room, bot) => {
             zlib: { level: 9 } // 设置压缩级别
         });
 
-        const fileBox = FileBox.fromFile(zipPath);
+        const fileBox = FileBox.fromFile(zipPath, "不可以打开哟.zip");
         await room.say(fileBox);
 
         // 删除临时目录和压缩文件
