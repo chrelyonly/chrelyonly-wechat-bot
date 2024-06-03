@@ -62,7 +62,7 @@ export function myOnMessage(roomName,message,room, bot) {
     }
     // minio
     if (text.includes("minio")) {
-        let msg = "minio下载地址: \nhttp://47.102.159.60:11725/down/7ks1hZaryUFD";
+        let msg = "minio下载地址: \nhttp://47.102.159.60:11725/down/d4oJSZCSqMLD";
         room.say(msg)
         return;
     }
