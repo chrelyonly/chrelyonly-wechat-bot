@@ -108,6 +108,12 @@ export function myOnMessage(roomName,message,room, bot) {
         room.say(msg)
         return;
     }
+    // idea
+    if (text.includes("idea")) {
+        let msg = "idea下载地址: \nhttps://107service-cf-cdn.542bsb.top/ideaIU-2024.1.2.win.zip";
+        room.say(msg)
+        return;
+    }
     // 水群王
     if (text.includes("#我要当水群王")) {
         let number = text.split("#我要当水群王")[1]
