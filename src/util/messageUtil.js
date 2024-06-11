@@ -42,6 +42,11 @@ export function myOnMessage(roomName,message,room, bot) {
         douyinVideo(talker,text,room,bot)
         return;
     }
+    // youtube解析
+    if (text.toString().includes("youtu.be") || text.toString().includes("www.youtube.com")) {
+        douyinVideo(talker,text,room,bot)
+        return;
+    }
     if (text.toString().includes("#菜单")) {
         let menu = "菜单：\n";
         for (let i = 0; i < getAllApiName().length; i++) {
