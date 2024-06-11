@@ -8,6 +8,7 @@ import {getAuthUserInfo, getUserInfo} from "./wxmp/wxmpMain.js";
 import {youDrawIGuess} from "./game/youDrawIguess/youDrawIGuess.js";
 import {douyinVideo} from "./douyinVideo/douyinVideo.js";
 import {r18} from "./r18/r18.js";
+import {youtubeVideo} from "./youtubeVideo/youtubeVideo.js";
 // 导入插件
 // import {apps} from "./plugins/index.js";
 
@@ -44,7 +45,7 @@ export function myOnMessage(roomName,message,room, bot) {
     }
     // youtube解析
     if (text.toString().includes("youtu.be") || text.toString().includes("www.youtube.com")) {
-        douyinVideo(talker,text,room,bot)
+        youtubeVideo(talker,text,room,bot)
         return;
     }
     if (text.toString().includes("#菜单")) {
