@@ -24,5 +24,3 @@ export const youtubeVideo = (talker,text,room,bot)=>{
         room.say("解析失败，请检查链接是否正确")
     })
 }
-
-youtubeVideo(null,"https://www.youtube.com/watch?v=49d95ni5J9Y",null,null);
