@@ -131,6 +131,12 @@ export function myOnMessage(roomName,message,room, bot) {
         room.say(msg)
         return;
     }
+    // idea
+    if (text.includes("idea")) {
+        let msg = "idea下载地址: \nhttps://107service-cf-cdn.542bsb.top/ideaIU-2024.1.2.win.zip";
+        room.say(msg)
+        return;
+    }
     // 水群王
     if (text.includes("#我要当水群王")) {
         let number = text.split("#我要当水群王")[1]
@@ -174,6 +180,23 @@ export function myOnMessage(roomName,message,room, bot) {
             room.say(error)
         })
         return;
+    }
+    if(text.includes("docker")){
+        let msg = "docker镜像地址:\n";
+        msg += "https://docker.542bsb.top\n"
+        msg += "https://107service-cf-cdn.542bsb.top\n"
+        msg += "食用教程: docker pull ubuntu:latest 替换为 https://docker.542bsb.top/ubuntu:latest\n"
+        room.say(msg)
+        return null;
+    }
+    if(text.includes("拉尔戈")){
+        const fileBox = FileBox.fromFile("./src/static/img/dnf/1716433273045.jpg")
+        room.say(fileBox)
+        return null;
+    }
+    if(text === "?"){
+        room.say("捏寄个问号是神魔意思?")
+        return null;
     }
     let apiItem = getApi(text,room);
     if (apiItem){
@@ -306,15 +329,6 @@ const getAllApiName = () => {
     return nameList;
 }
 const getApi = (name,room) => {
-    if(name === "?"){
-        room.say("捏寄个问号是神魔意思?")
-        return null;
-    }
-    if(name.includes("拉尔戈")){
-        const fileBox = FileBox.fromFile("./src/static/img/dnf/1716433273045.jpg")
-        room.say(fileBox)
-        return null;
-    }
     if(name.includes("#")){
         for (let i = 0; i < apiList.length; i++) {
             let item = apiList[i]
