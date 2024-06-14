@@ -91,10 +91,9 @@ export  function onMessage(message,bot) {
             // 7是文本
             if(txtType === 7){
                 // 保存数据库
-                saveChatHistory(message.id, 7, msg).then(r => {
-                    // 自定义文本回复内容
-                    myOnMessage(res,message,room,bot)
-                })
+                saveChatHistory(message.id, 7, msg)
+                // 自定义文本回复内容
+                myOnMessage(res,message,room,bot)
             }
             if(txtType === 13){
                 let text = msg;
