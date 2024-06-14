@@ -37,7 +37,7 @@ export const pluginsInit = (message,room,bot) => {
                 const matchIndex = text.indexOf(m);
                 if (matchIndex !== -1) {
                     const splitText = text.substring(matchIndex + m.length);
-                    console.log("插件关键字: " + splitText)
+                    log.info("插件关键字: " + splitText)
                     getEmoji(emoji, room, bot, splitText);
                     return; // 假设只需要处理第一个匹配到的 emoji
                 }

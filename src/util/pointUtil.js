@@ -1,7 +1,8 @@
 
 import  "./newdate.js";
-console.log(new Date().Format("hh:mm:ss"))
+log.info(new Date().Format("hh:mm:ss"))
 import {FileBox} from "file-box";
+import {log} from "wechaty";
 const listTime = [
     "00:00:00",
     "01:00:00",

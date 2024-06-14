@@ -6,10 +6,10 @@ import {isTimeTo} from "./util/pointUtil.js";
 
 // 初始化sqlite数据库
 sqlDbUtilInit().then(r => {
-    console.log('sqlite数据库初始化成功')
+    log.info('sqlite数据库初始化成功')
 },e => {
-    console.log('sqlite数据库初始化失败')
-    console.log(e)
+    log.info('sqlite数据库初始化失败')
+    log.info(e)
 })
 // 初始化机器人
 const bot = WechatyBuilder.build({
@@ -39,7 +39,7 @@ bot.on('message',  message => {
             log.info('启动成功')
         },err=>{
             log.info('启动失败')
-            console.log(err)
+            log.info(err)
         })
         .catch((e) => {
             log.info("启动失败")
@@ -56,22 +56,22 @@ import express from "express";
 import {testInit} from "./util/test/testUtil.js";
 import {resUserinfo} from "./util/wxmp/wxmpMain.js";
 import {okDraw} from "./util/game/youDrawIguess/youDrawIGuess.js";
-import {init, sqlDbUtilInit} from "./sqlite/sqlDbUtil.js";
+import {sqlDbUtilInit} from "./sqlite/sqlDbUtil.js";
 const app = express();
 // 解析JSON数据的中间件
 app.use(express.json());
 // 访问本地静态文件， __dirname 代表本脚本的路径
 app.use('/', express.static("./static/"));
 // 提交画画文件
-app.post('/okDraw', (req, res) => {
-    okDraw(req,bot)
-    res.send('ok')
-});
-
-app.post('/resUserinfo', (req, res) => {
-    resUserinfo(req,bot)
-    res.send('ok')
-});
+// app.post('/okDraw', (req, res) => {
+//     okDraw(req,bot)
+//     res.send('ok')
+// });
+//
+// app.post('/resUserinfo', (req, res) => {
+//     resUserinfo(req,bot)
+//     res.send('ok')
+// });
 app.get('/testInit', (req, res) => {
     testInit(bot,req.query).then(r => {
         res.send(r)
@@ -80,7 +80,7 @@ app.get('/testInit', (req, res) => {
     })
 });
 app.listen(3000, () => {
-    console.log('web监听3000端口')
+    log.info('web监听3000端口')
 })
 
 

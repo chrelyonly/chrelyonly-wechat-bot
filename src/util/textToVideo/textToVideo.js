@@ -41,7 +41,7 @@ export const textToVideo = (room,bot,msg) => {
         // 开始合成语音
         synthesizer.speakTextAsync(msg,result=> {
                 if (result.reason === sdk.ResultReason.SynthesizingAudioCompleted) {
-                    console.log("合成完成.");
+                    log.info("合成完成.");
                     // synthesizer.close();
                     // 浏览器流转换常规流
                     // result.audioData

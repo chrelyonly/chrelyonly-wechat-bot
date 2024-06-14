@@ -10,27 +10,28 @@ import {saveWaterKing, selectWaterKing} from "../sqlite/sqlDbUtil.js";
 export const getWaterGroupsWin = (room,bot,number)=> {
 //     取出所有waterGroups开头的次数
 //     let cacheAll = getCacheAll("waterGroups"  +  room.id);
-    let cacheAll = selectAllWaterKing(room.id)
-//     如果没有数据
-    if (!cacheAll){
-        return null;
-    }
+    selectAllWaterKing(room.id).then((cacheAll)=>{
+        //     如果没有数据
+        if (!cacheAll){
+            return null;
+        }
 //     对数据进行排序
-    let sortData = cacheAll.sort((a,b)=>{
-        return b.number - a.number;
+        let sortData = cacheAll.sort((a,b)=>{
+            return b.number - a.number;
+        });
+        if (sortData.length === 0){
+            return null;
+        }
+        let str= "";
+        str = "今日" + new Date().Format("yyyy年MM月dd日") + "\n"
+        str += "群名称:" + sortData[0].title + "\n"
+        number = sortData.length < number ? sortData.length : number;
+        for (let i = 0; i < number; i++) {
+            str += "第" + (i + 1) + "名:" + sortData[i].name + "-次数:" + sortData[i].number + "\n"
+        }
+        str +="水群王是:" + sortData[0].name + "-次数:" + sortData[0].number
+        room.say(str);
     });
-    if (sortData.length === 0){
-        return null;
-    }
-    let str= "";
-    str = "今日" + new Date().Format("yyyy年MM月dd日") + "\n"
-    str += "群名称:" + sortData[0].title + "\n"
-    number = number && number > 0?number:sortData.length;
-    for (let i = 0; i < number; i++) {
-        str += "第" + (i + 1) + "名:" + sortData[i].name + "-次数:" + sortData[i].number + "\n"
-    }
-    str +="水群王是:" + sortData[0].name + "-次数:" + sortData[0].number
-    room.say(str);
 }
 /**
  * 保存水群次数
@@ -44,7 +45,7 @@ export const saveWaterGroups = (groupName,room,talker,number)=> {
             oldData.number = oldData.number + +number;
         }else{
             oldData = {
-                id:talker.id,
+                number:1,
             }
         }
         saveWaterKing(groupName, talker.id, talker.name(), room.id, oldData.number)

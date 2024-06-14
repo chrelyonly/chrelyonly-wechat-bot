@@ -15,7 +15,7 @@ export function onScan(qrcode, status) {
         qrTerminal.generate(qrcode,{small:true})
         log.info('等待扫码:', ScanStatus[status], status)
     } else {
-        console.log('已扫码,请确认登录: %s(%s)', ScanStatus[status], status)
+        log.info('已扫码,请确认登录: %s(%s)', ScanStatus[status], status)
     }
 }
 // 登录
@@ -25,7 +25,7 @@ export function onLogin(user) {
 }
 // 登录
 export function roomTopic(room, topic, oldTopic, changer) {
-    console.log(`群 ${room.topic()} 修改名称,旧名称 ${oldTopic} 新名称 ${topic} 来自 ${changer.name()}`)
+    log.info(`群 ${room.topic()} 修改名称,旧名称 ${oldTopic} 新名称 ${topic} 来自 ${changer.name()}`)
 }
 /**
  * 消息监听
@@ -67,7 +67,7 @@ export  function onMessage(message,bot) {
                 message.toFileBox().then(function (res) {
                     // 保存数据库
                     saveChatHistory(message.id, 6, res.buffer.toString("base64")).then(r => {
-                        // console.log(r)
+                        // log.info(r)
                     })
                 })
             }
@@ -76,10 +76,10 @@ export  function onMessage(message,bot) {
                 // 保存缓存
                 // message.toFileBox().then(function (res) {
                     // res.toBuffer().then(res2 => {
-                    //     console.log(res2)
+                    //     log.info(res2)
                     // })
                     // res.toFile(res.name).then(res2 => {
-                    //     console.log(res2)
+                    //     log.info(res2)
                     // })
                     // let cacheJson = {
                     //     type: 5,
@@ -145,7 +145,7 @@ export  function onMessage(message,bot) {
  */
 export function onError(msg) {
     // log.info("启动失败,请检查是否实名,是否绑定手机号,是否绑定银行卡")
-    console.log(msg)
+    log.info(msg)
     // 停止node
     // process.exit()
 }

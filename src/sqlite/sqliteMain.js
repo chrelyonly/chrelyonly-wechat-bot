@@ -1,4 +1,5 @@
 import sqlite3 from 'sqlite3';
+import {log} from "wechaty";
 
 /**
  * 数据库操作类
@@ -25,13 +26,13 @@ class Database {
             if (err) {
                 console.error(`无法连接到数据库: ${err.message}`);
                 if (retries < this.maxRetries) {
-                    console.log(`重试连接 (${retries + 1}/${this.maxRetries})...`);
+                    log.info(`重试连接 (${retries + 1}/${this.maxRetries})...`);
                     setTimeout(() => this.connect(retries + 1), this.retryInterval);
                 } else {
                     console.error('已达到最大重试次数，无法连接到数据库');
                 }
             } else {
-                console.log('已连接到数据库');
+                log.info('已连接到数据库');
             }
         });
     }
@@ -42,7 +43,7 @@ class Database {
             if (this.db) {
                 resolve();
             } else {
-                console.log('尝试重新连接数据库...');
+                log.info('尝试重新连接数据库...');
                 this.connect();
                 setTimeout(() => {
                     if (this.db) {
@@ -64,7 +65,7 @@ class Database {
                         console.error('无法创建表', err);
                         reject(err);
                     } else {
-                        console.log('表已创建');
+                        log.info('表已创建');
                         resolve(true);
                     }
                 });
@@ -81,7 +82,7 @@ class Database {
                         console.error('无法插入数据', err);
                         reject(err);
                     } else {
-                        console.log(`插入了一行数据，行ID为 ${this.lastID}`);
+                        log.info(`插入了一行数据，行ID为 ${this.lastID}`);
                         resolve(this.lastID);
                     }
                 });
@@ -97,7 +98,7 @@ class Database {
                         console.error('无法更新数据', err);
                         reject(err);
                     } else {
-                        console.log(`更新了 ${this.changes} 行数据`);
+                        log.info(`更新了 ${this.changes} 行数据`);
                         resolve(this.changes);
                     }
                 });
@@ -143,7 +144,7 @@ class Database {
                     console.error('无法关闭数据库连接', err);
                     reject(err);
                 } else {
-                    console.log('数据库连接已关闭');
+                    log.info('数据库连接已关闭');
                     resolve(true);
                 }
             });
