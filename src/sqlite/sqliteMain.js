@@ -32,7 +32,7 @@ class Database {
                     console.error('已达到最大重试次数，无法连接到数据库');
                 }
             } else {
-                log.info('已连接到数据库');
+                // log.info('已连接到数据库');
             }
         });
     }
@@ -82,7 +82,7 @@ class Database {
                         console.error('无法插入数据', err);
                         reject(err);
                     } else {
-                        log.info(`插入了一行数据，行ID为 ${this.lastID}`);
+                        // log.info(`插入了一行数据，行ID为 ${this.lastID}`);
                         resolve(this.lastID);
                     }
                 });
@@ -144,7 +144,7 @@ class Database {
                     console.error('无法关闭数据库连接', err);
                     reject(err);
                 } else {
-                    log.info('数据库连接已关闭');
+                    // log.info('数据库连接已关闭');
                     resolve(true);
                 }
             });

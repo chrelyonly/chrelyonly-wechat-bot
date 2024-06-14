@@ -1,11 +1,11 @@
 import {Database} from './sqliteMain.js';
 import '../util/newdate.js';
-const db = new Database('./src/sqlite/data/myChat.db');
 /**
  * 这个工具稍微抽象一些方法,以便直接操作数据库
  * @returns {Promise<void>} 无返回值
  */
 export const sqlDbUtilInit = async ()=> {
+    const db = new Database('./src/sqlite/data/myChat.db');
 // 建立连接
     try {
         // 创建聊天记录表
@@ -33,22 +33,24 @@ export const sqlDbUtilInit = async ()=> {
         console.error('操作失败', err);
     }finally {
         // 关闭数据库连接
+        await db.close();
     }
 }
 /**
  * 保存聊天记录
  * 自适应更新或插入
  */
-export const saveChatHistory = (messageId,type,text) => {
+export const saveChatHistory = async (messageId,type,text) => {
+    const db = new Database('./src/sqlite/data/myChat.db');
     try {
         // 先查询判断是否存在
-        selectChatHistory(messageId).then((res)=>{
+         await selectChatHistory(messageId).then(async (res)=>{
             if(res){
                 // 存在则更新
-                db.update(`UPDATE chatHistory SET type = ?, text = ? WHERE messageId = ?`, [type, text, messageId]);
+                await db.update(`UPDATE chatHistory SET type = ?, text = ? WHERE messageId = ?`, [type, text, messageId]);
             }else{
                 // 不存在则插入
-                db.insert(`INSERT INTO chatHistory (messageId, type, text, time)
+                await db.insert(`INSERT INTO chatHistory (messageId, type, text, time)
                                  VALUES (?, ?, ?, ?)`, [messageId, type, text, new Date().Format("yyyyMMddHHmmss")]);
             }
         })
@@ -56,19 +58,21 @@ export const saveChatHistory = (messageId,type,text) => {
         console.error('操作失败', err);
     }finally {
         // 关闭数据库连接
+        await db.close();
     }
 }
 /**
  * 查询聊天记录
  */
-export const selectChatHistory = (messageId) => {
-
+export const selectChatHistory =async (messageId) => {
+    const db = new Database('./src/sqlite/data/myChat.db');
     try {
-        return db.selectOne(`SELECT * FROM chatHistory WHERE messageId = ?`, [messageId]);
+        return await db.selectOne(`SELECT * FROM chatHistory WHERE messageId = ?`, [messageId]);
     }catch (err) {
         console.error('操作失败', err);
     }finally {
         // 关闭数据库连接
+        await db.close();
     }
 }
 
@@ -78,16 +82,17 @@ export const selectChatHistory = (messageId) => {
  * 保存水群王记录
  * 自适应更新或插入
  */
-export const saveWaterKing = (groupName,nameId,name,roomId,number) => {
+export const saveWaterKing =async (groupName,nameId,name,roomId,number) => {
+    const db = new Database('./src/sqlite/data/myChat.db');
     try {
         // 先查询判断是否存在
-        selectWaterKing(nameId,roomId).then((res)=>{
+        await selectWaterKing(nameId,roomId).then(async (res)=>{
             if(res){
                 // 存在则更新
-                db.update(`UPDATE waterKing SET number = ? WHERE groupName = ? and nameId = ? and roomId = ? and dateDay = ?`, [number,groupName,nameId,roomId,new Date().Format("yyyyMMdd")]);
+                await db.update(`UPDATE waterKing SET number = ? WHERE groupName = ? and nameId = ? and roomId = ? and dateDay = ?`, [number,groupName,nameId,roomId,new Date().Format("yyyyMMdd")]);
             }else{
                 // 不存在则插入
-                db.insert(`INSERT INTO waterKing (groupName, nameId, name, number,roomId,dateDay, time)
+                await db.insert(`INSERT INTO waterKing (groupName, nameId, name, number,roomId,dateDay, time)
                                  VALUES (?, ?, ?, ?, ?,?,?)`, [groupName, nameId, name, number,roomId, new Date().Format("yyyyMMdd"),new Date().Format("yyyyMMddHHmmss")]);
             }
         })
@@ -95,13 +100,14 @@ export const saveWaterKing = (groupName,nameId,name,roomId,number) => {
         console.error('操作失败', err);
     }finally {
         // 关闭数据库连接
+        await db.close();
     }
 }
 /**
  * 查询单条水群王记录
  */
 export const selectWaterKing = async (nameId,roomId) => {
-
+    const db = new Database('./src/sqlite/data/myChat.db');
     try {
         return await db.selectOne(`SELECT *
                                    FROM waterKing
@@ -112,14 +118,16 @@ export const selectWaterKing = async (nameId,roomId) => {
         console.error('操作失败', err);
     } finally {
         // 关闭数据库连接
+        await db.close();
     }
 }
 /**
  * 查询全部水群王记录
  */
-export const selectAllWaterKing =  (roomId) => {
+export const selectAllWaterKing = async (roomId) => {
+    const db = new Database('./src/sqlite/data/myChat.db');
         try {
-            return db.selectAll(`SELECT *
+            return await db.selectAll(`SELECT *
                           FROM waterKing
                           WHERE roomId = ?
                             and dateDay = ?`, [roomId, new Date().Format("yyyyMMdd")])
@@ -127,5 +135,6 @@ export const selectAllWaterKing =  (roomId) => {
              console.error('操作失败', err);
         } finally {
             // 关闭数据库连接
+            await db.close();
         }
 }
