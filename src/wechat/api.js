@@ -104,34 +104,35 @@ export  function onMessage(message,bot) {
                     // 获取撤回的消息的id
                     let oldmsgid = result[1]
                     // 从缓存中获取消息
-                    let messageInfo = selectChatHistory(oldmsgid)
-                    if(messageInfo){
-                        // 由于是xml格式,获取replacemsg的值
-                        reg = /<replacemsg><!\[CDATA\[(.*?)]]><\/replacemsg>/;
-                        result = reg.exec(text);
-                        if(result){
-                            text = result[1]
+                    selectChatHistory(oldmsgid).then(messageInfo => {
+                        if(messageInfo){
+                            // 由于是xml格式,获取replacemsg的值
+                            reg = /<replacemsg><!\[CDATA\[(.*?)]]><\/replacemsg>/;
+                            result = reg.exec(text);
+                            if(result){
+                                text = result[1]
+                            }
+                            // 回复文本
+                            if (messageInfo.type === 7){
+                                room.say(text + ",撤回的消息是:[ " + messageInfo.text + " ]")
+                            }
+                            // // 回复表情包
+                            if (messageInfo.type === 5){
+                                // 从xml中解析图片地址
+                                let base64 = messageInfo.text;
+                                let fileBox = FileBox.fromBase64(base64,"temp.gif");
+                                room.say(fileBox)
+                            }
+                            // 回复图片
+                            if (messageInfo.type === 6){
+                                // 从xml中解析图片地址
+                                let base64 = messageInfo.text;
+                                let fileBox = FileBox.fromBase64(base64,"temp.png");
+                                room.say(text + ",撤回的消息是:")
+                                room.say(fileBox)
+                            }
                         }
-                        // 回复文本
-                        if (messageInfo.type === 7){
-                            room.say(text + ",撤回的消息是:[ " + messageInfo.text + " ]")
-                        }
-                        // // 回复表情包
-                        if (messageInfo.type === 5){
-                            // 从xml中解析图片地址
-                            let base64 = messageInfo.text;
-                            let fileBox = FileBox.fromBase64(base64,"temp.gif");
-                            room.say(fileBox)
-                        }
-                        // 回复图片
-                        if (messageInfo.type === 6){
-                            // 从xml中解析图片地址
-                            let base64 = messageInfo.text;
-                            let fileBox = FileBox.fromBase64(base64,"temp.png");
-                            room.say(text + ",撤回的消息是:")
-                            room.say(fileBox)
-                        }
-                    }
+                    })
                 }
             }
         })

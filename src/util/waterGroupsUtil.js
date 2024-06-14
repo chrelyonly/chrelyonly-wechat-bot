@@ -24,7 +24,7 @@ export const getWaterGroupsWin = (room,bot,number)=> {
         }
         let str= "";
         str = "今日" + new Date().Format("yyyy年MM月dd日") + "\n"
-        str += "群名称:" + sortData[0].title + "\n"
+        str += "群名称:" + sortData[0].groupName + "\n"
         number = sortData.length < number ? sortData.length : number;
         for (let i = 0; i < number; i++) {
             str += "第" + (i + 1) + "名:" + sortData[i].name + "-次数:" + sortData[i].number + "\n"
@@ -40,13 +40,14 @@ export const getWaterGroupsWin = (room,bot,number)=> {
  */
 export const saveWaterGroups = (groupName,room,talker,number)=> {
         // 判断写入缓存
-        let oldData = selectWaterKing(talker.id, room.id);
-        if (oldData && oldData.number){
-            oldData.number = oldData.number + +number;
-        }else{
-            oldData = {
-                number:1,
+        selectWaterKing(talker.id, room.id).then((oldData)=>{
+            if (oldData && oldData.number){
+                oldData.number = oldData.number + +number;
+            }else{
+                oldData = {
+                    number:1,
+                }
             }
-        }
-        saveWaterKing(groupName, talker.id, talker.name(), room.id, oldData.number)
+            saveWaterKing(groupName, talker.id, talker.name(), room.id, oldData.number)
+        });
 }
