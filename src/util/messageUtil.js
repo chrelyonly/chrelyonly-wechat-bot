@@ -5,49 +5,15 @@ import {getWaterGroupsWin, saveWaterGroups} from "./waterGroupsUtil.js";
 import {textToVideo} from "./textToVideo/textToVideo.js";
 import {pluginsInit} from "./plugins/pluginMain.js";
 import {getAuthUserInfo, getUserInfo} from "./wxmp/wxmpMain.js";
-import {youDrawIGuess} from "./game/youDrawIguess/youDrawIGuess.js";
 import {douyinVideo} from "./douyinVideo/douyinVideo.js";
 import {r18} from "./r18/r18.js";
 import {youtubeVideo} from "./youtubeVideo/youtubeVideo.js";
-// 导入插件
-// import {apps} from "./plugins/index.js";
-
 // 自定义更据消息回复事件
 export function myOnMessage(roomName,message,room, bot) {
-    // 判断是否机器人自己发送的
-    if (message.self()) {
-        return;
-    }
     // 根据消息内容回复
     let text = message.text();
     // 获取发送者
     let talker = message.talker()
-    // if (text.toString().includes("你画我猜")) {
-    //     youDrawIGuess(message, room, bot, text)
-    // }
-    // if (text.toString().includes("#插件")) {
-    // 插件接口
-    pluginsInit(message,room,bot)
-        // return;
-    // }
-    if (text.toString().includes("#获取信息A")) {
-        getUserInfo(talker,message,room,bot)
-        return;
-    }
-    if (text.toString().includes("#获取信息B")) {
-        getAuthUserInfo(talker,message,room,bot)
-        return;
-    }
-    // 抖音视频解析
-    if (text.toString().includes("抖音") && text.toString().includes("v.douyin.com")) {
-        douyinVideo(talker,text,room,bot)
-        return;
-    }
-    // youtube解析
-    if (text.toString().includes("youtu.be") || text.toString().includes("www.youtube.com")) {
-        youtubeVideo(talker,text,room,bot)
-        return;
-    }
     if (text.toString().includes("#菜单")) {
         let menu = "菜单：\n";
         for (let i = 0; i < getAllApiName().length; i++) {
@@ -56,6 +22,28 @@ export function myOnMessage(roomName,message,room, bot) {
         room.say(menu)
         return;
     }
+    // 表情包制作接口
+    pluginsInit(message,room,bot)
+    // 获取所有接口名称
+    if (text.toString().includes("#获取信息A")) {
+        getUserInfo(talker,message,room,bot)
+        return;
+    }
+    // 微信公众号授权 这个暂时不用
+    // if (text.toString().includes("#获取信息B")) {
+    //     getAuthUserInfo(talker,message,room,bot)
+    //     return;
+    // }
+    // 抖音视频解析
+    if (text.toString().includes("抖音") && text.toString().includes("v.douyin.com")) {
+        douyinVideo(talker,text,room,bot)
+        return;
+    }
+    // youtube解析, 这个有点问题,等待找个新接口
+    // if (text.toString().includes("youtu.be") || text.toString().includes("www.youtube.com")) {
+    //     youtubeVideo(talker,text,room,bot)
+    //     return;
+    // }
     // 涩图
     if (text.includes("涩图")) {
         r18(room,bot)
@@ -198,6 +186,11 @@ export function myOnMessage(roomName,message,room, bot) {
         room.say("捏寄个问号是神魔意思?")
         return null;
     }
+
+
+
+
+    // 有趣的api
     let apiItem = getApi(text,room);
     if (apiItem){
         // 定义参数
@@ -302,7 +295,7 @@ export function myOnMessage(roomName,message,room, bot) {
             }else if (apiItem.type === 15) {
                 let weatherStr = "";
                 let data = res.data.data
-                weatherStr += "城市：" + data.current.city + "\n"
+                weatherStr += "\n城市：" + data.current.city + "\n"
                 weatherStr += "天气：" + data.current.weather + "\n"
                 weatherStr += "温度：" + data.current.temp + "\n"
                 weatherStr += "风向：" + data.current.wind + "\n"

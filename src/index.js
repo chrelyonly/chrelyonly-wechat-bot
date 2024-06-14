@@ -2,9 +2,15 @@
 import {WechatyBuilder,log} from 'wechaty'
 import {onError, onLogin, onMessage, onScan, roomTopic} from "./wechat/api.js";
 import {roomEventInit} from "./util/roomUtil.js";
-import {saveFileToJson} from "./util/fileUtil.js";
 import {isTimeTo} from "./util/pointUtil.js";
 
+// 初始化sqlite数据库
+sqlDbUtilInit().then(r => {
+    console.log('sqlite数据库初始化成功')
+},e => {
+    console.log('sqlite数据库初始化失败')
+    console.log(e)
+})
 // 初始化机器人
 const bot = WechatyBuilder.build({
     name: "cm",
@@ -50,6 +56,7 @@ import express from "express";
 import {testInit} from "./util/test/testUtil.js";
 import {resUserinfo} from "./util/wxmp/wxmpMain.js";
 import {okDraw} from "./util/game/youDrawIguess/youDrawIGuess.js";
+import {init, sqlDbUtilInit} from "./sqlite/sqlDbUtil.js";
 const app = express();
 // 解析JSON数据的中间件
 app.use(express.json());

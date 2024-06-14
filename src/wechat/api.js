@@ -3,11 +3,12 @@
 import {log, ScanStatus} from "wechaty";
 import qrTerminal from "qrcode-terminal";
 // 引入缓存工具
-import {getCache, setCache} from "../util/cacheUtil.js";
+// import {getCache, setCache} from "../util/cacheUtil.js";
+// 改用sqlite数据库
+import {saveChatHistory, selectChatHistory} from "../sqlite/sqlDbUtil.js";
 import {FileBox} from "file-box";
 import {myOnMessage} from "../util/messageUtil.js";
 import {saveWaterGroups} from "../util/waterGroupsUtil.js";
-import {gameStatus, startGame} from "../util/game/gameMain.js";
 export function onScan(qrcode, status) {
     if (status === ScanStatus.Waiting || status === ScanStatus.Timeout) {
         // 在控制台显示二维码
@@ -30,6 +31,10 @@ export function roomTopic(room, topic, oldTopic, changer) {
  * 消息监听
  */
 export  function onMessage(message,bot) {
+    // 判断是否机器人自己发送的
+    if (message.self()) {
+        return;
+    }
     // 消息类型是否为文本
     const txtType = message.type()
     // 获取发送者
@@ -60,11 +65,10 @@ export  function onMessage(message,bot) {
             if(txtType === 6){
                 // 保存缓存
                 message.toFileBox().then(function (res) {
-                    let cacheJson = {
-                        type: 6,
-                        text: res.buffer.toString("base64")
-                    }
-                    setCache(message.id,JSON.stringify(cacheJson))
+                    // 保存数据库
+                    saveChatHistory(message.id, 6, res.buffer.toString("base64")).then(r => {
+                        // console.log(r)
+                    })
                 })
             }
             // 5 是收藏表情,不知如何解密微信的表情包连接
@@ -86,19 +90,11 @@ export  function onMessage(message,bot) {
             }
             // 7是文本
             if(txtType === 7){
-                // 保存缓存
-                let cacheJson = {
-                    type: 7,
-                    text: msg
-                }
-                setCache(message.id,JSON.stringify(cacheJson))
-                // 判断是否处于游戏内
-                // if (gameStatus && gameStatus !== 0){
-                //     startGame(message,room,bot,msg)
-                // }else{
+                // 保存数据库
+                saveChatHistory(message.id, 7, msg).then(r => {
                     // 自定义文本回复内容
                     myOnMessage(res,message,room,bot)
-                // }
+                })
             }
             if(txtType === 13){
                 let text = msg;
@@ -108,30 +104,29 @@ export  function onMessage(message,bot) {
                     // 获取撤回的消息的id
                     let oldmsgid = result[1]
                     // 从缓存中获取消息
-                    let cacheTxt = getCache(oldmsgid)
-                    if(cacheTxt){
+                    let messageInfo = selectChatHistory(oldmsgid)
+                    if(messageInfo){
                         // 由于是xml格式,获取replacemsg的值
                         reg = /<replacemsg><!\[CDATA\[(.*?)]]><\/replacemsg>/;
                         result = reg.exec(text);
                         if(result){
                             text = result[1]
                         }
-                        let oldMsg = JSON.parse(cacheTxt)
                         // 回复文本
-                        if (oldMsg.type === 7){
-                            room.say(text + ",撤回的消息是:[ " + oldMsg.text + " ]")
+                        if (messageInfo.type === 7){
+                            room.say(text + ",撤回的消息是:[ " + messageInfo.text + " ]")
                         }
                         // // 回复表情包
-                        if (oldMsg.type === 5){
+                        if (messageInfo.type === 5){
                             // 从xml中解析图片地址
-                            let base64 = oldMsg.text;
+                            let base64 = messageInfo.text;
                             let fileBox = FileBox.fromBase64(base64,"temp.gif");
                             room.say(fileBox)
                         }
                         // 回复图片
-                        if (oldMsg.type === 6){
+                        if (messageInfo.type === 6){
                             // 从xml中解析图片地址
-                            let base64 = oldMsg.text;
+                            let base64 = messageInfo.text;
                             let fileBox = FileBox.fromBase64(base64,"temp.png");
                             room.say(text + ",撤回的消息是:")
                             room.say(fileBox)

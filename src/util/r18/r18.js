@@ -1,6 +1,5 @@
 import { http } from "../https.js";
 import { FileBox } from "file-box";
-import fs from "fs";
 import path from "path";
 import { archiveFolder } from "zip-lib";
 import { dirname } from "node:path"
