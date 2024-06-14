@@ -112,18 +112,18 @@ export  function onMessage(message,bot) {
                                 text = result[1]
                             }
                             // 回复文本
-                            if (messageInfo.type === 7){
+                            if (messageInfo.type === "7"){
                                 room.say(text + ",撤回的消息是:[ " + messageInfo.text + " ]")
                             }
                             // // 回复表情包
-                            if (messageInfo.type === 5){
+                            if (messageInfo.type === "5"){
                                 // 从xml中解析图片地址
                                 let base64 = messageInfo.text;
                                 let fileBox = FileBox.fromBase64(base64,"temp.gif");
                                 room.say(fileBox)
                             }
                             // 回复图片
-                            if (messageInfo.type === 6){
+                            if (messageInfo.type === "6"){
                                 // 从xml中解析图片地址
                                 let base64 = messageInfo.text;
                                 let fileBox = FileBox.fromBase64(base64,"temp.png");
