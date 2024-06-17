@@ -1,6 +1,7 @@
 import {http} from "../../https.js";
 import {FileBox} from "file-box";
 import gifResize from '@gumlet/gif-resize'
+import {log} from "wechaty";
 // 接口地址
 const url = "https://api.chrelyonly.cn/api/emoji"
 // const url = "http://127.0.0.1:8084/emoji"
