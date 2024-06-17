@@ -65,7 +65,7 @@ class Database {
                         console.error('无法创建表', err);
                         reject(err);
                     } else {
-                        log.info('表已创建');
+                        // log.info('表已创建');
                         resolve(true);
                     }
                 });
@@ -98,7 +98,7 @@ class Database {
                         console.error('无法更新数据', err);
                         reject(err);
                     } else {
-                        log.info(`更新了 ${this.changes} 行数据`);
+                        // log.info(`更新了 ${this.changes} 行数据`);
                         resolve(this.changes);
                     }
                 });
