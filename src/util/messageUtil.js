@@ -4,10 +4,10 @@ import {apiList} from "../config/apiList.js";
 import {getWaterGroupsWin, saveWaterGroups} from "./waterGroupsUtil.js";
 import {textToVideo} from "./textToVideo/textToVideo.js";
 import {pluginsInit} from "./plugins/pluginMain.js";
-import {getAuthUserInfo, getUserInfo} from "./wxmp/wxmpMain.js";
+import {getUserInfo} from "./wxmp/wxmpMain.js";
 import {douyinVideo} from "./douyinVideo/douyinVideo.js";
 import {r18} from "./r18/r18.js";
-import {youtubeVideo} from "./youtubeVideo/youtubeVideo.js";
+
 // 自定义更据消息回复事件
 export function myOnMessage(roomName,message,room, bot) {
     // 根据消息内容回复

@@ -1,10 +1,4 @@
-import {
-    gameStatus,
-    iGuess,
-    joinYouDrawIGuess,
-    startYouDrawIGuess,
-    youDrawIGuess
-} from "./youDrawIguess/youDrawIGuess.js";
+import {gameStatus, iGuess, joinYouDrawIGuess, startYouDrawIGuess} from "./youDrawIguess/youDrawIGuess.js";
 
 
 /**

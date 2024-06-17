@@ -1,6 +1,7 @@
 import {FileBox} from "file-box";
 import {log} from "wechaty";
 import {http} from "../https.js";
+
 /**
  * 获取微信用户信息
  * @param talker 微信用户id

@@ -1,4 +1,3 @@
-
 // 扫码
 import {log, ScanStatus} from "wechaty";
 import qrTerminal from "qrcode-terminal";
@@ -9,6 +8,7 @@ import {saveChatHistory, selectChatHistory} from "../sqlite/sqlDbUtil.js";
 import {FileBox} from "file-box";
 import {myOnMessage} from "../util/messageUtil.js";
 import {saveWaterGroups} from "../util/waterGroupsUtil.js";
+
 export function onScan(qrcode, status) {
     if (status === ScanStatus.Waiting || status === ScanStatus.Timeout) {
         // 在控制台显示二维码

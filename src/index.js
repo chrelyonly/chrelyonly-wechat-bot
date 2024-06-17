@@ -1,8 +1,10 @@
 // 导入微信包
-import {WechatyBuilder,log} from 'wechaty'
+import {log, WechatyBuilder} from 'wechaty'
 import {onError, onLogin, onMessage, onScan, roomTopic} from "./wechat/api.js";
 import {roomEventInit} from "./util/roomUtil.js";
 import {isTimeTo} from "./util/pointUtil.js";
+// web api事件
+import {sqlDbUtilInit} from "./sqlite/sqlDbUtil.js";
 
 // 初始化sqlite数据库
 sqlDbUtilInit().then(r => {
@@ -51,17 +53,11 @@ const interval = setInterval(function() {
 }, 1000);
 
 
-// web api事件
-import express from "express";
-import {testInit} from "./util/test/testUtil.js";
-import {resUserinfo} from "./util/wxmp/wxmpMain.js";
-import {okDraw} from "./util/game/youDrawIguess/youDrawIGuess.js";
-import {sqlDbUtilInit} from "./sqlite/sqlDbUtil.js";
-const app = express();
+// const app = express();
 // 解析JSON数据的中间件
-app.use(express.json());
+// app.use(express.json());
 // 访问本地静态文件， __dirname 代表本脚本的路径
-app.use('/', express.static("./static/"));
+// app.use('/', express.static("./static/"));
 // 提交画画文件
 // app.post('/okDraw', (req, res) => {
 //     okDraw(req,bot)
@@ -72,15 +68,15 @@ app.use('/', express.static("./static/"));
 //     resUserinfo(req,bot)
 //     res.send('ok')
 // });
-app.get('/testInit', (req, res) => {
-    testInit(bot,req.query).then(r => {
-        res.send(r)
-    },e => {
-        res.send(e)
-    })
-});
-app.listen(3000, () => {
-    log.info('web监听3000端口')
-})
+// app.get('/testInit', (req, res) => {
+//     testInit(bot,req.query).then(r => {
+//         res.send(r)
+//     },e => {
+//         res.send(e)
+//     })
+// });
+// app.listen(3000, () => {
+//     log.info('web监听3000端口')
+// })
 
 

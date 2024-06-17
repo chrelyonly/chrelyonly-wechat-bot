@@ -2,10 +2,8 @@
 "use strict";
 // 调用微软云接口
 import sdk from "microsoft-cognitiveservices-speech-sdk"
-import readline from "readline"
-import  "../newdate.js";
+import "../newdate.js";
 import {log} from "wechaty";
-import {FileBox} from "file-box";
 // 密钥
 const SPEECH_KEY = "65d7e8a8deea4461967c3a627549d793";
 // 区域

@@ -1,9 +1,8 @@
-
 // 引入缓存工具
 // import {delCache, getCache, getCacheAll, setCache} from "./cacheUtil.js";
 // 改用sqlite
-import {selectAllWaterKing} from "../sqlite/sqlDbUtil.js";
-import {saveWaterKing, selectWaterKing} from "../sqlite/sqlDbUtil.js";
+import {saveWaterKing, selectAllWaterKing, selectWaterKing} from "../sqlite/sqlDbUtil.js";
+
 /**
  * 获取水群王
  */
