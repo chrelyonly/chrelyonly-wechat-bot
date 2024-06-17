@@ -1,6 +1,7 @@
 // 加载表情插件
 import {sendApi} from "./emoticon/emoticon.js";
 import {emojiApi} from "./emoticon/emojiApi.js";
+import {log} from "wechaty";
 
 /**
  * 插件初始化
