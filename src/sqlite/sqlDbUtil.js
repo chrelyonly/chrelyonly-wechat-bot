@@ -1,11 +1,16 @@
 import {Database} from './sqliteMain.js';
 import '../util/newdate.js';
+// 已小时来进行分库分表
+function myChatName(){
+    return  "chat" + new Date().Format("yyyyMMddhh");
+}
+const dbPath = "./src/sqlite/data/" + myChatName() + ".db";
 /**
  * 这个工具稍微抽象一些方法,以便直接操作数据库
  * @returns {Promise<void>} 无返回值
  */
 export const sqlDbUtilInit = async ()=> {
-    const db = new Database('./src/sqlite/data/myChat.db');
+    const db = new Database(dbPath);
 // 建立连接
     try {
         // 创建聊天记录表
@@ -41,7 +46,8 @@ export const sqlDbUtilInit = async ()=> {
  * 自适应更新或插入
  */
 export const saveChatHistory = async (messageId,type,text) => {
-    const db = new Database('./src/sqlite/data/myChat.db');
+    await sqlDbUtilInit()
+    const db = new Database(dbPath);
     try {
         // 先查询判断是否存在
          await selectChatHistory(messageId).then(async (res)=>{
@@ -65,7 +71,8 @@ export const saveChatHistory = async (messageId,type,text) => {
  * 查询聊天记录
  */
 export const selectChatHistory =async (messageId) => {
-    const db = new Database('./src/sqlite/data/myChat.db');
+    await sqlDbUtilInit()
+    const db = new Database(dbPath);
     try {
         return await db.selectOne(`SELECT * FROM chatHistory WHERE messageId = ?`, [messageId]);
     }catch (err) {
@@ -83,7 +90,8 @@ export const selectChatHistory =async (messageId) => {
  * 自适应更新或插入
  */
 export const saveWaterKing =async (groupName,nameId,name,roomId,number) => {
-    const db = new Database('./src/sqlite/data/myChat.db');
+    await sqlDbUtilInit()
+    const db = new Database(dbPath);
     try {
         // 先查询判断是否存在
         await selectWaterKing(nameId,roomId).then(async (res)=>{
@@ -107,7 +115,8 @@ export const saveWaterKing =async (groupName,nameId,name,roomId,number) => {
  * 查询单条水群王记录
  */
 export const selectWaterKing = async (nameId,roomId) => {
-    const db = new Database('./src/sqlite/data/myChat.db');
+    await sqlDbUtilInit()
+    const db = new Database(dbPath);
     try {
         return await db.selectOne(`SELECT *
                                    FROM waterKing
@@ -125,7 +134,8 @@ export const selectWaterKing = async (nameId,roomId) => {
  * 查询全部水群王记录
  */
 export const selectAllWaterKing = async (roomId) => {
-    const db = new Database('./src/sqlite/data/myChat.db');
+    await sqlDbUtilInit()
+    const db = new Database(dbPath);
         try {
             return await db.selectAll(`SELECT *
                           FROM waterKing
