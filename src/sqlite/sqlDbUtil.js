@@ -4,13 +4,15 @@ import '../util/newdate.js';
 function myChatName(){
     return  "chat" + new Date().Format("yyyyMMdd");
 }
-const dbPath = "./src/sqlite/data/" + myChatName() + ".db";
+const dbPath =() => {
+    return "./src/sqlite/data/" + myChatName() + ".db";
+}
 /**
  * 这个工具稍微抽象一些方法,以便直接操作数据库
  * @returns {Promise<void>} 无返回值
  */
 export const sqlDbUtilInit = async ()=> {
-    const db = new Database(dbPath);
+    const db = new Database(dbPath());
 // 建立连接
     try {
         // 创建聊天记录表
@@ -47,7 +49,7 @@ export const sqlDbUtilInit = async ()=> {
  */
 export const saveChatHistory = async (messageId,type,text) => {
     await sqlDbUtilInit()
-    const db = new Database(dbPath);
+    const db = new Database(dbPath());
     try {
         // 先查询判断是否存在
          await selectChatHistory(messageId).then(async (res)=>{
@@ -72,7 +74,7 @@ export const saveChatHistory = async (messageId,type,text) => {
  */
 export const selectChatHistory =async (messageId) => {
     await sqlDbUtilInit()
-    const db = new Database(dbPath);
+    const db = new Database(dbPath());
     try {
         return await db.selectOne(`SELECT * FROM chatHistory WHERE messageId = ?`, [messageId]);
     }catch (err) {
@@ -91,7 +93,7 @@ export const selectChatHistory =async (messageId) => {
  */
 export const saveWaterKing =async (groupName,nameId,name,roomId,number) => {
     await sqlDbUtilInit()
-    const db = new Database(dbPath);
+    const db = new Database(dbPath());
     try {
         // 先查询判断是否存在
         await selectWaterKing(nameId,roomId).then(async (res)=>{
@@ -116,7 +118,7 @@ export const saveWaterKing =async (groupName,nameId,name,roomId,number) => {
  */
 export const selectWaterKing = async (nameId,roomId) => {
     await sqlDbUtilInit()
-    const db = new Database(dbPath);
+    const db = new Database(dbPath());
     try {
         return await db.selectOne(`SELECT *
                                    FROM waterKing
@@ -135,7 +137,7 @@ export const selectWaterKing = async (nameId,roomId) => {
  */
 export const selectAllWaterKing = async (roomId) => {
     await sqlDbUtilInit()
-    const db = new Database(dbPath);
+    const db = new Database(dbPath());
         try {
             return await db.selectAll(`SELECT *
                           FROM waterKing
