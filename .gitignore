@@ -5,7 +5,7 @@ node_modules
 /out
 /tests/e2e/videos/
 /tests/e2e/screenshots/
-/src/sqlite/data/*
+/src/sqlite/data/chat*
 # local env files
 .env.local
 .env.*.local
