@@ -1,18 +1,9 @@
 // 导入微信包
 import {log, WechatyBuilder} from 'wechaty'
 import {onError, onLogin, onMessage, onScan, roomTopic} from "./wechat/api.js";
-import {roomEventInit} from "./util/roomUtil.js";
+// import {roomEventInit} from "./util/roomUtil.js";
 import {isTimeTo} from "./util/pointUtil.js";
-// web api事件
-import {sqlDbUtilInit} from "./sqlite/sqlDbUtil.js";
 
-// 初始化sqlite数据库
-sqlDbUtilInit().then(r => {
-    log.info('sqlite数据库初始化成功')
-},e => {
-    log.info('sqlite数据库初始化失败')
-    log.info(e)
-})
 // 初始化机器人
 const bot = WechatyBuilder.build({
     name: "cm",
@@ -22,7 +13,7 @@ const bot = WechatyBuilder.build({
     },
 })
 // 初始化房间事件
-roomEventInit(bot)
+// roomEventInit(bot)
 // 扫码
 bot.on('scan', onScan)
 // 登录
@@ -48,7 +39,7 @@ bot.on('message',  message => {
             console.error(e)
         })
 // 一秒执行一次判断是否到整点,定时事件
-const interval = setInterval(function() {
+setInterval(function() {
     isTimeTo(bot);
 }, 1000);
 

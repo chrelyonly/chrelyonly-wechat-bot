@@ -14,7 +14,7 @@ export function myOnMessage(roomName,message,room, bot) {
     let text = message.text();
     // 获取发送者
     let talker = message.talker()
-    if (text.toString().includes("#菜单")) {
+    if (text.includes("#菜单")) {
         let menu = "菜单：\n";
         for (let i = 0; i < getAllApiName().length; i++) {
             menu += (i + 1) + "." + getAllApiName()[i] + "\n";
@@ -25,105 +25,89 @@ export function myOnMessage(roomName,message,room, bot) {
     // 表情包制作接口
     pluginsInit(message,room,bot)
     // 获取所有接口名称
-    if (text.toString().includes("#获取信息A")) {
+    if (text.includes("#获取信息A")) {
         getUserInfo(talker,message,room,bot)
-        return;
     }
     // 微信公众号授权 这个暂时不用
-    // if (text.toString().includes("#获取信息B")) {
+    // if (text.includes("#获取信息B")) {
     //     getAuthUserInfo(talker,message,room,bot)
     //     return;
     // }
     // 抖音视频解析
-    if (text.toString().includes("抖音") && text.toString().includes("v.douyin.com")) {
+    if (text.includes("抖音") && text.includes("v.douyin.com")) {
         douyinVideo(talker,text,room,bot)
-        return;
     }
     // youtube解析, 这个有点问题,等待找个新接口
-    // if (text.toString().includes("youtu.be") || text.toString().includes("www.youtube.com")) {
+    // if (text.includes("youtu.be") || text.includes("www.youtube.com")) {
     //     youtubeVideo(talker,text,room,bot)
     //     return;
     // }
     // 涩图
     if (text.includes("涩图")) {
         r18(room,bot)
-        return;
     }
     // 水群王
     if (text.includes("#水群王")) {
         getWaterGroupsWin(room,bot,10)
-        return;
     }
     // 水群王
     if (text.includes("#全部水群王")) {
         getWaterGroupsWin(room,bot,null)
-        return;
     }
     // redis
     if (text.includes("redis")) {
         let msg = "redis下载地址: \nhttp://47.102.159.60:11725/down/rrj4eGHz0nlx?fname=/";
         room.say(msg)
-        return;
     }
     // minio
     if (text.includes("minio")) {
         let msg = "minio下载地址: \nhttp://47.102.159.60:11725/down/d4oJSZCSqMLD";
         room.say(msg)
-        return;
     }
     // windows
     if (text.includes("windows")) {
         let msg = "windows停用更新软件\n下载地址: \nhttp://47.102.159.60:11725/down/pSl2GTFvWRBs";
         room.say(msg)
-        return;
     }
     // CE
     if (text.includes("CE")) {
         let msg = "CE\n下载地址: \nhttp://47.102.159.60:11725/down/CCSgFbl46m5l";
         room.say(msg)
-        return;
     }
     // 抓包
     if (text.includes("抓包")) {
         let msg = "抓包软件\n下载地址: \nhttp://47.102.159.60:11725/down/JkLs3RFwsWg1";
         room.say(msg)
-        return;
     }
     // ssl
     if (text.includes("ssl")) {
         let msg = "ssl申请工具\n食用教程\nhttps://temp-img.chrelyonly.cn/ssl\n下载地址: \nhttp://47.102.159.60:11725/down/XWm4GaT0AELA";
         room.say(msg)
-        return;
     }
     // 软通牒
     if (text.includes("uiso") || text.includes("软通牒")) {
         let msg = "uiso下载地址: \nhttp://47.102.159.60:11725/down/iJNz3Pkbj7wK";
         room.say(msg)
-        return;
     }
     // navicat
     if (text.includes("navicat")) {
         let msg = "navicat激活工具下载地址: \nhttp://47.102.159.60:11725/down/QspoSUpIKQKL";
         room.say(msg)
-        return;
     }
     // jrebel
     if (text.includes("jrebel")) {
         let msg = "jrebel激活工具下载地址: \nhttp://47.102.159.60:11725/down/d8spIutME3sk";
         room.say(msg)
-        return;
     }
     // idea
     if (text.includes("idea")) {
         let msg = "idea下载地址: \nhttps://107service-cf-cdn.542bsb.top/ideaIU-2024.1.2.win.zip";
         room.say(msg)
-        return;
     }
     // idea
     if (text.includes("idea")) {
         let msg = "idea下载地址: \nhttps://107service-cf-cdn.542bsb.top/ideaIU-2024.1.2.win.zip";
         room.say(msg)
-        return;
     }
     // 水群王
     if (text.includes("#我要当水群王")) {
@@ -139,7 +123,6 @@ export function myOnMessage(roomName,message,room, bot) {
         setTimeout(() => {
             getWaterGroupsWin(room,bot,10)
         },5000)
-        return;
     }
     if (text.includes("#我不当水群王")) {
         let number = text.split("#我不当水群王")[1]
@@ -156,10 +139,9 @@ export function myOnMessage(roomName,message,room, bot) {
         setTimeout(() => {
             getWaterGroupsWin(room,bot,10)
         },5000)
-        return;
     }
     // 语音合成
-    if (text.toString().includes("#语音合成")) {
+    if (text.includes("#语音合成")) {
         let msg = text.replace("#语音合成","")
         textToVideo(room,bot,msg).then( res=> {
             const fileBox = FileBox.fromBuffer(res, "1.mp3")
@@ -167,7 +149,6 @@ export function myOnMessage(roomName,message,room, bot) {
         },error=>{
             room.say(error)
         })
-        return;
     }
     if(text.includes("docker")){
         let msg = "docker镜像地址:\n";
@@ -175,21 +156,14 @@ export function myOnMessage(roomName,message,room, bot) {
         msg += "https://107service-cf-cdn.542bsb.top\n"
         msg += "食用教程: docker pull ubuntu:latest 替换为 https://docker.542bsb.top/ubuntu:latest\n"
         room.say(msg)
-        return null;
     }
     if(text.includes("拉尔戈")){
         const fileBox = FileBox.fromFile("./src/static/img/dnf/1716433273045.jpg")
         room.say(fileBox)
-        return null;
     }
     if(text === "?"){
         room.say("捏寄个问号是神魔意思?")
-        return null;
     }
-
-
-
-
     // 有趣的api
     let apiItem = getApi(text,room);
     if (apiItem){
@@ -305,6 +279,10 @@ export function myOnMessage(roomName,message,room, bot) {
             }else if (apiItem.type === 16) {
                 room.say(res.data.msg,talker)
             }
+        },e=>{
+            room.say("接口异常: " + e.msg)
+        }).catch(e=>{
+            room.say("接口异常: " + e.msg)
         })
     }
 }

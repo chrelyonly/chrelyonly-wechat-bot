@@ -19,9 +19,9 @@ const __dirname = dirname(__filename);
 //     });
 // };
 
-export const r18 = async (room, bot) => {
+export const r18 =  (room, bot) => {
     let msg = "禁止色色,达咩哟!";
-    await room.say(msg);
+    room.say(msg);
 
     // const imageUrls = [
     //     "https://image.anosu.top/pixiv/direct?r18=1&keyword=honkai",
