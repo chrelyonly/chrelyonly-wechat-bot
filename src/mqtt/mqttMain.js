@@ -1,6 +1,6 @@
 import {mqttMessage} from "./mqttUtil.js";
 
-export const SOCKET_SERVICE = ' wss://chrelyonly.cn//mqtt-api'
+export const SOCKET_SERVICE = ' wss://chrelyonly.cn/mqtt-api'
 export const USERNAME = "chrelyonly";
 export const PASSWORD = "chrelyonly";
 // 引入全局websocket
@@ -21,13 +21,16 @@ export const mqttMain = (bot) => {
 // 用户订阅id
         const singleTopic = "/userId" + userId;
 // 在线人数订阅
-        const onlineUserNum = "/onlineUserNum" + userId;
+        const onlineUserNum = "/onlineUserNum";
 // 能量订阅
         const wechatRun = "/wechatRun" + userId
+// 其他地址
+        const oauth = "/oauth"
     mqttServer = mqtt.connect(SOCKET_SERVICE, {
         username: USERNAME,
         password: PASSWORD,
         reconnectPeriod: 1000, // 自动重连间隔时间
+        clientId: userId,
     });
         //监听连接状态
         mqttServer.on("connect", () => {
@@ -45,6 +48,11 @@ export const mqttMain = (bot) => {
             mqttServer.subscribe(wechatRun, err => {
                 if (!err) {
                     // console.log("订阅成功wechatRun:" + wechatRun);
+                }
+            });
+            mqttServer.subscribe(oauth, err => {
+                if (!err) {
+                    // console.log("订阅成功oauth:" + wechatRun);
                 }
             });
         });
