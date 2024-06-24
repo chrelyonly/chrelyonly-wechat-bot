@@ -38,12 +38,12 @@ export function roomTopic(room, topic, oldTopic, changer) {
  * 消息监听
  */
 export function onMessage(message, bot) {
-    // 判断是否机器人自己发送的
-    if (message.self()) {
-        return;
-    }
     // 判断是否是机器人消息
     if (botList.includes(bot.id)) {
+        return;
+    }
+    // 判断是否机器人自己发送的
+    if (message.self()) {
         return;
     }
     // 消息类型是否为文本
