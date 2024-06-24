@@ -15,7 +15,7 @@ export const botList = []
  */
 export const mqttMessage = (topic, message, userId, bot) => {
     if (topic.includes("/onlineUserNum")) {
-        console.log("刷新在线人数")
+        // console.log("刷新在线人数")
         let userInfo = JSON.parse(message.toString())
         // msgUtil(bot,"当前在线人数:" + userInfo.count)
     //   去重然后存入userInfo.id
@@ -24,11 +24,11 @@ export const mqttMessage = (topic, message, userId, bot) => {
         }
     }
     if (topic.includes("/userId" + userId)) {
-        console.log("收到其他机器人消息")
+        // console.log("收到其他机器人消息")
         msgUtil(bot,"收到其他机器人消息:" + message.toString())
     }
     if (topic.includes("/wechatRun" + userId)) {
-        console.log("wechatRun")
+        // console.log("wechatRun")
         msgUtil(bot,"wechatRun:" + message.toString())
     }
     if (topic.includes("/oauth")) {
