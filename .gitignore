@@ -24,3 +24,4 @@ yarn-error.log*
 *.sln
 *.sw*
 *.lock
+cm.memory-card.json
