@@ -160,7 +160,6 @@ export const selectAllWaterKing = async (roomId) => {
  * @returns {Promise<unknown>}
  */
 export const exportWaterKingToExcelByDate = async (roomId,date) => {
-    console.log(roomId,date)
     await sqlDbUtilInit()
     const db = new Database(dbPath());
     try {
