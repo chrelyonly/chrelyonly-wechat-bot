@@ -9,7 +9,7 @@ import {log} from "wechaty";
  * @param room 房间号
  * @param bot 机器人实例
  */
-export const pluginsInit = (message,room,bot) => {
+export const pluginsInit = (message, room, bot) => {
     // 判断是否包含关键字
     let text = message.text();
     // 暂时不区分明令
@@ -17,8 +17,8 @@ export const pluginsInit = (message,room,bot) => {
     //     emojiPlugin()
 
     // }
-    if (text.includes("插件菜单")){
-        getMenu(room,bot);
+    if (text.includes("插件菜单")) {
+        getMenu(room, bot);
         return;
     }
     // 遍历 emojiApi 列表
@@ -50,14 +50,14 @@ export const pluginsInit = (message,room,bot) => {
 /**
  * 表情插件
  */
-const getEmoji = (item,room,bot,text) => {
+const getEmoji = (item, room, bot, text) => {
     sendApi(item, room, bot, text)
 }
 
-const getMenu = (room, bot)=> {
+const getMenu = (room, bot) => {
     let msg = "插件菜单: \n";
     for (let i = 0; i < emojiApi.length; i++) {
-        msg += i+1 + "." + emojiApi[i].des + "\n";
+        msg += i + 1 + "." + emojiApi[i].des + "\n";
     }
     room.say(msg)
 }

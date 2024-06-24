@@ -10,25 +10,25 @@ import axios from 'axios';
 axios.defaults.timeout = 60000;
 //返回其他状态码
 axios.defaults.validateStatus = function (status) {
-  return status >= 200 && status <= 500;
+    return status >= 200 && status <= 500;
 };
 //跨域请求，允许保存cookie
 axios.defaults.withCredentials = true;
 //http request拦截
 axios.interceptors.request.use(config => {
-  return config
+    return config
 }, error => {
-  return Promise.reject(error)
+    return Promise.reject(error)
 });
 //http response 拦截
 axios.interceptors.response.use(res => {
-  //获取状态码
-  const status =  res.status;
-  if (status !== 200) {
-    return Promise.resolve(new Error(res.data))
-  }
-  return res;
+    //获取状态码
+    const status = res.status;
+    if (status !== 200) {
+        return Promise.resolve(new Error(res.data))
+    }
+    return res;
 }, error => {
-  return Promise.reject(new Error(error));
+    return Promise.reject(new Error(error));
 });
 export default axios;

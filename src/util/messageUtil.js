@@ -9,7 +9,7 @@ import {douyinVideo} from "./douyinVideo/douyinVideo.js";
 import {r18} from "./r18/r18.js";
 
 // 自定义更据消息回复事件
-export function myOnMessage(roomName,message,room, bot) {
+export function myOnMessage(roomName, message, room, bot) {
     // 根据消息内容回复
     let text = message.text();
     // 获取发送者
@@ -23,10 +23,10 @@ export function myOnMessage(roomName,message,room, bot) {
         return;
     }
     // 表情包制作接口
-    pluginsInit(message,room,bot)
+    pluginsInit(message, room, bot)
     // 获取所有接口名称
     if (text.includes("#获取信息A")) {
-        getUserInfo(talker,message,room,bot)
+        getUserInfo(talker, message, room, bot)
     }
     // 微信公众号授权 这个暂时不用
     // if (text.includes("#获取信息B")) {
@@ -35,7 +35,7 @@ export function myOnMessage(roomName,message,room, bot) {
     // }
     // 抖音视频解析
     if (text.includes("抖音") && text.includes("v.douyin.com")) {
-        douyinVideo(talker,text,room,bot)
+        douyinVideo(talker, text, room, bot)
     }
     // youtube解析, 这个有点问题,等待找个新接口
     // if (text.includes("youtu.be") || text.includes("www.youtube.com")) {
@@ -44,15 +44,15 @@ export function myOnMessage(roomName,message,room, bot) {
     // }
     // 涩图
     if (text.includes("涩图")) {
-        r18(room,bot)
+        r18(room, bot)
     }
     // 水群王
     if (text.includes("#水群王")) {
-        getWaterGroupsWin(room,bot,10)
+        getWaterGroupsWin(room, bot, 10)
     }
     // 水群王
     if (text.includes("#全部水群王")) {
-        getWaterGroupsWin(room,bot,null)
+        getWaterGroupsWin(room, bot, null)
     }
     // redis
     if (text.includes("redis")) {
@@ -113,68 +113,68 @@ export function myOnMessage(roomName,message,room, bot) {
     if (text.includes("#我要当水群王")) {
         let number = text.split("#我要当水群王")[1]
         // 判断number是否是数字
-        if (isNaN(number)){
+        if (isNaN(number)) {
             number = 10
         }
-        if (+number < 0){
+        if (+number < 0) {
             number = 10
         }
-        saveWaterGroups(roomName,room,talker,number)
+        saveWaterGroups(roomName, room, talker, number)
         setTimeout(() => {
-            getWaterGroupsWin(room,bot,10)
-        },5000)
+            getWaterGroupsWin(room, bot, 10)
+        }, 5000)
     }
     if (text.includes("#我不当水群王")) {
         let number = text.split("#我不当水群王")[1]
         // 判断number是否是数字
-        if (isNaN(number)){
+        if (isNaN(number)) {
             number = -100
         }
-        if (+number < 0){
+        if (+number < 0) {
             number = -100
-        }else{
+        } else {
             number = -number
         }
-        saveWaterGroups(roomName,room,talker,number)
+        saveWaterGroups(roomName, room, talker, number)
         setTimeout(() => {
-            getWaterGroupsWin(room,bot,10)
-        },5000)
+            getWaterGroupsWin(room, bot, 10)
+        }, 5000)
     }
     // 语音合成
     if (text.includes("#语音合成")) {
-        let msg = text.replace("#语音合成","")
-        textToVideo(room,bot,msg).then( res=> {
+        let msg = text.replace("#语音合成", "")
+        textToVideo(room, bot, msg).then(res => {
             const fileBox = FileBox.fromBuffer(res, "1.mp3")
             room.say(fileBox)
-        },error=>{
+        }, error => {
             room.say(error)
         })
     }
-    if(text.includes("docker")){
+    if (text.includes("docker")) {
         let msg = "docker镜像地址:\n";
         msg += "https://docker.542bsb.top\n"
         msg += "https://107service-cf-cdn.542bsb.top\n"
         msg += "食用教程: docker pull ubuntu:latest 替换为 https://docker.542bsb.top/ubuntu:latest\n"
         room.say(msg)
     }
-    if(text.includes("拉尔戈")){
+    if (text.includes("拉尔戈")) {
         const fileBox = FileBox.fromFile("./src/static/img/dnf/1716433273045.jpg")
         room.say(fileBox)
     }
-    if(text === "?"){
+    if (text === "?") {
         room.say("捏寄个问号是神魔意思?")
     }
     // 有趣的api
-    let apiItem = getApi(text,room);
-    if (apiItem){
+    let apiItem = getApi(text, room);
+    if (apiItem) {
         // 定义参数
         let params = {}
         // 不同接口的请求参数不同单独区分一下,9点歌 点歌有两步骤,单独判断下
-        if (apiItem.type === 9){
+        if (apiItem.type === 9) {
             //musicjx.com/
             let n = null;
             // 判断是否包含#号 包含就是点歌
-            if (apiItem.msg.includes("#")){
+            if (apiItem.msg.includes("#")) {
                 let arr = apiItem.msg.split("#")
                 apiItem.msg = arr[0]
                 n = arr[1]
@@ -184,24 +184,24 @@ export function myOnMessage(roomName,message,room, bot) {
                 msg: apiItem.msg,
                 n: n,
             }
-        }else{
+        } else {
             params = {
                 "QQ": apiItem.msg,
                 "name": apiItem.msg,
                 "msg": apiItem.msg,
                 "city": apiItem.msg,
                 // 类型12时拼接qq头像地址
-                "url": apiItem.type === 12?"https://qlogo2.store.qq.com/qzone/" + apiItem.msg + "/" + apiItem.msg + "/100":null,
+                "url": apiItem.type === 12 ? "https://qlogo2.store.qq.com/qzone/" + apiItem.msg + "/" + apiItem.msg + "/100" : null,
                 "prompt": apiItem.msg,
                 // 结构一下默认自带参数
                 ...apiItem.params,
             }
         }
-        http(apiItem.url,apiItem.requestMethod,params,apiItem.requestType,apiItem.headers).then( res => {
+        http(apiItem.url, apiItem.requestMethod, params, apiItem.requestType, apiItem.headers).then(res => {
             if (apiItem.type === 1) {
-                room.say(res.data.data,talker)
+                room.say(res.data.data, talker)
             } else if (apiItem.type === 2) {
-                room.say(res.data.data.output,talker)
+                room.say(res.data.data.output, talker)
             } else if (apiItem.type === 3) {
                 const fileBox = FileBox.fromBuffer(res.data, "1.png")
                 room.say(fileBox)
@@ -215,7 +215,7 @@ export function myOnMessage(roomName,message,room, bot) {
                 const fileBox = FileBox.fromUrl(res.data.data.data[0], "1.png")
                 room.say(fileBox)
             } else if (apiItem.type === 7) {
-                room.say(res.data,talker)
+                room.say(res.data, talker)
             } else if (apiItem.type === 8) {
                 const fileBox = FileBox.fromBuffer(res.data, "1.gif")
                 room.say(fileBox)
@@ -223,50 +223,46 @@ export function myOnMessage(roomName,message,room, bot) {
                 //点歌专用
                 // 获取数据连接
                 try {
-                    if (res.data.data.text){
+                    if (res.data.data.text) {
                         room.say(res.data.data.text + "\n通过#号点歌可以选择播放次数\n如：歌曲名#3")
                         return;
                     }
                     let url = res.data.data.url
-                    let params = {
-
-                    }
-                    http(url,"get",params, 3,{}).then(res2 => {
+                    let params = {}
+                    http(url, "get", params, 3, {}).then(res2 => {
                         if (res2.headers["content-type"].includes("application/json")) {
                             // 还原arraybuffer至msg
                             let data = new TextDecoder("utf-8").decode(res2.data)
-                            if (data.code !== 200){
+                            if (data.code !== 200) {
                                 room.say(data)
-                            }else{
+                            } else {
                                 room.say(data.data)
                             }
                             return
                         }
-                        const fileBox = FileBox.fromBuffer(res2.data,res.data.data.name + "-" + res.data.data.songname + ".mp3")
+                        const fileBox = FileBox.fromBuffer(res2.data, res.data.data.name + "-" + res.data.data.songname + ".mp3")
                         room.say(fileBox)
                     })
-                }catch (e){
+                } catch (e) {
                     room.say("没有找到相关歌曲:" + e.msg)
                 }
             } else if (apiItem.type === 10) {
-                room.say(res.data.data.Message,talker)
+                room.say(res.data.data.Message, talker)
             } else if (apiItem.type === 11) {
-                let params = {
-
-                }
-                http(res.data.text,"get",params, 3,{}).then(res2 => {
-                    const fileBox = FileBox.fromBuffer(res2.data,"1.gif")
+                let params = {}
+                http(res.data.text, "get", params, 3, {}).then(res2 => {
+                    const fileBox = FileBox.fromBuffer(res2.data, "1.gif")
                     room.say(fileBox)
                 })
             } else if (apiItem.type === 12) {
                 const fileBox = FileBox.fromBuffer(res.data, "1.png")
                 room.say(fileBox)
-            }else if (apiItem.type === 13) {
+            } else if (apiItem.type === 13) {
                 room.say(res.data.data.Msg, talker)
-            }else if (apiItem.type === 14) {
+            } else if (apiItem.type === 14) {
                 const fileBox = FileBox.fromStream(res.data, "1.png")
                 room.say(fileBox)
-            }else if (apiItem.type === 15) {
+            } else if (apiItem.type === 15) {
                 let weatherStr = "";
                 let data = res.data.data
                 weatherStr += "\n城市：" + data.current.city + "\n"
@@ -275,13 +271,13 @@ export function myOnMessage(roomName,message,room, bot) {
                 weatherStr += "风向：" + data.current.wind + "\n"
                 weatherStr += "风向等级：" + data.current.windSpeed + "\n"
                 weatherStr += "湿度：" + data.current.humidity + "\n"
-                room.say(weatherStr,talker)
-            }else if (apiItem.type === 16) {
-                room.say(res.data.msg,talker)
+                room.say(weatherStr, talker)
+            } else if (apiItem.type === 16) {
+                room.say(res.data.msg, talker)
             }
-        },e=>{
+        }, e => {
             room.say("接口异常: " + e.msg)
-        }).catch(e=>{
+        }).catch(e => {
             room.say("接口异常: " + e.msg)
         })
     }
@@ -291,21 +287,21 @@ export function myOnMessage(roomName,message,room, bot) {
 const getAllApiName = () => {
     let nameList = []
     for (let i = 0; i < apiList.length; i++) {
-        if(apiList[i].des){
+        if (apiList[i].des) {
             nameList.push("#" + apiList[i].des)
-        }else{
+        } else {
             nameList.push("#" + apiList[i].name)
         }
     }
     return nameList;
 }
-const getApi = (name,room) => {
-    if(name.includes("#")){
+const getApi = (name, room) => {
+    if (name.includes("#")) {
         for (let i = 0; i < apiList.length; i++) {
             let item = apiList[i]
-            if (name.includes(item.name)){
+            if (name.includes(item.name)) {
                 item.msg = name.split(item.name)[1].trim()
-                if (!item.msg.trim()){
+                if (!item.msg.trim()) {
                     item.msg = "1172576293"
                 }
                 return item;

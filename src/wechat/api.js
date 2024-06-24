@@ -3,6 +3,7 @@ import {log, ScanStatus} from "wechaty";
 import qrTerminal from "qrcode-terminal";
 // 引入缓存工具
 // import {getCache, setCache} from "../util/cacheUtil.js";
+import {mqttMain} from "../mqtt/mqttMain.js";
 // 改用sqlite数据库
 import {saveChatHistory, selectChatHistory} from "../sqlite/sqlDbUtil.js";
 import {FileBox} from "file-box";
@@ -12,25 +13,30 @@ import {saveWaterGroups} from "../util/waterGroupsUtil.js";
 export function onScan(qrcode, status) {
     if (status === ScanStatus.Waiting || status === ScanStatus.Timeout) {
         // 在控制台显示二维码
-        qrTerminal.generate(qrcode,{small:true})
+        qrTerminal.generate(qrcode, {small: true})
         log.info('等待扫码:', ScanStatus[status], status)
     } else {
         log.info('已扫码,请确认登录: %s(%s)', ScanStatus[status], status)
     }
 }
+
 // 登录
-export function onLogin(user) {
+export function onLogin(user, bot) {
 //保存token以便下次登录
     log.info(`${user} 登陆成功`)
+// mqtt服务器
+    mqttMain(bot);
 }
+
 // 登录
 export function roomTopic(room, topic, oldTopic, changer) {
     log.info(`群 ${room.topic()} 修改名称,旧名称 ${oldTopic} 新名称 ${topic} 来自 ${changer.name()}`)
 }
+
 /**
  * 消息监听
  */
-export  function onMessage(message,bot) {
+export function onMessage(message, bot) {
     // 判断是否机器人自己发送的
     if (message.self()) {
         return;
@@ -51,10 +57,10 @@ export  function onMessage(message,bot) {
             //     return;
             // }
             // 保存水群次数
-            saveWaterGroups(res,room,talker,1)
+            saveWaterGroups(res, room, talker, 1)
             let msg = message.text();
-            if (msg === ""){
-            //    不支持的消息类型
+            if (msg === "") {
+                //    不支持的消息类型
                 log.info("不支持的消息类型")
                 return;
             }
@@ -62,7 +68,7 @@ export  function onMessage(message,bot) {
             // log.info('消息类型:',txtType)
             // log.info('群名称:',res + ",收到群消息:" + talker.name() + ",他/她/它说:" + msg)
             // 6 正常发送的图片
-            if(txtType === 6){
+            if (txtType === 6) {
                 // 保存缓存
                 message.toFileBox().then(function (res) {
                     // 保存数据库
@@ -72,61 +78,61 @@ export  function onMessage(message,bot) {
                 })
             }
             // 5 是收藏表情,不知如何解密微信的表情包连接
-            if(txtType === 5){
+            if (txtType === 5) {
                 // 保存缓存
                 // message.toFileBox().then(function (res) {
-                    // res.toBuffer().then(res2 => {
-                    //     log.info(res2)
-                    // })
-                    // res.toFile(res.name).then(res2 => {
-                    //     log.info(res2)
-                    // })
-                    // let cacheJson = {
-                    //     type: 5,
-                    //     text: res.buffer.toString("base64")
-                    // }
-                    // setCache(message.id,JSON.stringify(cacheJson))
+                // res.toBuffer().then(res2 => {
+                //     log.info(res2)
+                // })
+                // res.toFile(res.name).then(res2 => {
+                //     log.info(res2)
+                // })
+                // let cacheJson = {
+                //     type: 5,
+                //     text: res.buffer.toString("base64")
+                // }
+                // setCache(message.id,JSON.stringify(cacheJson))
                 // })
             }
             // 7是文本
-            if(txtType === 7){
+            if (txtType === 7) {
                 // 保存数据库
                 saveChatHistory(message.id, 7, msg)
                 // 自定义文本回复内容
-                myOnMessage(res,message,room,bot)
+                myOnMessage(res, message, room, bot)
             }
-            if(txtType === 13){
+            if (txtType === 13) {
                 let text = msg;
                 let reg = /<msgid>(.*?)<\/msgid>/;
                 let result = reg.exec(text);
-                if(result){
+                if (result) {
                     // 获取撤回的消息的id
                     let oldmsgid = result[1]
                     // 从缓存中获取消息
                     selectChatHistory(oldmsgid).then(messageInfo => {
-                        if(messageInfo){
+                        if (messageInfo) {
                             // 由于是xml格式,获取replacemsg的值
                             reg = /<replacemsg><!\[CDATA\[(.*?)]]><\/replacemsg>/;
                             result = reg.exec(text);
-                            if(result){
+                            if (result) {
                                 text = result[1]
                             }
                             // 回复文本
-                            if (messageInfo.type === "7"){
+                            if (messageInfo.type === "7") {
                                 room.say(text + ",撤回的消息是:[ " + messageInfo.text + " ]")
                             }
                             // // 回复表情包
-                            if (messageInfo.type === "5"){
+                            if (messageInfo.type === "5") {
                                 // 从xml中解析图片地址
                                 let base64 = messageInfo.text;
-                                let fileBox = FileBox.fromBase64(base64,"temp.gif");
+                                let fileBox = FileBox.fromBase64(base64, "temp.gif");
                                 room.say(fileBox)
                             }
                             // 回复图片
-                            if (messageInfo.type === "6"){
+                            if (messageInfo.type === "6") {
                                 // 从xml中解析图片地址
                                 let base64 = messageInfo.text;
-                                let fileBox = FileBox.fromBase64(base64,"temp.png");
+                                let fileBox = FileBox.fromBase64(base64, "temp.png");
                                 room.say(text + ",撤回的消息是:")
                                 room.say(fileBox)
                             }
@@ -136,10 +142,11 @@ export  function onMessage(message,bot) {
             }
         })
 
-    }else{
+    } else {
         log.info('收到个人消息')
     }
 }
+
 /**
  * 失败操作
  */

@@ -1,31 +1,32 @@
 {
-	"name": "chrelyonly-wechat-bot",
-	"version": "1.0.0",
-	"author": "chrelyonly",
-	"type": "module",
-	"main": "main.js",
-	"bin": "main.js",
-	"scripts": {
-		"dev": "node main.js",
-		"pnpm-install": "pnpm install"
-	},
-	"dependencies": {
-		"@gumlet/gif-resize": "^1.3.1",
-		"archiver": "^7.0.1",
-		"axios": "^1.6.8",
-		"blob": "^0.1.0",
-		"express": "^4.19.2",
-		"file-box": "^1.4.15",
-		"form-data": "^4.0.0",
-		"gifsicle": "^7.0.1",
-		"lodash": "^4.17.21",
-		"microsoft-cognitiveservices-speech-sdk": "^1.36.0",
-		"node-cache": "^5.1.2",
-		"node-fetch": "^3.3.2",
-		"qrcode-terminal": "^0.12.0",
-		"sqlite3": "^5.1.7",
-		"wechaty": "^1.20.2",
-		"wechaty-puppet-wechat": "^1.18.4",
-		"zip-lib": "^1.0.4"
-	}
+  "name": "chrelyonly-wechat-bot",
+  "version": "1.0.0",
+  "author": "chrelyonly",
+  "type": "module",
+  "main": "main.js",
+  "bin": "main.js",
+  "scripts": {
+    "dev": "node main.js",
+    "pnpm-install": "pnpm install"
+  },
+  "dependencies": {
+    "@gumlet/gif-resize": "^1.3.1",
+    "archiver": "^7.0.1",
+    "axios": "^1.6.8",
+    "blob": "^0.1.0",
+    "express": "^4.19.2",
+    "file-box": "^1.4.15",
+    "form-data": "^4.0.0",
+    "gifsicle": "^7.0.1",
+    "lodash": "^4.17.21",
+    "microsoft-cognitiveservices-speech-sdk": "^1.36.0",
+    "mqtt": "^5.7.2",
+    "node-cache": "^5.1.2",
+    "node-fetch": "^3.3.2",
+    "qrcode-terminal": "^0.12.0",
+    "sqlite3": "^5.1.7",
+    "wechaty": "^1.20.2",
+    "wechaty-puppet-wechat": "^1.18.4",
+    "zip-lib": "^1.0.4"
+  }
 }

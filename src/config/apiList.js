@@ -1,4 +1,3 @@
-
 export const apiList = [
     {
         name: "表情包",
@@ -385,11 +384,9 @@ export const apiList = [
         // 数据返回类型
         type: 15,
         // 请求头
-        headers: {
-        },
+        headers: {},
         // 请求参数, 该参数与requestType有关,通过requestType来判断参数的位置是在?后还是body,以后有时间的话,把requestType拆分成requestType和responseType
-        params: {
-        },
+        params: {},
         // 请求协议
         requestMethod: "get",
         // 请求数据存放位置以及响应模式
@@ -405,11 +402,9 @@ export const apiList = [
         // 数据返回类型
         type: 16,
         // 请求头
-        headers: {
-        },
+        headers: {},
         // 请求参数, 该参数与requestType有关,通过requestType来判断参数的位置是在?后还是body,以后有时间的话,把requestType拆分成requestType和responseType
-        params: {
-        },
+        params: {},
         // 请求协议
         requestMethod: "get",
         // 请求数据存放位置以及响应模式

@@ -5,13 +5,13 @@ import {log} from "wechaty";
 log.info(new Date().Format("hh:mm:ss"))
 const listTime = [
     "00:00:00",
-    "01:00:00",
-    "02:00:00",
-    "03:00:00",
-    "04:00:00",
-    "05:00:00",
-    "06:00:00",
-    "07:00:00",
+    // "01:00:00",
+    // "02:00:00",
+    // "03:00:00",
+    // "04:00:00",
+    // "05:00:00",
+    // "06:00:00",
+    // "07:00:00",
     "08:00:00",
     "09:00:00",
     "10:00:00",
@@ -44,8 +44,8 @@ const saveTime = (bot) => {
     // const roomList = await bot.Room.find({topic: '🍓酱の后🌸园  SVIP内部群1'})
     // promise实现
     // 寻找指定群
-    bot.Room.find({topic: '🍓酱の后🌸园  SVIP内部群1'}).then( room => {
-        if (room){
+    bot.Room.find({topic: '🍓酱の后🌸园  SVIP内部群1'}).then(room => {
+        if (room) {
             const now = new Date().Format("hh");
             // room.say(now)
             const fileBox = FileBox.fromFile("./src/static/img/point/" + now + ".png")

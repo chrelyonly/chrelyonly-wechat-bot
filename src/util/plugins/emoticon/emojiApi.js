@@ -29,15 +29,15 @@ export const emojiApi = [
         // 路径
         path: '/emojiBuild',
         //匹配字 多个
-        match: ["谁赞成","谁反对","我说完了"],
+        match: ["谁赞成", "谁反对", "我说完了"],
         //描述
         des: "谁赞成or谁反对or我说完了",
         //     参数
-        params:{
+        params: {
             // 资源名
-            name:"sheifandui",
+            name: "sheifandui",
             // 资源类型
-            type:"gif",
+            type: "gif",
         }
     },
     {
@@ -48,16 +48,16 @@ export const emojiApi = [
         // 路径
         path: '/emojiBuild',
         //匹配字 多个
-        match: ["闪光灯","举牌","闪光灯举牌"],
+        match: ["闪光灯", "举牌", "闪光灯举牌"],
         //描述
         des: "闪光灯举牌+最大9个字",
         //     参数
-        params:{
+        params: {
             // 资源名
-            name:"jupai",
+            name: "jupai",
             // 资源类型
-            type:"gif",
-        //     资源id
+            type: "gif",
+            //     资源id
             id: "1822",
             //     默认文字
             subTitle: "我爱草莓！"
@@ -75,12 +75,12 @@ export const emojiApi = [
         //描述
         des: "舔狗+文字",
         //     参数
-        params:{
+        params: {
             // 资源名
-            name:"tiangou",
+            name: "tiangou",
             // 资源类型
-            type:"gif",
-        //     资源id
+            type: "gif",
+            //     资源id
             id: "1861",
             //     默认文字
             subTitle: "我做一只舔狗，无忧无虑，快乐似神仙！舔舔更健康，幸福到永远！"
@@ -94,15 +94,15 @@ export const emojiApi = [
         // 路径
         path: '/emojiBuild',
         //匹配字 多个
-        match: ["打工","切格瓦拉"],
+        match: ["打工", "切格瓦拉"],
         //描述
         des: "切格瓦拉",
         //     参数
-        params:{
+        params: {
             // 资源名
-            name:"qiegewala",
+            name: "qiegewala",
             // 资源类型
-            type:"gif",
+            type: "gif",
         }
     },
     {
@@ -113,15 +113,15 @@ export const emojiApi = [
         // 路径
         path: '/emojiBuild',
         //匹配字 多个
-        match: ["厚颜无耻","粗鄙之语"],
+        match: ["厚颜无耻", "粗鄙之语"],
         //描述
         des: "厚颜无耻",
         //     参数
-        params:{
+        params: {
             // 资源名
-            name:"houyanwuchi",
+            name: "houyanwuchi",
             // 资源类型
-            type:"gif",
+            type: "gif",
         }
     },
     {
@@ -136,15 +136,15 @@ export const emojiApi = [
         //描述
         des: "床边的狗+文字",
         //     参数
-        params:{
+        params: {
 
             // 资源编号
             id: 47,
             // 资源名
-            name:"chuangbiandegou",
+            name: "chuangbiandegou",
             // 资源类型
-            type:"png",
-        //     默认文字
+            type: "png",
+            //     默认文字
             subTitle: "天青色等烟雨\n而我在等你"
         }
     },
@@ -160,14 +160,14 @@ export const emojiApi = [
         //描述
         des: "日记+文字",
         //     参数
-        params:{
+        params: {
             // 资源编号
             id: 48,
             // 资源名
-            name:"riji",
+            name: "riji",
             // 资源类型
-            type:"png",
-        //     默认文字
+            type: "png",
+            //     默认文字
             subTitle: "天青色等烟雨\n而我在等你"
         }
     },
@@ -183,13 +183,13 @@ export const emojiApi = [
         //描述
         des: "被抓+(2个参数使用-来连接例如:小明-被抓了吧)",
         //     参数
-        params:{
+        params: {
             // 资源编号
             id: 51,
             // 资源名
-            name:"beizhua",
+            name: "beizhua",
             // 资源类型
-            type:"png",
+            type: "png",
             //     默认文字
             subTitle: "小明-被抓了吧"
         }
@@ -202,17 +202,17 @@ export const emojiApi = [
         // 路径
         path: '/emojiBuild',
         //匹配字 多个
-        match: ["有内鬼","终止交易"],
+        match: ["有内鬼", "终止交易"],
         //描述
         des: "有内鬼+文字",
         //     参数
-        params:{
+        params: {
             // 资源编号
             id: 56,
             // 资源名
-            name:"riji",
+            name: "riji",
             // 资源类型
-            type:"png",
+            type: "png",
             //     默认文字
             subTitle: "有内鬼终止交易"
         }
@@ -225,17 +225,17 @@ export const emojiApi = [
         // 路径
         path: '/emojiBuild',
         //匹配字 多个
-        match: ["王境泽","饿死"],
+        match: ["王境泽", "饿死"],
         //描述
         des: "王境泽+(4个参数使用-来连接例如:我王境泽-就是饿死,从这里跳下去-也绝不会吃你一口饭-唉呀妈呀~真香)",
         //     参数
-        params:{
+        params: {
             // 资源编号
             id: 10,
             // 资源名
-            name:"wangjingze",
+            name: "wangjingze",
             // 资源类型
-            type:"gif",
+            type: "gif",
             //     默认文字
             subTitle: "我王境泽-就是饿死,从这里跳下去-也绝不会吃你一口饭-唉呀妈呀~真香"
         }

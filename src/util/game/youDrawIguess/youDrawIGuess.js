@@ -27,37 +27,37 @@ export let gameStatus = 0;
 /**
  * 你画我猜小游戏
  */
-export const youDrawIGuess = (message,room,bot,text)=>{
+export const youDrawIGuess = (message, room, bot, text) => {
     log.info('你画我猜小游戏')
-    if (gameStatus === 0){
+    if (gameStatus === 0) {
         room.say("你画我猜已发起，快来加入吧~\n输入:加入你画我猜")
         gameStatus = 1
-    }else{
+    } else {
         room.say("你画我猜已发起,请勿重复发起!\n输入:加入你画我猜")
     }
 }
 /**
  * 加入你画我猜小游戏
  */
-export const joinYouDrawIGuess = (message,room,bot,text)=>{
+export const joinYouDrawIGuess = (message, room, bot, text) => {
     log.info('加入游戏')
     // 获取发送者
     let talker = message.talker()
-    if (gameStatus === 1){
-    //     判断是否已经加入
-        userList.forEach((item)=>{
-            if (item.id === talker.id){
-                room.say("你已经加入游戏,快去叫别人来玩",talker)
+    if (gameStatus === 1) {
+        //     判断是否已经加入
+        userList.forEach((item) => {
+            if (item.id === talker.id) {
+                room.say("你已经加入游戏,快去叫别人来玩", talker)
                 return
             }
         })
         // 加入游戏
         userList.push(talker)
-    //     当前人数
+        //     当前人数
         room.say("加入游戏成功,当前人数: " + userList.length + "人,大家快来玩呀~")
-    }else if (gameStatus === 1){
+    } else if (gameStatus === 1) {
         room.say("游戏已经开始,哼哼啊啊啊啊啊啊啊")
-    }else{
+    } else {
         room.say("游戏未开始,请稍后再试")
     }
 }
@@ -65,25 +65,25 @@ export const joinYouDrawIGuess = (message,room,bot,text)=>{
 /**
  * 开始你画我猜小游戏
  */
-export const startYouDrawIGuess = (message,room,bot,text)=>{
+export const startYouDrawIGuess = (message, room, bot, text) => {
     log.info('开始你画我猜小游戏')
-    if (gameStatus === 1){
+    if (gameStatus === 1) {
         // 状态修改为开始 等待画图
         gameStatus = 2;
         room.say("游戏开始,等待画画")
-    }else{
+    } else {
         room.say("游戏未开始,哼哼啊啊啊啊啊啊啊")
     }
 }
 /**
  * 结束画图
  */
-export const okDraw = (request,bot)=>{
+export const okDraw = (request, bot) => {
     log.info('结束画图')
-    return new Promise((success,error) => {
-        bot.Room.find({topic: '🍓酱の后🌸园  SVIP内部群1'}).then( room => {
-            if (room){
-                if (gameStatus === 2){
+    return new Promise((success, error) => {
+        bot.Room.find({topic: '🍓酱の后🌸园  SVIP内部群1'}).then(room => {
+            if (room) {
+                if (gameStatus === 2) {
                     // 状态修改为等待猜图
                     gameStatus = 3;
                     answer = request.body.answer
@@ -92,10 +92,10 @@ export const okDraw = (request,bot)=>{
                     let base64 = answerImg.replace("data:image/png;base64,", "");
 // 将Base64字符串转换为Buffer对象
 //                 let buffer = Buffer.from(base64, 'base64');
-                    const fileBox = FileBox.fromBase64(base64,"1.gif")
+                    const fileBox = FileBox.fromBase64(base64, "1.gif")
                     room.say(fileBox)
                     room.say("已经画好图啦!快猜吧~")
-                }else{
+                } else {
                     room.say("还没到你画图呢,哼哼啊啊啊啊啊啊啊")
                 }
             }
@@ -105,16 +105,16 @@ export const okDraw = (request,bot)=>{
 /**
  * 猜图片
  */
-export const iGuess = (message,room,bot,text)=>{
+export const iGuess = (message, room, bot, text) => {
     log.info('我猜')
     // 获取发送者
     let talker = message.talker()
-    if (gameStatus === 3){
-        if (text.toString().includes(answer)){
-            room.say("恭喜" + talker.name() + "猜对了,答案是: " + answer + ",本轮游戏结束!",talker)
+    if (gameStatus === 3) {
+        if (text.toString().includes(answer)) {
+            room.say("恭喜" + talker.name() + "猜对了,答案是: " + answer + ",本轮游戏结束!", talker)
             gameStatus = 0;
         }
-    }else{
+    } else {
         room.say("游戏未开始,哼哼啊啊啊啊啊啊啊")
     }
 }

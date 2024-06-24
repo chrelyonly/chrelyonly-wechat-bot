@@ -89,6 +89,7 @@ class Database {
             });
         });
     }
+
     // 更新数据
     update(sql, params) {
         return this.ensureConnected().then(() => {
@@ -105,6 +106,7 @@ class Database {
             });
         });
     }
+
     // 查询单条数据
     selectOne(sql, params = []) {
         return this.ensureConnected().then(() => {
@@ -120,6 +122,7 @@ class Database {
             });
         });
     }
+
     // 查询所有数据
     selectAll(sql, params = []) {
         return this.ensureConnected().then(() => {

@@ -19,7 +19,7 @@ const __dirname = dirname(__filename);
 //     });
 // };
 
-export const r18 =  (room, bot) => {
+export const r18 = (room, bot) => {
     let msg = "禁止色色,达咩哟!";
     room.say(msg);
 

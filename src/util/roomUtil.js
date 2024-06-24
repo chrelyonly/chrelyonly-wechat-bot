@@ -1,4 +1,4 @@
-export const roomEventInit = (bot)=>{
+export const roomEventInit = (bot) => {
     // 新成员事件
     bot.on('room-join', (room, inviteeList, inviter) => {
         const nameList = inviteeList.map(c => c.name()).join(',')

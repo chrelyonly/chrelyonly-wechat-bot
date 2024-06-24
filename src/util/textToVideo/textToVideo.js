@@ -13,7 +13,7 @@ let synthesizer = null;
 /**
  * 创建合成器
  */
-const createSynthesizer = ()=>{
+const createSynthesizer = () => {
     log.info("文字转语音模块初始化...")
     // 初始化语音对象
     const speechConfig = sdk.SpeechConfig.fromSubscription(SPEECH_KEY, SPEECH_REGION);
@@ -30,14 +30,14 @@ const createSynthesizer = ()=>{
 /**
  * 文字转语音模块初始化
  */
-export const textToVideo = (room,bot,msg) => {
-    return new Promise((success,error)=>{
+export const textToVideo = (room, bot, msg) => {
+    return new Promise((success, error) => {
         // 为空则创建合成器
-        if (synthesizer === null){
+        if (synthesizer === null) {
             createSynthesizer();
         }
         // 开始合成语音
-        synthesizer.speakTextAsync(msg,result=> {
+        synthesizer.speakTextAsync(msg, result => {
                 if (result.reason === sdk.ResultReason.SynthesizingAudioCompleted) {
                     log.info("合成完成.");
                     // synthesizer.close();
@@ -54,7 +54,7 @@ export const textToVideo = (room,bot,msg) => {
                 synthesizer = null;
                 error("合成失败")
             },
-            err=>{
+            err => {
                 console.trace("err - " + err);
                 synthesizer.close();
                 synthesizer = null;
