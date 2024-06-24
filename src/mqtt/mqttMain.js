@@ -8,11 +8,14 @@ let mqttServer = null;
 // 机器人
 let bot = null;
 try {
+    // 这里自行取一个名字id
     let userId = new Date().Format("yyyyMMddhhmmssSSS");
     // 用户订阅id
     const singleTopic = "/userId" + userId;
     // 在线人数订阅
     const onlineUserNum = "/onlineUserNum";
+    // 能量订阅
+    const wechatRun = "/wechatRun"
 
     //监听连接状态
     mqttServer.on("connect", () => {
@@ -25,6 +28,11 @@ try {
         mqttServer.subscribe(onlineUserNum, err => {
             if (!err) {
                 console.log("订阅成功:" + onlineUserNum);
+            }
+        });
+        mqttServer.subscribe(wechatRun, err => {
+            if (!err) {
+                console.log("订阅成功:" + wechatRun);
             }
         });
     });

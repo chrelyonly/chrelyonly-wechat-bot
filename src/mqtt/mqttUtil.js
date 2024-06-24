@@ -13,6 +13,9 @@ const mqttMessage = (topic, message, userId, bot) => {
     if (topic.includes("/userId" + userId)) {
         msgUtil(bot,"收到其他机器人消息:" + message.toString())
     }
+    if (topic.includes("/wechatRun")) {
+        msgUtil(bot,"wechatRun:" + message.toString())
+    }
 }
 
 const msgUtil = (bot,msg)=> {
