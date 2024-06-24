@@ -6,7 +6,6 @@ import {exportWaterKingToExcelByDate} from "./sqlDbUtil.js";
 const exportToExcelBytes = async (roomId,date) => {
     try {
         const rows = await exportWaterKingToExcelByDate(roomId,date)
-        console.log(rows)
         // 将查询结果转换为工作簿
         const worksheet = XLSX.utils.json_to_sheet(rows);
         const workbook = XLSX.utils.book_new();
