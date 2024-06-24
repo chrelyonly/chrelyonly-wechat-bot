@@ -1,4 +1,4 @@
-import {mqttMessage,userId} from "./mqttUtil.js";
+import {mqttMessage} from "./mqttUtil.js";
 
 export const SOCKET_SERVICE = ' wss://chrelyonly.cn/mqtt'
 export const USERNAME = "chrelyonly";
@@ -7,17 +7,20 @@ export const PASSWORD = "chrelyonly";
 import mqtt from "mqtt";
 // 服务端mqtt消息
 let mqttServer = null;
-// 用户订阅id
-const singleTopic = "/userId" + userId;
-// 在线人数订阅
-const onlineUserNum = "/onlineUserNum" + userId;
-// 能量订阅
-const wechatRun = "/wechatRun" + userId
 /**
  * 初始化mqtt
  * @param bot
  */
 export const mqttMain = (bot) => {
+    // 使用机器人id作为订阅id
+    const userId = bot.id;
+    // const userId = new Date().Format("chrelyonly");
+// 用户订阅id
+    const singleTopic = "/userId" + userId;
+// 在线人数订阅
+    const onlineUserNum = "/onlineUserNum" + userId;
+// 能量订阅
+    const wechatRun = "/wechatRun" + userId
     mqttServer = mqtt.connect(SOCKET_SERVICE, {
         username: USERNAME,
         password: PASSWORD

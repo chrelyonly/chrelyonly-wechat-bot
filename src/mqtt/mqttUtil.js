@@ -1,8 +1,4 @@
-/**
- * 这里自行取一个名字id
- * 我的id
- */
-export const userId = new Date().Format("chrelyonly");
+
 /**
  * 机器人id list 用于发消息时判断是否是机器人,防止机器人互相发消息
  * 集群id 从远端获取
