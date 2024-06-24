@@ -7,6 +7,7 @@ import {pluginsInit} from "./plugins/pluginMain.js";
 import {getUserInfo} from "./wxmp/wxmpMain.js";
 import {douyinVideo} from "./douyinVideo/douyinVideo.js";
 import {r18} from "./r18/r18.js";
+import {exportWaterKingToExcel} from "../sqlite/exportSqliteToExcel.js";
 
 // 自定义更据消息回复事件
 export function myOnMessage(roomName, message, room, bot) {
@@ -108,6 +109,16 @@ export function myOnMessage(roomName, message, room, bot) {
     if (text.includes("idea")) {
         let msg = "idea下载地址: \nhttps://107service-cf-cdn.542bsb.top/ideaIU-2024.1.2.win.zip";
         room.say(msg)
+    }
+    // 水群王
+    if (text.includes("#导出聊天记录")) {
+        let date = text.split("#导出聊天记录")[1]
+        // 校验日期格式
+        if (!date || date.length !== 8) {
+            room.say("日期格式不正确,请重新输入(yyyyMMdd)")
+            return;
+        }
+        exportWaterKingToExcel(room,date);
     }
     // 水群王
     if (text.includes("#我要当水群王")) {

@@ -17,7 +17,7 @@ export const sqlDbUtilInit = async () => {
     const db = new Database(dbPath());
 // 建立连接
     try {
-        // 创建聊天记录表
+        // 创建聊天记录表  ,主要用于撤回 统计的较为简单
         await db.createTable(`CREATE TABLE IF NOT EXISTS chatHistory
                               (
                                   id       INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -26,7 +26,7 @@ export const sqlDbUtilInit = async () => {
                                   text   TEXT NOT NULL, --  '消息内容'
                                   time     TEXT NOT NULL -- '时间'
                               )`);
-        // 创建水群王记录表
+        // 创建水群王记录表 , 统计的数据较为详细
         await db.createTable(`CREATE TABLE IF NOT EXISTS waterKing
                             (
                                 id       INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -137,6 +137,29 @@ export const selectWaterKing = async (nameId, roomId) => {
  * 查询全部水群王记录
  */
 export const selectAllWaterKing = async (roomId) => {
+    await sqlDbUtilInit()
+    const db = new Database(dbPath());
+    try {
+        return await db.selectAll(`SELECT *
+                          FROM waterKing
+                          WHERE roomId = ?
+                            and dateDay = ?`, [roomId, new Date().Format("yyyyMMdd")])
+    } catch (err) {
+        console.error('操作失败', err);
+    } finally {
+        // 关闭数据库连接
+        await db.close();
+    }
+}
+
+
+/**
+ * 导出数据库为excel
+ * @param roomId 房间id
+ * @param date 日期
+ * @returns {Promise<unknown>}
+ */
+export const exportWaterKingToExcelByDate = async (roomId,date) => {
     await sqlDbUtilInit()
     const db = new Database(dbPath());
     try {
