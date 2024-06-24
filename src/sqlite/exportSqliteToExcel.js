@@ -1,6 +1,6 @@
 import XLSX from 'xlsx';
 import {FileBox} from "file-box";
-const {exportWaterKingToExcelByDate} = require("./sqlDbUtil.js");
+import {exportWaterKingToExcelByDate} from "./sqlDbUtil.js";
 
 // 导出数据为Excel字节数组
 const exportToExcelBytes = async (roomId,date) => {
