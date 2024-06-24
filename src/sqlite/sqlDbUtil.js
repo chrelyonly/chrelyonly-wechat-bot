@@ -166,7 +166,7 @@ export const exportWaterKingToExcelByDate = async (roomId,date) => {
         return await db.selectAll(`SELECT *
                           FROM waterKing
                           WHERE roomId = ?
-                            and dateDay = ?`, date)
+                            and dateDay = ?`, [roomId, date])
     } catch (err) {
         console.error('操作失败', err);
     } finally {
