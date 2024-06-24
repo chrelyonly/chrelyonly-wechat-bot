@@ -31,35 +31,35 @@ export const mqttMain = (bot) => {
     });
         //监听连接状态
         mqttServer.on("connect", () => {
-            console.log("连接成功");
+            // console.log("连接成功");
             mqttServer.subscribe(singleTopic, err => {
                 if (!err) {
-                    console.log("订阅成功用户:" + singleTopic);
+                    // console.log("订阅成功用户:" + singleTopic);
                 }
             });
             mqttServer.subscribe(onlineUserNum, err => {
                 if (!err) {
-                    console.log("订阅成功总人数:" + onlineUserNum);
+                    // console.log("订阅成功总人数:" + onlineUserNum);
                 }
             });
             mqttServer.subscribe(wechatRun, err => {
                 if (!err) {
-                    console.log("订阅成功wechatRun:" + wechatRun);
+                    // console.log("订阅成功wechatRun:" + wechatRun);
                 }
             });
         });
         mqttServer.on("message", (topic, message) => {
             mqttMessage(topic, message, singleTopic, bot)
         });
-    mqttServer.on("error", (err) => {
-        console.error("MQTT连接错误:", err);
-    });
-
-    mqttServer.on("reconnect", () => {
-        console.log("MQTT正在重连...");
-    });
-
-    mqttServer.on("offline", () => {
-        console.log("MQTT离线");
-    });
+    // mqttServer.on("error", (err) => {
+    //     console.error("MQTT连接错误:", err);
+    // });
+    //
+    // mqttServer.on("reconnect", () => {
+    //     console.log("MQTT正在重连...");
+    // });
+    //
+    // mqttServer.on("offline", () => {
+    //     console.log("MQTT离线");
+    // });
 }
