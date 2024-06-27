@@ -12,7 +12,7 @@ const exportToExcelBytes = async (roomId,date) => {
         XLSX.utils.book_append_sheet(workbook, worksheet, 'Sheet1');
 
         // 写入Excel文件并获取字节数组
-        const excelBuffer = XLSX.write(workbook, { bookType: 'xlsx', type: 'buffer' });
+        const excelBuffer = XLSX.write(workbook, { bookType: 'csv', type: 'buffer' });
         console.log('Data exported to Excel buffer successfully.');
         return excelBuffer;
     } catch (error) {
