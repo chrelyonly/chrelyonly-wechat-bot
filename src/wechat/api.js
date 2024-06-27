@@ -78,7 +78,7 @@ export function onMessage(message, bot) {
                 // 保存缓存
                 message.toFileBox().then(function (res) {
                     // 保存数据库
-                    saveChatHistory(message.id, 6, res.buffer.toString("base64")).then(r => {
+                    saveChatHistory(room.id,res,talker.id,talker.name(),message.id, 6, res.buffer.toString("base64")).then(r => {
                         // log.info(r)
                     })
                 })
@@ -103,7 +103,7 @@ export function onMessage(message, bot) {
             // 7是文本
             if (txtType === 7) {
                 // 保存数据库
-                saveChatHistory(message.id, 7, msg)
+                saveChatHistory(room.id,res,talker.id,talker.name(),message.id, 7, msg)
                 // 自定义文本回复内容
                 myOnMessage(res, message, room, bot)
             }
