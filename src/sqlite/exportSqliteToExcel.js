@@ -7,7 +7,16 @@ const exportToExcelBytes = async (roomId,date) => {
     try {
         const rows = await exportWaterKingToExcelByDate(roomId,date)
         // 将查询结果转换为工作簿
-        const worksheet = XLSX.utils.json_to_sheet(rows);
+        const worksheet = XLSX.utils.json_to_sheet(rows.map(row => {
+            return Object.fromEntries(
+                Object.entries(row).map(([key, value]) => {
+                    if (typeof value === 'string' && value.length > 32767) {
+                        value = "导出图片有点小问题,可能出现内存溢出,不导出";
+                    }
+                    return [key, value];
+                })
+            );
+        }));
         const workbook = XLSX.utils.book_new();
         XLSX.utils.book_append_sheet(workbook, worksheet, 'Sheet1');
 
