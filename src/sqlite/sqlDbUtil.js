@@ -66,7 +66,7 @@ export const saveChatHistory = async (roomId,groupName,nameId,name,messageId, ty
             } else {
                 // 不存在则插入
                 await db.insert(`INSERT INTO chatHistory (roomId,groupName,nameId,name,messageId, type, text,dateDay, time)
-                                 VALUES (?, ?, ?, ?)`, [roomId,groupName,nameId,name,messageId, type, text,new Date().Format("yyyyMMdd"), new Date().Format("yyyyMMddHHmmss")]);
+                                 VALUES (?, ?, ?, ?,?,?,?,?,?)`, [roomId,groupName,nameId,name,messageId, type, text,new Date().Format("yyyyMMdd"), new Date().Format("yyyyMMddHHmmss")]);
             }
         })
     } catch (err) {
