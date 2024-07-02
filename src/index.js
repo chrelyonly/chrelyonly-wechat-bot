@@ -44,11 +44,16 @@ bot
 setInterval(function () {
     isTimeTo(bot);
 }, 1000);
+// 每10分钟执行一次
+setInterval(function () {
+    checkDnfHot(bot);
+}, 60 * 1000 * 10);
 
 
 // web服务器
 import express from 'express'
 import {testInit} from "./util/test/testUtil.js";
+import {checkDnfHot} from "./util/dnf/dnf.js";
 
 const app = express();
 // 解析JSON数据的中间件
