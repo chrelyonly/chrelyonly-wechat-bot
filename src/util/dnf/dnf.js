@@ -23,7 +23,7 @@ export const checkDnfHot = (bot)=>{
         // 上次更新时间
         lastUpdateTime = recommendHot[0].dateline
     //     获取当前版本
-        let msg = "dnf小助手: \n"
+        let msg = "dnf小助手实时监听变化: \n"
         msg += "dnf当前版本: \n"
         msg += "  版本名称(国服): "
             + data.time_axis.time_line_detail.time_axis_cn[0].list[0].dateline
@@ -47,6 +47,7 @@ export const checkDnfHot = (bot)=>{
             msg += "  标题: " + item.title + "\n"
             msg += "  详情: " + item.url + "\n"
         })
+        msg += "我要玩dnf,dnf真好玩\n"
         sendMsg(bot,msg)
     })
 }
