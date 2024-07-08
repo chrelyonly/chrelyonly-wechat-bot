@@ -39,10 +39,10 @@ export function roomTopic(room, topic, oldTopic, changer) {
  */
 export function onMessage(message, bot) {
     // 判断是否是机器人消息
-    if (botList.includes(bot.id)) {
-        log.info("自己说话,不处理")
-        return;
-    }
+    // if (botList.includes(bot.id)) {
+    //     log.info("自己说话,不处理")
+    //     return;
+    // }
     // 判断是否机器人自己发送的
     if (message.self()) {
         return;
