@@ -23,7 +23,7 @@ export const mqttMain = (bot) => {
 // 在线人数订阅
         const onlineUserNum = "/onlineUserNum";
 // 能量订阅
-        const wechatRun = "/wechatRun" + userId
+        const wechatRun = "/wechatRun-chrelyonly"
 // 其他地址
         const oauth = "/oauth"
     mqttServer = mqtt.connect(SOCKET_SERVICE, {

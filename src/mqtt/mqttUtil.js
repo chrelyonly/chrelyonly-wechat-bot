@@ -27,7 +27,7 @@ export const mqttMessage = (topic, message, userId, bot) => {
         // console.log("收到其他机器人消息")
         msgUtil(bot,"收到其他机器人消息:" + message.toString())
     }
-    if (topic.includes("/wechatRun" + userId)) {
+    if (topic.includes("/wechatRun-chrelyonly")) {
         // console.log("wechatRun")
         msgUtil(bot,"wechatRun:" + message.toString())
     }
