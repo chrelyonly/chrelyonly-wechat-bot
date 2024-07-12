@@ -50,7 +50,7 @@ export function myOnMessage(roomName, message, room, bot) {
     }
     // 涩图
     if (text.includes("比例")) {
-        checkDnfFree(bot)
+        checkDnfFree(bot,1)
     }
     // 水群王
     if (text.includes("#水群王")) {

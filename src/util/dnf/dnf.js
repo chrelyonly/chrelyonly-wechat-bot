@@ -58,8 +58,9 @@ let lastFreeK6 = "";
 /**
  * 检查游戏比例
  * @param bot
+ * @param text
  */
-export const checkDnfFree = (bot) =>{
+export const checkDnfFree = (bot,text = null) =>{
     let params = {
         gameId: "G10",
         groupId: "G5709P001",
@@ -68,6 +69,21 @@ export const checkDnfFree = (bot) =>{
     }
     http("https://gw.7881.com/goods-service-api/api/goods/gameCoinRate", "post", params, 1, headers).then(res => {
         let data = res.data.body
+
+        if(text){
+//     获取当前版本
+            let msg = "dnf小助手: 实时监听游戏比例变化: \n"
+            data.forEach(item => {
+                msg += "  跨区: " + item.title + "\n"
+                msg += "    当前比例: " + item.unitPerPrice + ", 单价: " + item.pricePerUnit + "\n"
+                msg += "    最新比例: " + item.dealUnitPerPrice + ", 单价: " + item.dealPricePerUnit + "\n"
+            })
+            msg += "我要玩dnf,dnf真好玩\n"
+            sendMsg(bot,msg)
+            return;
+        }else{
+
+        }
         if(lastFreeK6 === data[7].unitPerPrice){
             return;
         }
