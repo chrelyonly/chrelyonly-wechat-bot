@@ -17,7 +17,7 @@ export const pluginsInit = (message, room, bot) => {
     //     emojiPlugin()
 
     // }
-    if (text.includes("插件菜单")) {
+    if (text.includes("#插件菜单")) {
         getMenu(room, bot);
         return;
     }
