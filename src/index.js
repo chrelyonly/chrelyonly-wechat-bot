@@ -41,19 +41,23 @@ bot
         console.error(e)
     })
 // 一秒执行一次判断是否到整点,定时事件
-setInterval(function () {
+setInterval( ()=> {
     isTimeTo(bot);
 }, 1000);
 // 每10分钟执行一次
-setInterval(function () {
+setInterval( () =>{
     checkDnfHot(bot);
+}, 60 * 1000 * 10);
+// 每30分钟执行一次
+setInterval( () =>{
+    checkDnfFree(bot);
 }, 60 * 1000 * 10);
 
 
 // web服务器
 import express from 'express'
 import {testInit} from "./util/test/testUtil.js";
-import {checkDnfHot} from "./util/dnf/dnf.js";
+import {checkDnfFree, checkDnfHot} from "./util/dnf/dnf.js";
 
 const app = express();
 // 解析JSON数据的中间件

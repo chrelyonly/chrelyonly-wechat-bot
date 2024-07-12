@@ -52,6 +52,39 @@ export const checkDnfHot = (bot)=>{
     })
 }
 
+
+// 上次游戏比例
+let lastFreeK6 = "";
+/**
+ * 检查游戏比例
+ * @param bot
+ */
+export const checkDnfFree = (bot) =>{
+    let params = {
+        gameId: "G10",
+        groupId: "G5709P001",
+    }
+    let headers = {
+    }
+    http("https://gw.7881.com/goods-service-api/api/goods/gameCoinRate", "post", params, 1, headers).then(res => {
+        let data = res.data.body
+        if(lastFreeK6 === data[0].unitPerPrice){
+            return;
+        }
+        lastFreeK6 = data[0].unitPerPrice
+        //     获取当前版本
+        let msg = "dnf小助手: 实时监听游戏比例变化: \n"
+        data.forEach(item => {
+                msg += "  跨区: " + item.title + "\n"
+                msg += "    当前比例: " + item.unitPerPrice + ", 单价: " + item.pricePerUnit + "\n"
+                msg += "    最新比例: " + item.dealUnitPerPrice + ", 单价: " + item.dealPricePerUnit + "\n"
+        })
+        msg += "我要玩dnf,dnf真好玩\n"
+        sendMsg(bot,msg)
+    })
+}
+
+
 const sendMsg = (bot,msg) => {
     // 寻找指定群
     bot.Room.find({topic: '🍓酱の后🌸园  SVIP内部群1'}).then(room => {

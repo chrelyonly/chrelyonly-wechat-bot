@@ -8,6 +8,7 @@ import {getUserInfo} from "./wxmp/wxmpMain.js";
 import {douyinVideo} from "./douyinVideo/douyinVideo.js";
 import {r18} from "./r18/r18.js";
 import {exportWaterKingToExcel} from "../sqlite/exportSqliteToExcel.js";
+import {checkDnfFree} from "./dnf/dnf.js";
 
 // 自定义更据消息回复事件
 export function myOnMessage(roomName, message, room, bot) {
@@ -46,6 +47,10 @@ export function myOnMessage(roomName, message, room, bot) {
     // 涩图
     if (text.includes("涩图")) {
         r18(room, bot)
+    }
+    // 涩图
+    if (text.includes("比例")) {
+        checkDnfFree(bot)
     }
     // 水群王
     if (text.includes("#水群王")) {
