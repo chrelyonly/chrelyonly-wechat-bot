@@ -51,7 +51,7 @@ setInterval( () =>{
 // 每30分钟执行一次
 setInterval( () =>{
     checkDnfFree(bot);
-}, 60 * 1000 * 30);
+}, 60 * 1000 * 360);
 
 
 // web服务器
