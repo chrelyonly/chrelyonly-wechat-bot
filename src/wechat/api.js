@@ -10,7 +10,8 @@ import {FileBox} from "file-box";
 import {myOnMessage} from "../util/messageUtil.js";
 import {saveWaterGroups} from "../util/waterGroupsUtil.js";
 import {botList} from "../mqtt/mqttUtil.js";
-
+// 机器人状态
+let botStatus = "on";
 export function onScan(qrcode, status) {
     if (status === ScanStatus.Waiting || status === ScanStatus.Timeout) {
         // 在控制台显示二维码
@@ -38,11 +39,6 @@ export function roomTopic(room, topic, oldTopic, changer) {
  * 消息监听
  */
 export function onMessage(message, bot) {
-    // 判断是否是机器人消息
-    // if (botList.includes(bot.id)) {
-    //     log.info("自己说话,不处理")
-    //     return;
-    // }
     // 判断是否机器人自己发送的
     if (message.self()) {
         return;
@@ -51,6 +47,11 @@ export function onMessage(message, bot) {
     const txtType = message.type()
     // 获取发送者
     let talker = message.talker()
+    // 判断是否是机器人消息
+    if (botList.includes(talker.id)) {
+        log.info("自己说话,不处理")
+        return;
+    }
     // 判断是否是群消息  获取发送群
     let room = message.room();
     if (room) {
@@ -62,14 +63,28 @@ export function onMessage(message, bot) {
             //     log.info("不支持的群")
             //     return;
             // }
-            // 保存水群次数
-            saveWaterGroups(res, room, talker, 1)
             let msg = message.text();
             if (msg === "") {
                 //    不支持的消息类型
                 log.info("不支持的消息类型")
                 return;
             }
+            if(msg === "开机"){
+                botStatus = "on";
+                room.say("机器人已开启\n当前时间:\n" + new Date().Format("yyyy-MM-dd HH:mm:ss"))
+                return;
+            }
+            if(msg === "关机"){
+                botStatus = "off";
+                room.say("睡觉觉啦\n当前时间:\n" + new Date().Format("yyyy-MM-dd HH:mm:ss"))
+                return;
+            }
+            // 判断机器人状态
+            if(botStatus === "off"){
+                return;
+            }
+            // 保存水群次数
+            saveWaterGroups(res, room, talker, 1)
             // log.info('消息id:',message.id)
             // log.info('消息类型:',txtType)
             // log.info('群名称:',res + ",收到群消息:" + talker.name() + ",他/她/它说:" + msg)
