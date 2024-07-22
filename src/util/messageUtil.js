@@ -36,9 +36,9 @@ export function myOnMessage(roomName, message, room, bot) {
     //     return;
     // }
     // 抖音视频解析
-    if (text.includes("抖音") && text.includes("v.douyin.com")) {
-        douyinVideo(talker, text, room, bot)
-    }
+    // if (text.includes("抖音") && text.includes("v.douyin.com")) {
+    //     douyinVideo(talker, text, room, bot)
+    // }
     // youtube解析, 这个有点问题,等待找个新接口
     // if (text.includes("youtu.be") || text.includes("www.youtube.com")) {
     //     youtubeVideo(talker,text,room,bot)
