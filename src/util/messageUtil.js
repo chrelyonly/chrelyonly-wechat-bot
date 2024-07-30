@@ -9,6 +9,7 @@ import {douyinVideo} from "./douyinVideo/douyinVideo.js";
 import {r18} from "./r18/r18.js";
 import {exportWaterKingToExcel} from "../sqlite/exportSqliteToExcel.js";
 import {checkDnfFree} from "./dnf/dnf.js";
+import {vpsMain} from  "./vps/vpsMain.js"
 
 // 自定义更据消息回复事件
 export function myOnMessage(roomName, message, room, bot) {
@@ -114,6 +115,10 @@ export function myOnMessage(roomName, message, room, bot) {
     if (text.includes("idea")) {
         let msg = "idea下载地址: \nhttps://107service-cf-cdn.542bsb.top/ideaIU-2024.1.2.win.zip";
         room.say(msg)
+    }
+    // 打印服务器信息
+    if (text.includes("我的服务器")) {
+        vpsMain(room)
     }
     // 水群王
     if (text.includes("#导出聊天记录")) {
