@@ -5,7 +5,7 @@ import qrTerminal from "qrcode-terminal";
 // import {getCache, setCache} from "../util/cacheUtil.js";
 import {mqttMain} from "../mqtt/mqttMain.js";
 // 改用sqlite数据库
-import {saveChatHistory, selectChatHistory} from "../sqlite/sqlDbUtil.js";
+import {saveChatHistory, selectChatHistory} from "../sqlite/waterKing/wechatKingSqlDbUtil.js";
 import {FileBox} from "file-box";
 import {myOnMessage} from "../util/messageUtil.js";
 import {saveWaterGroups} from "../util/waterGroupsUtil.js";
