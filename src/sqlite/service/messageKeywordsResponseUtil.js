@@ -73,11 +73,27 @@ export const selectMessageKeywordsResponse = async (id) => {
 /**
  * 查询关键字,list
  */
-export const selectMessageKeywordList = async (current,size) => {
+export const selectMessageKeywordsResponsePage = async (current,size) => {
     await messageKeywordsResponse()
     const db = new Database(messageKeywordsResponseDbPath());
     try {
         return await db.selectAll(`SELECT * FROM messageKeywordsResponse limit ?,?`, [current,size]);
+    } catch (err) {
+        console.error('操作失败', err);
+    } finally {
+        // 关闭数据库连接
+        await db.close();
+    }
+}
+
+/**
+ * 查询关键字,list
+ */
+export const selectMessageKeywordsResponseList = async (parentId) => {
+    await messageKeywordsResponse()
+    const db = new Database(messageKeywordsResponseDbPath());
+    try {
+        return await db.selectAll(`SELECT * FROM messageKeywordsResponse where parentId = ?`, [parentId]);
     } catch (err) {
         console.error('操作失败', err);
     } finally {

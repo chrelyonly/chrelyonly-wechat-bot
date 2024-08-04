@@ -37,7 +37,13 @@ export const messageKeywordsResponse = async () => {
                                   createTime   TEXT NOT NULL, -- '日期逻辑方便筛选'
                                   open   TEXT NOT NULL, -- '开关'
                                   time     TEXT NOT NULL -- '时间'
-                              )`);
+                              );
+                                CREATE INDEX idx_sort ON messageKeywords(sort);
+                                CREATE INDEX idx_label ON messageKeywords(label);
+                                CREATE INDEX idx_keyword ON messageKeywords(keyword);
+                                CREATE INDEX idx_updateTime ON messageKeywords(updateTime);
+                                CREATE INDEX idx_createTime ON messageKeywords(createTime);
+                              `);
         // 创建value嫑 主要用于根据key嫑返回指定内容
         await messageKeywordsResponseDb.createTable(`CREATE TABLE IF NOT EXISTS messageKeywordsResponse
                             (
@@ -45,12 +51,18 @@ export const messageKeywordsResponse = async () => {
                                 sort   TEXT NOT NULL, -- '排序'
                                 level   TEXT NOT NULL, -- '权重'
                                 parentId   TEXT NOT NULL, -- 'keyId'
-                                content   TEXT NOT NULL, -- '内容 ["好啊","好nm"]'
+                                content   TEXT NOT NULL, -- '内容 '
                                 updateTime   TEXT NOT NULL, -- '修改日期'
                                 createTime   TEXT NOT NULL, -- '日期逻辑方便筛选'
                                 open   TEXT NOT NULL, -- '开关'
                                 time     TEXT NOT NULL -- '时间'
-                            )`);
+                            );
+                            CREATE INDEX idx_sort ON messageKeywordsResponse(sort);
+                            CREATE INDEX idx_level ON messageKeywordsResponse(level);
+                            CREATE INDEX idx_parentId ON messageKeywordsResponse(parentId);
+                            CREATE INDEX idx_updateTime ON messageKeywordsResponse(updateTime);
+                            
+                            `);
     } catch (err) {
         console.error('操作失败', err);
     } finally {
@@ -63,12 +75,3 @@ export const messageKeywordsResponse = async () => {
 
 
 
-
-
-
-/**
- * 自定义回复数据库操作查询
- */
-export const myDivMessageResponseSqlDbUtil = ()=>{
-
-}
