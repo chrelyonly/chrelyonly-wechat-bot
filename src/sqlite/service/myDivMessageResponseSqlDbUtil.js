@@ -6,7 +6,7 @@ import '../util/newdate.js';
  * 消息关键字数据库路径
  * @returns {string}
  */
-const messageKeywordsDbPath = () => {
+export const messageKeywordsDbPath = () => {
     return "./src/sqlite/data/messageKeywords.db";
 }
 
@@ -14,14 +14,14 @@ const messageKeywordsDbPath = () => {
  * 消息关键字响应数据库路径
  * @returns {string}
  */
-const messageKeywordsResponseDbPath = () => {
+export const messageKeywordsResponseDbPath = () => {
     return "./src/sqlite/data/messageKeywordsResponse.db";
 }
 /**
  * 这个工具稍微抽象一些方法,以便直接操作数据库
  * @returns {Promise<void>} 无返回值
  */
-export const sqlDbUtilInit = async () => {
+export const messageKeywordsResponse = async () => {
     const messageKeywordsDb = new Database(messageKeywordsDbPath());
     const messageKeywordsResponseDb = new Database(messageKeywordsResponseDbPath());
 // 建立连接
@@ -32,9 +32,10 @@ export const sqlDbUtilInit = async () => {
                                   id       INTEGER PRIMARY KEY AUTOINCREMENT,
                                   sort   TEXT NOT NULL, -- '排序'
                                   label   TEXT NOT NULL, -- '描述'
-                                  keyword   TEXT NOT NULL, -- '关键字 ["你好","hello"]'
+                                  keyword   TEXT NOT NULL, -- '关键字 你好,hello'
                                   updateTime   TEXT NOT NULL, -- '修改日期'
-                                  dateDay   TEXT NOT NULL, -- '日期逻辑方便筛选'
+                                  createTime   TEXT NOT NULL, -- '日期逻辑方便筛选'
+                                  open   TEXT NOT NULL, -- '开关'
                                   time     TEXT NOT NULL -- '时间'
                               )`);
         // 创建value嫑 主要用于根据key嫑返回指定内容
@@ -44,9 +45,10 @@ export const sqlDbUtilInit = async () => {
                                 sort   TEXT NOT NULL, -- '排序'
                                 level   TEXT NOT NULL, -- '权重'
                                 parentId   TEXT NOT NULL, -- 'keyId'
-                                conent   TEXT NOT NULL, -- '内容 ["好啊","好nm"]'
+                                content   TEXT NOT NULL, -- '内容 ["好啊","好nm"]'
                                 updateTime   TEXT NOT NULL, -- '修改日期'
-                                dateDay   TEXT NOT NULL, -- '日期逻辑方便筛选'
+                                createTime   TEXT NOT NULL, -- '日期逻辑方便筛选'
+                                open   TEXT NOT NULL, -- '开关'
                                 time     TEXT NOT NULL -- '时间'
                             )`);
     } catch (err) {
