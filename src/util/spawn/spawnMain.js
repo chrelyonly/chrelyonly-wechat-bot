@@ -17,8 +17,8 @@ export const getPm2Info = (room,bot)=>{
     pm2.stdout.on('data', (data) => {
         // 使用 iconv-lite 将数据从 GBK 编码转换为 UTF-8
         // const output = iconv.decode(data, 'gbk');
-        // console.log(`标准输出:\n${output}`);
-        room.say(data)
+        console.log(`标准输出:\n${data}`);
+        room.say(data.toString())
     });
 
 // 监听标准错误数据
