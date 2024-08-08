@@ -25,4 +25,5 @@ yarn-error.log*
 *.sw*
 *.lock
 /cm.memory-card.json
+cm.memory-card.json.js
 /testr.js
