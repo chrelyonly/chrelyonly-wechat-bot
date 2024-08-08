@@ -29,6 +29,9 @@ dependencies:
   gifsicle:
     specifier: ^7.0.1
     version: 7.0.1
+  iconv-lite:
+    specifier: ^0.6.3
+    version: 0.6.3
   lodash:
     specifier: ^4.17.21
     version: 4.17.21
@@ -2814,7 +2817,6 @@ packages:
     dependencies:
       safer-buffer: 2.1.2
     dev: false
-    optional: true
 
   /ieee754@1.2.1:
     resolution: {integrity: sha512-dcyqhDvX1C46lXZcVqCpK+FtMRQVdIMN6/Df5js2zouUsqG7I6sFxitIC+7KYK29KdXOLHdu9zL4sFnoVQnqaA==}

@@ -1,5 +1,5 @@
 import {Database} from '../sqliteMain.js';
-import '../util/newdate.js';
+import '../../util/newdate.js';
 
 
 /**
