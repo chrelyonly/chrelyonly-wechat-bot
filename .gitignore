@@ -11,7 +11,7 @@ node_modules
 .env.*.local
 
 # Log files
-npm-debug.log*
+npm-debug.log*】
 yarn-debug.log*
 yarn-error.log*
 
@@ -24,6 +24,4 @@ yarn-error.log*
 *.sln
 *.sw*
 *.lock
-/cm.memory-card.json
 cm.memory-card.json.js
-/testr.js
