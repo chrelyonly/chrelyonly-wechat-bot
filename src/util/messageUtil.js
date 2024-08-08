@@ -10,6 +10,8 @@ import {r18} from "./r18/r18.js";
 import {exportWaterKingToExcel} from "../sqlite/exportSqliteToExcel.js";
 import {checkDnfFree} from "./dnf/dnf.js";
 import {vpsMain} from  "./vps/vpsMain.js"
+import {myDivMessageResponseMain} from "../sqlite/service/myDivMessageResponseMain.js";
+import {getPm2Info} from "./spawn/spawnMain.js";
 
 // 自定义更据消息回复事件
 export function myOnMessage(roomName, message, room, bot) {
@@ -25,6 +27,8 @@ export function myOnMessage(roomName, message, room, bot) {
         room.say(menu)
         return;
     }
+    // 自定义收发接口
+    myDivMessageResponseMain(message, room, bot,talker);
     // 表情包制作接口
     pluginsInit(message, room, bot)
     // 获取所有接口名称
@@ -48,6 +52,10 @@ export function myOnMessage(roomName, message, room, bot) {
     // 涩图
     if (text.includes("涩图")) {
         r18(room, bot)
+    }
+    // 涩图
+    if (text.includes("getPm2Info")) {
+        getPm2Info(room, bot)
     }
     // 涩图
     if (text.includes("比例")) {

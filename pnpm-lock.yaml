@@ -4,6 +4,7 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+<<<<<<< HEAD
 importers:
 
   .:
@@ -65,6 +66,69 @@ importers:
       zip-lib:
         specifier: ^1.0.4
         version: 1.0.4
+=======
+dependencies:
+  '@gumlet/gif-resize':
+    specifier: ^1.3.1
+    version: 1.3.1
+  archiver:
+    specifier: ^7.0.1
+    version: 7.0.1
+  axios:
+    specifier: ^1.6.8
+    version: 1.6.8(debug@2.6.9)
+  blob:
+    specifier: ^0.1.0
+    version: 0.1.0
+  express:
+    specifier: ^4.19.2
+    version: 4.19.2
+  file-box:
+    specifier: ^1.4.15
+    version: 1.4.15
+  form-data:
+    specifier: ^4.0.0
+    version: 4.0.0
+  gifsicle:
+    specifier: ^7.0.1
+    version: 7.0.1
+  iconv-lite:
+    specifier: ^0.6.3
+    version: 0.6.3
+  lodash:
+    specifier: ^4.17.21
+    version: 4.17.21
+  microsoft-cognitiveservices-speech-sdk:
+    specifier: ^1.36.0
+    version: 1.36.0
+  mqtt:
+    specifier: ^5.7.2
+    version: 5.7.2
+  node-cache:
+    specifier: ^5.1.2
+    version: 5.1.2
+  node-fetch:
+    specifier: ^3.3.2
+    version: 3.3.2
+  qrcode-terminal:
+    specifier: ^0.12.0
+    version: 0.12.0
+  sqlite3:
+    specifier: ^5.1.7
+    version: 5.1.7
+  wechaty:
+    specifier: ^1.20.2
+    version: 1.20.2(@swc/core@1.4.8)(brolog@1.14.2)(redux@4.2.1)(rxjs@7.8.1)
+  wechaty-puppet-wechat:
+    specifier: ^1.18.4
+    version: 1.18.4(brolog@1.14.2)(gerror@1.0.16)(wechaty-puppet@1.20.2)
+  xlsx:
+    specifier: ^0.18.5
+    version: 0.18.5
+  zip-lib:
+    specifier: ^1.0.4
+    version: 1.0.4
+>>>>>>> refs/remotes/origin/master
 
 packages:
 
@@ -4744,7 +4808,11 @@ snapshots:
   iconv-lite@0.6.3:
     dependencies:
       safer-buffer: 2.1.2
+<<<<<<< HEAD
     optional: true
+=======
+    dev: false
+>>>>>>> refs/remotes/origin/master
 
   ieee754@1.2.1: {}
 

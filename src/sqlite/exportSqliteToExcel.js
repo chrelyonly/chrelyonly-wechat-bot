@@ -1,6 +1,6 @@
 import XLSX from 'xlsx';
 import {FileBox} from "file-box";
-import {exportWaterKingToExcelByDate} from "./sqlDbUtil.js";
+import {exportWaterKingToExcelByDate} from "./waterKing/wechatKingSqlDbUtil.js";
 
 // 导出数据为Excel字节数组
 const exportToExcelBytes = async (roomId,date) => {
