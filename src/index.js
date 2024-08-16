@@ -58,6 +58,7 @@ setInterval( () =>{
 import express from 'express'
 import {testInit} from "./util/test/testUtil.js";
 import {checkDnfFree, checkDnfHot} from "./util/dnf/dnf.js";
+import {webApi} from "./web/api.js";
 
 const app = express();
 // 解析JSON数据的中间件
@@ -84,5 +85,5 @@ app.get('/testInit', (req, res) => {
 app.listen(55555, () => {
     log.info('web监听55555端口')
 })
-
+webApi(app)
 
