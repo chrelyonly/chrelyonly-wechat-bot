@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>配置消息结果</title>
+    <!-- Import style -->
+    <link rel="stylesheet" href="/cdn/element/index.css"/>
+    <!-- Import Vue 3 -->
+    <script src="/cdn/vue/vue.global.js"></script>
+    <!-- Import component library -->
+    <script src="/cdn/element/index.full.js"></script>
+    <script src="/cdn/avue/avue.min.js" charset="utf-8"></script>
+    <link rel="stylesheet" href="/cdn/avue/index.css">
+    <script src="/cdn/axios/axios.min.js"></script>
+</head>
+<body>
+<div id="app">
+    <el-button>{{ message }}</el-button>
+</div>
+<script>
+    const App = {
+        data() {
+            return {
+                message: "画画接口",
+                //
+                sign: "",
+                // 图片内容
+                img: "",
+                //    答案
+                answer: ""
+            };
+        },
+        methods: {
+            /**
+             * 请求提交接口
+             * 作为一个对象传输
+             */
+            requestApi(url, method, params, headers) {
+                return window.axios({
+                    url: url,
+                    method: method,
+                    headers: headers,
+                    data: params
+                })
+            }
+        }
+    };
+    const app = Vue.createApp(App);
+    app.use(ElementPlus);
+    app.use(window.AVUE);
+    app.use(window.axios);
+    app.mount("#app");
+</script>
+</body>
+</html>
