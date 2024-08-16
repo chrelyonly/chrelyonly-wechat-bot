@@ -24,16 +24,38 @@ export default {
     {
       label: "关键字",
       prop: "keyword",
+      editDisplay: false,
+      rules: [
+        {
+          required: true,
+          message: '请输入关键字',
+          trigger: 'blur',
+        },
+      ],
     },
     {
       label: "描述",
       prop: "label",
+      rules: [
+        {
+          required: true,
+          message: '请输入描述',
+          trigger: 'blur',
+        },
+      ],
     },
     {
       label: "排序",
       prop: "sort",
       value: 30,
-      type: "number"
+      type: "number",
+      rules: [
+        {
+          required: true,
+          message: '请输入排序',
+          trigger: 'blur',
+        },
+      ],
     },
     {
       label: "修改日期",

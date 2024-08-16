@@ -85,7 +85,17 @@ const rowDel = (row, done, loading) => {
     inputErrorMessage: '不告诉你',
   })
       .then(({ value }) => {
-        submit(row, done, loading)
+        $https("/bot-api/messageKeywords/remove","post",row,2,{}).then((res) => {
+          onLoad(page);
+          ElMessage({
+            type: "success",
+            message: "操作成功!"
+          });
+          done();
+        }, error => {
+          loading();
+          window.console.log(error);
+        });
       })
 }
 // 修改事件
@@ -95,7 +105,6 @@ const rowUpdate = (row,index, done, loading) => {
 // 统一事件
 const submit = (row, done, loading)=>{
   $https("/bot-api/messageKeywords/submit","post",row,2,{}).then((res) => {
-    console.log(res)
     onLoad(page);
     ElMessage({
       type: "success",
@@ -134,6 +143,7 @@ const openChange = (row) => {
                @current-change="currentChange"
                @size-change="sizeChange"
                @refresh-change="refreshChange"
+               @on-load="onLoad"
     >
       <template #menu="scope">
         <el-button>
