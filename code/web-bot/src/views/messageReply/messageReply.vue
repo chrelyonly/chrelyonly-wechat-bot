@@ -3,6 +3,7 @@
 import option from "@/option/messageReply.js";
 // 引入环境
 import {inject, ref} from 'vue';
+import {ElMessage, ElMessageBox} from "element-plus";
 // 调用全局方法
 const $https = inject("$https");
 //  ******************************************声明变量sta*************************************************
@@ -32,9 +33,11 @@ const onLoad = (pages, params = {})=>{
   params.size = pages.value?.pageSize;
   loading.value = true;
   $https("/bot-api/messageKeywords/list","get",params,1,{}).then(res=>{
+    console.log(res)
+    console.log("res111")
     const records = res.data.data;
-    page.value.total = records.total;
-    data.value = records.records;
+    // page.value.total = records.total;
+    data.value = records;
     loading.value = false;
     selectionClear();
   })
@@ -70,6 +73,49 @@ const sizeChange = (pageSize) => {
 const refreshChange = () => {
   onLoad(page);
 }
+// 新增事件
+const rowSave = (row, done, loading) => {
+  submit(row, done, loading)
+}
+// 删除事件
+const rowDel = (row, done, loading) => {
+  ElMessageBox.prompt('确认你的密码', '提示', {
+    confirmButtonText: '确认',
+    cancelButtonText: '关闭',
+    inputErrorMessage: '不告诉你',
+  })
+      .then(({ value }) => {
+        submit(row, done, loading)
+      })
+}
+// 修改事件
+const rowUpdate = (row,index, done, loading) => {
+  submit(row, done, loading)
+}
+// 统一事件
+const submit = (row, done, loading)=>{
+  $https("/bot-api/messageKeywords/submit","post",row,2,{}).then((res) => {
+    console.log(res)
+    onLoad(page);
+    ElMessage({
+      type: "success",
+      message: "操作成功!"
+    });
+    done();
+  }, error => {
+    loading();
+    window.console.log(error);
+  });
+}
+
+// 营业状态改变
+const openChange = (row) => {
+  if(!row.id){
+    return;
+  }
+  submit(row);
+}
+
 </script>
 
 <template>
@@ -79,6 +125,9 @@ const refreshChange = () => {
                :option="option"
                :table-loading="loading"
                :data="data"
+               @row-update="rowUpdate"
+               @row-save="rowSave"
+               @row-del="rowDel"
                @search-change="searchChange"
                @search-reset="searchReset"
                @selection-change="selectionChange"
@@ -86,6 +135,23 @@ const refreshChange = () => {
                @size-change="sizeChange"
                @refresh-change="refreshChange"
     >
+      <template #menu="scope">
+        <el-button>
+          调用一次
+        </el-button>
+      </template>
+      <template #open="{ row }">
+        <el-switch
+            v-model="row.open"
+            inline-prompt
+            style="--el-switch-on-color: #13ce66; --el-switch-off-color: #ff4949"
+            active-text="启用"
+            active-value="1"
+            inactive-value="0"
+            inactive-text="停用"
+            @change="openChange(row)"
+        />
+      </template>
     </avue-crud>
 </template>
 

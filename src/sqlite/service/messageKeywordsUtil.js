@@ -23,7 +23,7 @@ export const saveOrUpdateMessageKeywords = async (sort,label,keyword,open,id) =>
             } else {
                 // 不存在则插入
                 await db.insert(`INSERT INTO messageKeywords (sort,label,keyword,updateTime, createTime, open,time)
-                                 VALUES (?, ?, ?, ?,?,?,?,?,?)`, [sort, label, keyword,new Date().Format("yyyy-MM-dd HH:mm:ss"),new Date().Format("yyyy-MM-dd HH:mm:ss"),open,new Date().Format("yyyyMMddHHmmss")]);
+                                 VALUES (?, ?, ?, ?,?,?,?)`, [sort, label, keyword,new Date().Format("yyyy-MM-dd HH:mm:ss"),new Date().Format("yyyy-MM-dd HH:mm:ss"),open,new Date().Format("yyyyMMddHHmmss")]);
             }
         })
     } catch (err) {
