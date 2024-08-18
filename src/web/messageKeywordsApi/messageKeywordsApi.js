@@ -44,8 +44,8 @@ export const messageKeywordsApiDebug = (app,bot) => {
         try {
             let {keyword} = req.body;
             // 根据id查询响应关键字
-            res.send(R.success())
             sendMsg(bot,keyword);
+            res.send(R.success())
         }catch (error) {
             console.log(error);
             res.send(R.fail(error.message))

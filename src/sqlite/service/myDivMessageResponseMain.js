@@ -9,12 +9,12 @@ export const myDivMessageResponseMain = (message, room, bot,talker)=>{
 //     查询出全部的key数据
     selectMessageKeywordList(0,1000).then( res=>{
         // 循环列表
-        for (let i = 0; i < res.length; i++) {
-            let item = res[i]
+        for (let i = 0; i < res.data.length; i++) {
+            let item = res.data[i]
             //     判断是否出现了关键字
             if(item.keyword.includes(message)) {
                 // 查询自定义回复
-                selectMessageKeywordsResponseList().then( res2=>{
+                selectMessageKeywordsResponseList(item.id).then( res2=>{
                     for (let j = 0; j < res2.length; j++) {
                         // 对象
                         let item2 = res2[j]

@@ -24,7 +24,7 @@ const page = ref({
   // 当前页码
   currentPage: 1,
   // 列表总数
-  total: 0
+  total: 10
 });
 // 弹出标题
 const title = ref("");
@@ -152,7 +152,7 @@ const debugFunc = (row) => {
       });
     }
   }).then(()=>{
-    loading.value = true;
+    loading.value = false;
   })
 }
 
@@ -160,7 +160,9 @@ const debugFunc = (row) => {
 // 父级事件
 const init = (row) => {
   parentData.value = row;
-  drawer.value = true
+  data.value = [];
+  drawer.value = true;
+  onLoad(page);
 }
 
 defineExpose({
@@ -189,12 +191,11 @@ defineExpose({
                @current-change="currentChange"
                @size-change="sizeChange"
                @refresh-change="refreshChange"
-               @on-load="onLoad"
     >
       <template #menu="scope">
-        <el-button type="text" @click="debugFunc(scope.row)">
-          调用一次
-        </el-button>
+<!--        <el-button type="text" @click="debugFunc(scope.row)">-->
+<!--          调用一次-->
+<!--        </el-button>-->
       </template>
       <template #open="{ row }">
         <el-switch

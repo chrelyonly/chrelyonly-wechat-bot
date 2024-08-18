@@ -27,7 +27,7 @@ const page = ref({
   // 当前页码
   currentPage: 1,
   // 列表总数
-  total: 0
+  total: 10
 });
 //  ******************************************声明变量end*************************************************
 // 加载数据方法
@@ -37,8 +37,8 @@ const onLoad = (pages, params = {})=>{
   loading.value = true;
   $https("/bot-api/messageKeywords/list","get",params,1,{}).then(res=>{
     const records = res.data.data;
-    // page.value.total = records.total;
-    data.value = records;
+    page.value.total = records.count;
+    data.value = records.data;
     loading.value = false;
     selectionClear();
   })
@@ -65,10 +65,12 @@ const selectionClear = ()=>{
 // 分页改变事件
 const currentChange = (currentPage) =>{
   page.value.currentPage = currentPage;
+  onLoad(page);
 }
 // 分页数量改变事件
 const sizeChange = (pageSize) => {
   page.value.pageSize = pageSize;
+  onLoad(page);
 }
 // 刷新事件
 const refreshChange = () => {
@@ -144,7 +146,7 @@ const debugFunc = (row) => {
       });
     }
   }).then(()=>{
-    loading.value = true;
+    loading.value = false;
   })
 }
 const viewMessageKeywordsResponse = (row)=>{
@@ -171,9 +173,9 @@ const viewMessageKeywordsResponse = (row)=>{
                @on-load="onLoad"
     >
       <template #menu="scope">
-        <el-button type="text" @click="debugFunc(scope.row)">
-          调用一次
-        </el-button>
+<!--        <el-button type="text" @click="debugFunc(scope.row)">-->
+<!--          调用一次-->
+<!--        </el-button>-->
         <el-button type="text" @click="viewMessageKeywordsResponse(scope.row)">
           管理内容
         </el-button>

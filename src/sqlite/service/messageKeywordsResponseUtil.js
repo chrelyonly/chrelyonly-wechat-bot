@@ -104,7 +104,7 @@ export const selectMessageKeywordsResponseList = async (parentId) => {
     await messageKeywordsResponse()
     const db = new Database(messageKeywordsResponseDbPath());
     try {
-        return await db.selectAll(`SELECT * FROM messageKeywordsResponse where parentId = ?`, [parentId]);
+        return await db.selectAll(`SELECT * FROM messageKeywordsResponse where parentId = ? and open = 1`, [parentId]);
     } catch (err) {
         console.error('操作失败', err);
     } finally {

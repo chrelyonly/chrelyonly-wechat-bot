@@ -91,7 +91,9 @@ export const selectMessageKeywordList = async (current, size) => {
     const db = new Database(messageKeywordsDbPath());
     const offset = (current - 1) * size; // 计算偏移量
     try {
-        return await db.selectAll(`SELECT * FROM messageKeywords LIMIT ?, ?`, [offset, size]);
+        let count = await db.count(`SELECT count(*) as count FROM messageKeywords `, [])
+        let data =  await db.selectAll(`SELECT * FROM messageKeywords LIMIT ?, ?`, [offset, size]);
+        return {count:count[0]['count'],data:data}
     } catch (err) {
         console.error('操作失败', err);
     } finally {
