@@ -22,27 +22,18 @@ export default {
       display: false,
     },
     {
-      label: "关键字",
-      prop: "keyword",
-      // editDisplay: false,
-      rules: [
-        {
-          required: true,
-          message: '请输入关键字',
-          trigger: 'blur',
-        },
-      ],
+      label: "权重",
+      prop: "level",
     },
     {
-      label: "描述",
-      prop: "label",
-      rules: [
-        {
-          required: true,
-          message: '请输入描述',
-          trigger: 'blur',
-        },
-      ],
+      label: "父级id",
+      prop: "parentId",
+      display: false,
+      hide: true
+    },
+    {
+      label: "回复内容",
+      prop: "content",
     },
     {
       label: "排序",

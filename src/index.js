@@ -85,5 +85,5 @@ app.get('/testInit', (req, res) => {
 app.listen(55555, () => {
     log.info('web监听55555端口')
 })
-webApi(app)
+webApi(app,bot)
 

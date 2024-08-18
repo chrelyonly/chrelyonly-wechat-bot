@@ -6,6 +6,7 @@
  * isToken是否需要token
  */
 import axios from 'axios';
+import {ElMessage} from "element-plus";
 //默认超时时间
 axios.defaults.timeout = 60000;
 //返回其他状态码
@@ -23,9 +24,10 @@ axios.interceptors.request.use(config => {
 //http response 拦截
 axios.interceptors.response.use(res => {
     //获取状态码
-    const status = res.status;
+    const status = res.data.code ?? res.status;
     if (status !== 200) {
-        return Promise.resolve(new Error(res.data))
+        ElMessage.error("网络开小差了哦~")
+        return Promise.reject(new Error(res.data))
     }
     return res;
 }, error => {
