@@ -21,49 +21,40 @@ export default {
       hide: true,
       display: false,
     },
+    // {
+    //   label: "权重",
+    //   prop: "level",
+    // },
     {
-      label: "关键字",
-      prop: "keyword",
-      // editDisplay: false,
-      rules: [
-        {
-          required: true,
-          message: '请输入关键字',
-          trigger: 'blur',
-        },
-      ],
+      label: "父级id",
+      prop: "parentId",
+      display: false,
+      hide: true
     },
     {
-      label: "描述",
-      prop: "label",
-      rules: [
-        {
-          required: true,
-          message: '请输入描述',
-          trigger: 'blur',
-        },
-      ],
+      label: "回复内容",
+      prop: "content",
     },
-    {
-      label: "排序",
-      prop: "sort",
-      value: 30,
-      type: "number",
-      rules: [
-        {
-          required: true,
-          message: '请输入排序',
-          trigger: 'blur',
-        },
-      ],
-    },
+    // {
+    //   label: "排序",
+    //   prop: "sort",
+    //   value: 30,
+    //   type: "number",
+    //   rules: [
+    //     {
+    //       required: true,
+    //       message: '请输入排序',
+    //       trigger: 'blur',
+    //     },
+    //   ],
+    // },
     {
       label: "修改日期",
       prop: "updateTime",
       display: false,
     },
     {
-      label: "更新日期",
+      label: "创建日期",
       prop: "createTime",
       display: false,
     },

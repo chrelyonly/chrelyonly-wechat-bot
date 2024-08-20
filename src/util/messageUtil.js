@@ -28,7 +28,7 @@ export function myOnMessage(roomName, message, room, bot) {
         return;
     }
     // 自定义收发接口
-    myDivMessageResponseMain(message, room, bot,talker);
+    myDivMessageResponseMain(text, room, bot,talker);
     // 表情包制作接口
     pluginsInit(message, room, bot)
     // 获取所有接口名称

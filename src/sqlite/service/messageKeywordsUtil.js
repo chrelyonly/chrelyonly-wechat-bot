@@ -1,5 +1,6 @@
 import {Database} from "../sqliteMain.js";
 import {messageKeywordsDbPath, messageKeywordsResponse} from "./myDivMessageResponseSqlDbUtil.js";
+import {R} from "../../web/util/R.js";
 
 /**
  * 新增修改保存关键字
@@ -12,26 +13,42 @@ import {messageKeywordsDbPath, messageKeywordsResponse} from "./myDivMessageResp
  * @param id id如果有的话
  */
 export const saveOrUpdateMessageKeywords = async (sort,label,keyword,open,id) => {
-    await messageKeywordsResponse()
-    const db = new Database(messageKeywordsDbPath());
-    try {
-        // 先查询判断是否存在
-        await selectMessageKeywords(keyword).then(async (res) => {
-            if (res) {
-                // 存在则更新
-                await db.update(`UPDATE messageKeywords SET sort = ?, label = ? , keyword = ? ,updateTime = ? , open = ? WHERE id = ?`, [sort, label, keyword,new Date().Format("yyyyMMddHHmmss"),open,id]);
-            } else {
-                // 不存在则插入
-                await db.insert(`INSERT INTO messageKeywords (sort,label,keyword,updateTime, createTime, open,time)
-                                 VALUES (?, ?, ?, ?,?,?,?)`, [sort, label, keyword,new Date().Format("yyyy-MM-dd HH:mm:ss"),new Date().Format("yyyy-MM-dd HH:mm:ss"),open,new Date().Format("yyyyMMddHHmmss")]);
-            }
-        })
-    } catch (err) {
-        console.error('操作失败', err);
-    } finally {
-        // 关闭数据库连接
-        await db.close();
-    }
+    return new Promise(async (resolve, reject) => {
+        await messageKeywordsResponse()
+        const db = new Database(messageKeywordsDbPath());
+        try {
+            // 先查询判断是否存在
+            await selectMessageKeywords(keyword).then(async (res) => {
+                // 如果修改成已经存在的关键字
+                if (res && (res.id !== id)) {
+                    resolve(R.fail("当前已经存在关键字:" + keyword))
+                    return;
+                }
+                if (id) {
+                    // 存在则更新
+                    await db.update(`UPDATE messageKeywords
+                                     SET sort       = ?,
+                                         label      = ?,
+                                         keyword    = ?,
+                                         updateTime = ?,
+                                         open       = ?
+                                     WHERE id = ?`, [sort, label, keyword, new Date().Format("yyyy-MM-dd HH:mm:ss"), open, id]);
+                } else {
+                    // 不存在则插入
+                    await db.insert(`INSERT INTO messageKeywords (sort, label, keyword, updateTime, createTime, open, time)
+                                     VALUES (?, ?, ?, ?, ?, ?,
+                                             ?)`, [sort, label, keyword, new Date().Format("yyyy-MM-dd HH:mm:ss"), new Date().Format("yyyy-MM-dd HH:mm:ss"), open, new Date().Format("yyyyMMddHHmmss")]);
+                }
+            })
+            resolve(R.success("操作成功"))
+        } catch (err) {
+            console.error('操作失败', err);
+            reject(R.fail("操作失败" + err))
+        } finally {
+            // 关闭数据库连接
+            await db.close();
+        }
+    })
 }
 
 /**
@@ -69,11 +86,14 @@ export const selectMessageKeywords = async (keyword) => {
 /**
  * 查询关键字,list
  */
-export const selectMessageKeywordList = async (current,size) => {
-    await messageKeywordsResponse()
+export const selectMessageKeywordList = async (current, size) => {
+    await messageKeywordsResponse();
     const db = new Database(messageKeywordsDbPath());
+    const offset = (current - 1) * size; // 计算偏移量
     try {
-        return await db.selectAll(`SELECT * FROM messageKeywords limit ?,?`, [current,size]);
+        let count = await db.count(`SELECT count(*) as count FROM messageKeywords `, [])
+        let data =  await db.selectAll(`SELECT * FROM messageKeywords LIMIT ?, ?`, [offset, size]);
+        return {count:count[0]['count'],data:data}
     } catch (err) {
         console.error('操作失败', err);
     } finally {

@@ -122,7 +122,21 @@ class Database {
             });
         });
     }
-
+//计数
+    count(sql, params = []) {
+        return this.ensureConnected().then(() => {
+            return new Promise((resolve, reject) => {
+                this.db.all(sql, params, (err, rows) => {
+                    if (err) {
+                        console.error('无法查询数据', err);
+                        reject(err);
+                    } else {
+                        resolve(rows);
+                    }
+                });
+            });
+        });
+    }
     // 查询所有数据
     selectAll(sql, params = []) {
         return this.ensureConnected().then(() => {
