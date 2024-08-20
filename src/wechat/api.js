@@ -47,6 +47,30 @@ export function onMessage(message, bot) {
     const txtType = message.type()
     // 获取发送者
     let talker = message.talker()
+    //
+    // let roomNew = message.room()
+    // roomNew.topic().then(function (res) {
+    //     // 定义支持的群
+    //     if (!res.toString().includes("🍓酱の后🌸园  SVIP内部群1")){
+    //         // 不支持的群
+    //         log.info("不支持的群")
+    //         return;
+    //     }
+    //     if (txtType === 13) {
+    //         message.toRecalled().then( res2=> {
+    //             roomNew.say(res2)
+    //         })
+    //     }
+    //     let msg = message.text();
+    //     if (msg === "头像") {
+    //         // roomNew.say(`https://wx.qlogo.cn/${talker.payload.avatar}&type=big`)
+    //         // talker.avatar().then(res2 => {
+    //         //     // console.log(res)
+    //         //     roomNew.say(res2)
+    //         // });
+    //     }
+    // })
+    // return;
     // 判断是否是机器人消息
     if (botList.includes(talker.id)) {
         log.info("自己说话,不处理")
