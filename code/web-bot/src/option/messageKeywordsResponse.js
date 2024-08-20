@@ -21,10 +21,10 @@ export default {
       hide: true,
       display: false,
     },
-    // {
-    //   label: "权重",
-    //   prop: "level",
-    // },
+    {
+      label: "权重",
+      prop: "level",
+    },
     {
       label: "父级id",
       prop: "parentId",
@@ -35,19 +35,19 @@ export default {
       label: "回复内容",
       prop: "content",
     },
-    // {
-    //   label: "排序",
-    //   prop: "sort",
-    //   value: 30,
-    //   type: "number",
-    //   rules: [
-    //     {
-    //       required: true,
-    //       message: '请输入排序',
-    //       trigger: 'blur',
-    //     },
-    //   ],
-    // },
+    {
+      label: "排序",
+      prop: "sort",
+      value: 30,
+      type: "number",
+      rules: [
+        {
+          required: true,
+          message: '请输入排序',
+          trigger: 'blur',
+        },
+      ],
+    },
     {
       label: "修改日期",
       prop: "updateTime",
