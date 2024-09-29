@@ -14,8 +14,9 @@ export const chineseTxtRead = (room,bot,message) => {
     http("https://hanyu.baidu.com/s","get",params,1,{}).then( res => {
         const match = res.data.match(readRegex);
         if (match) {
-            const text = match[match.length-1].replace(/<[^>]*>/g, '').trim(); // 去掉任何HTML标签
-            room.say(text)
+            let tempText = match[match.length-1].replace(/<[^>]*>/g, '').trim(); // 去掉任何HTML标签
+            tempText = tempText.replaceAll(" ","").trim();
+            room.say(tempText)
         }
     })
 }
