@@ -57,15 +57,14 @@ export function myOnMessage(roomName, message, room, bot) {
     // 汉语拼音
     if (text.includes("怎么读") || text.includes("怎么写") || text.includes("什么意思")) {
         try {
-            if(text.split("怎么读")[0].length === 1){
-                chineseTxtRead(room, bot,text)
-            }
+            // 获取第一个文字
+            chineseTxtRead(room, bot,text[0])
         }catch(err) {
             // 怎么读功能异常
             console.log(err);
         }
         try {
-            chineseTxtWrite(room, bot,text)
+            chineseTxtWrite(room, bot,text[0])
         }catch(err) {
             // 怎么写功能异常
             console.log(err);
