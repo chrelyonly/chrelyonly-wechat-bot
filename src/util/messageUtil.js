@@ -12,6 +12,7 @@ import {checkDnfFree} from "./dnf/dnf.js";
 import {vpsMain} from  "./vps/vpsMain.js"
 import {myDivMessageResponseMain} from "../sqlite/service/myDivMessageResponseMain.js";
 import {getPm2Info} from "./spawn/spawnMain.js";
+import {chineseTxtRead, chineseTxtWrite} from "./hanyu/chineseTxtReadMain.js";
 
 // 自定义更据消息回复事件
 export function myOnMessage(roomName, message, room, bot) {
@@ -52,6 +53,23 @@ export function myOnMessage(roomName, message, room, bot) {
     // 涩图
     if (text.includes("涩图")) {
         r18(room, bot)
+    }
+    // 涩图
+    if (text.includes("怎么读") || text.includes("怎么写") || text.includes("什么意思")) {
+        try {
+            if(text.split("怎么读")[0].length === 1){
+                chineseTxtRead(room, bot,text)
+            }
+        }catch(err) {
+            // 怎么读功能异常
+            console.log(err);
+        }
+        try {
+            chineseTxtWrite(room, bot,text)
+        }catch(err) {
+            // 怎么写功能异常
+            console.log(err);
+        }
     }
     // 涩图
     if (text.includes("getPm2Info")) {
