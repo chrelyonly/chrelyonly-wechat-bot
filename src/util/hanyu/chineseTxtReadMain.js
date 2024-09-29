@@ -16,7 +16,7 @@ export const chineseTxtRead = (room,bot,message) => {
         if (match) {
             let tempText = match[match.length-1].replace(/<[^>]*>/g, '').trim(); // 去掉任何HTML标签
             tempText = tempText.replaceAll(" ","").trim();
-            room.say(tempText)
+            room.say("名词解释: " + tempText)
         }
     })
 }
