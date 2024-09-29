@@ -29,7 +29,7 @@ export const chineseTxtWrite = (room,bot,message) => {
     http("https://hanyu.baidu.com/s","get",params,1,{}).then( res => {
         const match = res.data.match(writeRegex);
         if (match) {
-            const fileBox = FileBox.fromUrl(match[0], {name:"chineseTxtRead" + message + new Date().Format("yyyy-MM-dd HH:mm:ss")});
+            const fileBox = FileBox.fromUrl(match[match.length-1], {name:"chineseTxtRead" + message + new Date().Format("yyyy-MM-dd HH:mm:ss")});
             room.say(fileBox)
         }
     })

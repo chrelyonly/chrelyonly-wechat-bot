@@ -28,11 +28,10 @@ export const chineseTxtWrite = (room,bot,message) => {
     http("https://hanyu.baidu.com/s","get",params,1,{}).then( res => {
         const match = res.data.match(writeRegex);
         if (match) {
-            console.log(match[0])
+            console.log(match[match.length-1])
         }
     })
 }
-
 
 chineseTxtRead(null,null,"灬")
 chineseTxtWrite(null,null,"灬")
