@@ -54,7 +54,7 @@ export function myOnMessage(roomName, message, room, bot) {
     if (text.includes("涩图")) {
         r18(room, bot)
     }
-    // 涩图
+    // 汉语拼音
     if (text.includes("怎么读") || text.includes("怎么写") || text.includes("什么意思")) {
         try {
             if(text.split("怎么读")[0].length === 1){

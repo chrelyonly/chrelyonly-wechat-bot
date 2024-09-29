@@ -12,7 +12,7 @@ export const chineseTxtRead = (room,bot,message) => {
         ptype: "zici"
     }
     http("https://hanyu.baidu.com/s","get",params,1,{}).then( res => {
-        const match = res.data.match(writeRegex);
+        const match = res.data.match(readRegex);
         if (match) {
             const text = match[match.length-1].replace(/<[^>]*>/g, '').trim(); // 去掉任何HTML标签
             room.say(text)
@@ -27,7 +27,7 @@ export const chineseTxtWrite = (room,bot,message) => {
         ptype: "zici"
     }
     http("https://hanyu.baidu.com/s","get",params,1,{}).then( res => {
-        const match = res.data.match(readRegex);
+        const match = res.data.match(writeRegex);
         if (match) {
             const fileBox = FileBox.fromUrl(match[0], {name:"chineseTxtRead" + message + new Date().Format("yyyy-MM-dd HH:mm:ss")});
             room.say(fileBox)

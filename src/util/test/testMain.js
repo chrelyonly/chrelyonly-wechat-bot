@@ -34,5 +34,5 @@ export const chineseTxtWrite = (room,bot,message) => {
 }
 
 
-chineseTxtRead(null,null,"啊")
-chineseTxtWrite(null,null,"是")
+chineseTxtRead(null,null,"灬")
+chineseTxtWrite(null,null,"灬")
