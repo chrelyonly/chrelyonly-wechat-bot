@@ -32,10 +32,12 @@ const page = ref({
 //  ******************************************声明变量end*************************************************
 // 加载数据方法
 const onLoad = (pages, params = {})=>{
-  params.current = pages.value?.currentPage;
-  params.size = pages.value?.pageSize;
+  params.current = pages?.currentPage;
+  params.size = pages?.pageSize;
   loading.value = true;
+  debugger
   $https("/bot-api/messageKeywords/list","get",params,1,{}).then(res=>{
+    data.value = [];
     const records = res.data.data;
     page.value.total = records.count;
     data.value = records.data;
@@ -45,12 +47,12 @@ const onLoad = (pages, params = {})=>{
 }
 // 搜索区重置事件
 const searchReset = ()=> {
-  onLoad(page);
+  onLoad(page.value);
 }
 // 搜索区提交事件
 const searchChange  = (params, done)=> {
   page.value.currentPage = 1;
-  onLoad(page, params);
+  onLoad(page.value, params);
   done();
 }
 // 列表数据选中事件
@@ -65,16 +67,14 @@ const selectionClear = ()=>{
 // 分页改变事件
 const currentChange = (currentPage) =>{
   page.value.currentPage = currentPage;
-  onLoad(page);
 }
 // 分页数量改变事件
 const sizeChange = (pageSize) => {
   page.value.pageSize = pageSize;
-  onLoad(page);
 }
 // 刷新事件
 const refreshChange = () => {
-  onLoad(page);
+  onLoad(page.value);
 }
 // 新增事件
 const rowSave = (row, done, loading) => {
@@ -89,7 +89,7 @@ const rowDel = (row, done, loading) => {
   })
       .then(({ value }) => {
         $https("/bot-api/messageKeywords/remove","post",row,2,{}).then((res) => {
-          onLoad(page);
+          onLoad(page.value);
           ElMessage({
             type: "success",
             message: "操作成功!"
@@ -119,7 +119,7 @@ const submit = (row, done, loading)=>{
         message: res.data.msg
       });
     }
-    onLoad(page);
+    onLoad(page.value);
     done();
   }, error => {
     loading();

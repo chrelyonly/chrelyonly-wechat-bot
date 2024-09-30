@@ -19,7 +19,8 @@ export default defineConfig({
     port: 2888,
     proxy: {
       '/bot-api/': {
-        target: 'http://localhost:55555',
+        // target: 'http://localhost:55555',
+        target: 'https://apply.chrelyonly.cn',
         changeOrigin: true,
         ws: true,
         rewrite: path => path.replace(/^\/bot-api/, ''),
