@@ -48,7 +48,7 @@ export const emojiApi = [
         // 路径
         path: '/emojiBuild',
         //匹配字 多个
-        match: ["闪光灯", "举牌", "闪光灯举牌"],
+        match: ["闪光灯", "举牌"],
         //描述
         des: "闪光灯举牌+最大9个字",
         //     参数
@@ -67,13 +67,13 @@ export const emojiApi = [
         // 编号
         id: 5,
         // 名称
-        name: '舔狗',
+        name: '催眠',
         // 路径
         path: '/emojiBuild',
         //匹配字 多个
-        match: ["舔狗"],
+        match: ["催眠"],
         //描述
-        des: "舔狗+文字",
+        des: "催眠+文字",
         //     参数
         params: {
             // 资源名

@@ -28,7 +28,7 @@ export function myOnMessage(roomName, message, room, bot) {
         room.say(menu)
         return;
     }
-    // 自定义收发接口
+    // 自定义收发接口 来自webapi实现的
     myDivMessageResponseMain(text, room, bot,talker);
     // 表情包制作接口
     pluginsInit(message, room, bot)
@@ -70,21 +70,17 @@ export function myOnMessage(roomName, message, room, bot) {
             console.log(err);
         }
     }
-    // 涩图
+    // 查询pm2内存状态
     if (text.includes("getPm2Info")) {
         getPm2Info(room, bot)
     }
-    // 涩图
+    // dnf游戏比例
     if (text.includes("比例")) {
-        checkDnfFree(bot,1)
+        checkDnfFree(room,1)
     }
     // 水群王
     if (text.includes("#水群王")) {
         getWaterGroupsWin(room, bot, 10)
-    }
-    // 水群王
-    if (text.includes("#全部水群王")) {
-        getWaterGroupsWin(room, bot, null)
     }
     // redis
     if (text.includes("redis")) {
@@ -129,16 +125,6 @@ export function myOnMessage(roomName, message, room, bot) {
     // jrebel
     if (text.includes("jrebel")) {
         let msg = "jrebel激活工具下载地址: \nhttp://47.102.159.60:11725/down/d8spIutME3sk";
-        room.say(msg)
-    }
-    // idea
-    if (text.includes("idea")) {
-        let msg = "idea下载地址: \nhttps://107service-cf-cdn.542bsb.top/ideaIU-2024.1.2.win.zip";
-        room.say(msg)
-    }
-    // idea
-    if (text.includes("idea")) {
-        let msg = "idea下载地址: \nhttps://107service-cf-cdn.542bsb.top/ideaIU-2024.1.2.win.zip";
         room.say(msg)
     }
     // 打印服务器信息
@@ -198,9 +184,8 @@ export function myOnMessage(roomName, message, room, bot) {
     }
     if (text.includes("docker")) {
         let msg = "docker镜像地址:\n";
-        msg += "https://docker.542bsb.top\n"
-        msg += "https://107service-cf-cdn.542bsb.top\n"
-        msg += "食用教程: docker pull ubuntu:latest 替换为 https://docker.542bsb.top/ubuntu:latest\n"
+        msg += "https://docker.1ms.run\n"
+        msg += "实测好用到爆"
         room.say(msg)
     }
     if (text.includes("拉尔戈")) {

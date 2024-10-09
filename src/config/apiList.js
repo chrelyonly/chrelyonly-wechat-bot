@@ -38,16 +38,6 @@ export const apiList = [
         des: "感动哭了+QQ号"
     },
     {
-        name: "高质量",
-        url: "https://api.lolimi.cn/API/face_gao/",
-        type: 3,
-        params: {},
-        headers: {},
-        requestMethod: "get",
-        requestType: 3,
-        des: "高质量+QQ号"
-    },
-    {
         name: "咸鱼",
         url: "https://api.lolimi.cn/API/face_yu/",
         type: 3,
@@ -88,16 +78,6 @@ export const apiList = [
         des: "想看+QQ号"
     },
     {
-        name: "咬",
-        url: "https://api.lolimi.cn/API/face_suck/",
-        type: 8,
-        params: {},
-        headers: {},
-        requestMethod: "get",
-        requestType: 3,
-        des: "咬+QQ号"
-    },
-    {
         name: "捣",
         url: "https://api.lolimi.cn/API/face_pound/",
         type: 8,
@@ -128,16 +108,6 @@ export const apiList = [
         des: "你可能需要它+QQ号"
     },
     {
-        name: "吃掉",
-        url: "https://api.lolimi.cn/API/face_bite/",
-        type: 8,
-        params: {},
-        headers: {},
-        requestMethod: "get",
-        requestType: 3,
-        des: "吃掉+QQ号"
-    },
-    {
         name: "拍",
         url: "https://api.lolimi.cn/API/face_pat/",
         type: 8,
@@ -166,15 +136,7 @@ export const apiList = [
         requestMethod: "get",
         requestType: 3
     },
-    {
-        name: "摸鱼人日历",
-        url: "https://api.lolimi.cn/API/moyu/",
-        type: 3,
-        params: {},
-        headers: {},
-        requestMethod: "get",
-        requestType: 3
-    },
+
     {
         name: "撕了你",
         url: "https://api.lolimi.cn/API/si/",
@@ -203,25 +165,16 @@ export const apiList = [
         requestMethod: "get",
         requestType: 3
     },
+
     {
-        name: "吃",
-        url: "https://api.lolimi.cn/API/face_bite/?type=json",
-        type: 11,
-        params: {},
-        headers: {},
-        requestMethod: "get",
-        requestType: 1,
-        des: "吃+QQ号"
-    },
-    {
-        name: "添",
+        name: "舔",
         url: "https://api.lolimi.cn/API/tian/",
         type: 12,
         params: {},
         headers: {},
         requestMethod: "get",
         requestType: 3,
-        des: "添+QQ号"
+        des: "舔+QQ号"
     },
     {
         name: "腿",
@@ -231,15 +184,6 @@ export const apiList = [
         headers: {},
         requestMethod: "get",
         requestType: 1,
-    },
-    {
-        name: "抽签",
-        url: "https://api.lolimi.cn/API/chouq/api.php",
-        type: 5,
-        params: {},
-        headers: {},
-        requestMethod: "get",
-        requestType: 1
     },
     {
         name: "随机cosplay",
@@ -329,17 +273,6 @@ export const apiList = [
         headers: {},
         requestMethod: "get",
         requestType: 1
-    },
-    // ai问答
-    {
-        name: "提问",
-        url: "https://api.lolimi.cn/API/AI/mm.php",
-        type: 2,
-        params: {},
-        headers: {},
-        requestMethod: "get",
-        requestType: 1,
-        des: "提问XXX"
     },
 //     点歌发送语音
     {

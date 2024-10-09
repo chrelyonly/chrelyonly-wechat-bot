@@ -1,10 +1,6 @@
 import { spawn } from "child_process"
 // import iconv from "iconv-lite"
-// 先这样用 ,后面改到web端控制,  多开在线登录控制.....
-
-
-
-
+// 先这样用 ,后面改到web端控制,  多开在线映射二维吗登录控制.....
 
 /**
  * 获取信息
