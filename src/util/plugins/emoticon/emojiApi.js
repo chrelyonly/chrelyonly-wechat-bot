@@ -306,7 +306,7 @@ export const emojiApi = [
             // 资源类型
             type: "gif",
             //     默认文字
-            subTitle: "激动的心\\n颤抖的手\\n一分钱都没有"
+            subTitle: "激动的心\n颤抖的手\n一分钱都没有"
         }
     },
     {
@@ -365,7 +365,7 @@ export const emojiApi = [
         //匹配字 多个
         match: ["圣旨"],
         //描述
-        des: "圣旨+(4个参数用-连接,例如:宣王美丽-今晚侍寝-不得有误-钦\")",
+        des: "圣旨+(4个参数用-连接,例如:宣王美丽-今晚侍寝-不得有误-钦此~)",
         //     参数
         params: {
             // 资源编号
@@ -451,13 +451,13 @@ export const emojiApi = [
         // 编号
         id: 22,
         // 名称
-        name: '喝药',
+        name: '爱你哟',
         // 路径
         path: '/emojiBuild',
         //匹配字 多个
-        match: ["喝药"],
+        match: ["爱你哟"],
         //描述
-        des: "喝药+文字",
+        des: "爱你哟+文字",
         //     参数
         params: {
             // 资源编号
