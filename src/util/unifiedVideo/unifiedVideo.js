@@ -17,7 +17,7 @@ export const unifiedVideo = (talker, text, room, bot) => {
     }
     http("https://api.cobalt.tools/api/json", "post", params, 2, headers).then(res => {
         log.info("解析成功");
-        log.info(res.data.url);
+        log.info(res);
         let params = {
 
         }
