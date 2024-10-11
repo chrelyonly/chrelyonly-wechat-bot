@@ -13,6 +13,8 @@ import {vpsMain} from  "./vps/vpsMain.js"
 import {myDivMessageResponseMain} from "../sqlite/service/myDivMessageResponseMain.js";
 import {getPm2Info} from "./spawn/spawnMain.js";
 import {chineseTxtRead, chineseTxtWrite} from "./hanyu/chineseTxtReadMain.js";
+import {unifiedVideo} from "./unifiedVideo/unifiedVideo.js";
+import {getSystemInfo} from "./systemInfo/systemInfo.js";
 
 // 自定义更据消息回复事件
 export function myOnMessage(roomName, message, room, bot) {
