@@ -50,6 +50,16 @@ export function myOnMessage(roomName, message, room, bot) {
     //     youtubeVideo(talker,text,room,bot)
     //     return;
     // }
+    if (text.includes("https://")) {
+        unifiedVideo(talker,text,room,bot)
+        return;
+    }
+    // 获取当前设备信息
+    if (text.includes("getSystemInfo")) {
+        let msg = getSystemInfo(talker,text,room,bot)
+        room.say(msg)
+        return;
+    }
     // 涩图
     if (text.includes("涩图")) {
         r18(room, bot)

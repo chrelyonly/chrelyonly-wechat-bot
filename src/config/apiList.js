@@ -277,7 +277,7 @@ export const apiList = [
 //     点歌发送语音
     {
         name: "点歌",
-        url: "https://api.yaohud.cn/api/music/qq",
+        url: "https://api.lolimi.cn/API/wydg/api.php",
         // 数据返回类型
         type: 9,
         params: {},
