@@ -52,7 +52,7 @@ export function myOnMessage(roomName, message, room, bot) {
     //     youtubeVideo(talker,text,room,bot)
     //     return;
     // }
-    if (text.includes("https://")) {
+    if (text.includes("https://www.youtube.com")) {
         unifiedVideo(talker,text,room,bot)
         return;
     }
