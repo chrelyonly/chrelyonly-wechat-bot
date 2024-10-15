@@ -37,6 +37,7 @@ export function myOnMessage(roomName, message, room, bot) {
     // 获取所有接口名称
     if (text.includes("#获取信息A")) {
         getUserInfo(talker, message, room, bot)
+        return;
     }
     // 微信公众号授权 这个暂时不用
     // if (text.includes("#获取信息B")) {
@@ -65,6 +66,7 @@ export function myOnMessage(roomName, message, room, bot) {
     // 涩图
     if (text.includes("涩图")) {
         r18(room, bot)
+        return;
     }
     // 汉语拼音
     if (text.includes("怎么读") || text.includes("怎么写") || text.includes("什么意思")) {
@@ -81,67 +83,81 @@ export function myOnMessage(roomName, message, room, bot) {
             // 怎么写功能异常
             console.log(err);
         }
+        return;
     }
     // 查询pm2内存状态
     if (text.includes("getPm2Info")) {
         getPm2Info(room, bot)
+        return;
     }
     // dnf游戏比例
     if (text.includes("比例")) {
         checkDnfFree(room,1)
+        return;
     }
     // 水群王
     if (text.includes("#水群王")) {
         getWaterGroupsWin(room, bot, 10)
+        return;
     }
     // redis
     if (text.includes("redis")) {
         let msg = "redis下载地址: \nhttp://47.102.159.60:11725/down/rrj4eGHz0nlx?fname=/";
         room.say(msg)
+        return;
     }
     // minio
     if (text.includes("minio")) {
         let msg = "minio下载地址: \nhttp://47.102.159.60:11725/down/d4oJSZCSqMLD";
         room.say(msg)
+        return;
     }
     // windows
     if (text.includes("windows")) {
         let msg = "windows停用更新软件\n下载地址: \nhttp://47.102.159.60:11725/down/pSl2GTFvWRBs";
         room.say(msg)
+        return;
     }
     // CE
     if (text.includes("CE")) {
         let msg = "CE\n下载地址: \nhttp://47.102.159.60:11725/down/CCSgFbl46m5l";
         room.say(msg)
+        return;
     }
     // 抓包
     if (text.includes("抓包")) {
         let msg = "抓包软件\n下载地址: \nhttp://47.102.159.60:11725/down/JkLs3RFwsWg1";
         room.say(msg)
+        return;
     }
     // ssl
     if (text.includes("ssl")) {
         let msg = "ssl申请工具\n食用教程\nhttps://temp-img.chrelyonly.cn/ssl\n下载地址: \nhttp://47.102.159.60:11725/down/XWm4GaT0AELA";
         room.say(msg)
+        return;
     }
     // 软通牒
     if (text.includes("uiso") || text.includes("软通牒")) {
         let msg = "uiso下载地址: \nhttp://47.102.159.60:11725/down/iJNz3Pkbj7wK";
         room.say(msg)
+        return;
     }
     // navicat
     if (text.includes("navicat")) {
         let msg = "navicat激活工具下载地址: \nhttp://47.102.159.60:11725/down/QspoSUpIKQKL";
         room.say(msg)
+        return;
     }
     // jrebel
     if (text.includes("jrebel")) {
         let msg = "jrebel激活工具下载地址: \nhttp://47.102.159.60:11725/down/d8spIutME3sk";
         room.say(msg)
+        return;
     }
     // 打印服务器信息
     if (text.includes("我的服务器")) {
         vpsMain(room)
+        return;
     }
     // 水群王
     if (text.includes("#导出聊天记录")) {
@@ -152,6 +168,7 @@ export function myOnMessage(roomName, message, room, bot) {
             return;
         }
         exportWaterKingToExcel(room,date);
+        return;
     }
     // 水群王
     if (text.includes("#我要当水群王")) {
@@ -167,6 +184,7 @@ export function myOnMessage(roomName, message, room, bot) {
         setTimeout(() => {
             getWaterGroupsWin(room, bot, 10)
         }, 5000)
+        return;
     }
     if (text.includes("#我不当水群王")) {
         let number = text.split("#我不当水群王")[1]
@@ -183,6 +201,7 @@ export function myOnMessage(roomName, message, room, bot) {
         setTimeout(() => {
             getWaterGroupsWin(room, bot, 10)
         }, 5000)
+        return;
     }
     // 语音合成
     if (text.includes("#语音合成")) {
@@ -193,19 +212,23 @@ export function myOnMessage(roomName, message, room, bot) {
         }, error => {
             room.say(error)
         })
+        return;
     }
     if (text.includes("docker")) {
         let msg = "docker镜像地址:\n";
         msg += "https://docker.1ms.run\n"
         msg += "实测好用到爆"
         room.say(msg)
+        return;
     }
     if (text.includes("拉尔戈")) {
         const fileBox = FileBox.fromFile("./src/static/img/dnf/1716433273045.jpg")
         room.say(fileBox)
+        return;
     }
     if (text === "?") {
         room.say("捏寄个问号是神魔意思?")
+        return;
     }
     // 有趣的api
     let apiItem = getApi(text, room);
