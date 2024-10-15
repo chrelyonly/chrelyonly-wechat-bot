@@ -562,4 +562,257 @@ export const emojiApi = [
             subTitle: "傻逼佬，你给我"
         }
     },
+    {
+        // 编号
+        id: 27,
+        // 名称
+        name: '不讲武德',
+        // 路径
+        path: '/emojiBuild',
+        //匹配字 多个
+        match: ["不讲武德","年轻人"],
+        //描述
+        des: "不讲武德+文字",
+        //     参数
+        params: {
+            // 资源编号
+            id: 305,
+            // 资源名
+            name: "bujiangwude",
+            // 资源类型
+            type: "png",
+            //     默认文字
+            subTitle: "年轻人，不讲武德"
+        }
+    },
+    {
+        // 编号
+        id: 28,
+        // 名称
+        name: '求求你',
+        // 路径
+        path: '/emojiBuild',
+        //匹配字 多个
+        match: ["求求你"],
+        //描述
+        des: "求求你+文字",
+        //     参数
+        params: {
+            // 资源编号
+            id: 310,
+            // 资源名
+            name: "qiuqiuni",
+            // 资源类型
+            type: "gif",
+            //     默认文字
+            subTitle: "求求你"
+        }
+    },
+    {
+        // 编号
+        id: 29,
+        // 名称
+        name: '吃瓜群众',
+        // 路径
+        path: '/emojiBuild',
+        //匹配字 多个
+        match: ["吃瓜"],
+        //描述
+        des: "吃瓜+文字",
+        //     参数
+        params: {
+            // 资源编号
+            id: 396,
+            // 资源名
+            name: "qiuqiuni",
+            // 资源类型
+            type: "gif",
+            //     默认文字
+            subTitle: "吃瓜群众"
+        }
+    },
+    {
+        // 编号
+        id: 30,
+        // 名称
+        name: '握手',
+        // 路径
+        path: '/emojiBuild',
+        //匹配字 多个
+        match: ["握手"],
+        //描述
+        des: "握手+文字",
+        //     参数
+        params: {
+            // 资源编号
+            id: 418,
+            // 资源名
+            name: "woshou",
+            // 资源类型
+            type: "gif",
+            //     默认文字
+            subTitle: "乖儿子，来握个手"
+        }
+    },
+    {
+        // 编号
+        id: 31,
+        // 名称
+        name: '奥特曼',
+        // 路径
+        path: '/emojiBuild',
+        //匹配字 多个
+        match: ["奥特曼"],
+        //描述
+        des: "奥特曼+文字",
+        //     参数
+        params: {
+            // 资源编号
+            id: 408,
+            // 资源名
+            name: "aotemandashabi",
+            // 资源类型
+            type: "gif",
+            //     默认文字
+            subTitle: "专打傻逼"
+        }
+    },
+    {
+        // 编号
+        id: 32,
+        // 名称
+        name: '鼓掌',
+        // 路径
+        path: '/emojiBuild',
+        //匹配字 多个
+        match: ["鼓掌","人才"],
+        //描述
+        des: "鼓掌+文字",
+        //     参数
+        params: {
+            // 资源编号
+            id: 456,
+            // 资源名
+            name: "guzhan",
+            // 资源类型
+            type: "gif",
+            //     默认文字
+            subTitle: "是个人才"
+        }
+    },
+    {
+        // 编号
+        id: 33,
+        // 名称
+        name: '我也要',
+        // 路径
+        path: '/emojiBuild',
+        //匹配字 多个
+        match: ["我也要"],
+        //描述
+        des: "我也要+文字",
+        //     参数
+        params: {
+            // 资源编号
+            id: 462,
+            // 资源名
+            name: "woyeyao",
+            // 资源类型
+            type: "png",
+            //     默认文字
+            subTitle: "我也想吃\n我也想吃\n我也想吃"
+        }
+    },
+    {
+        // 编号
+        id: 34,
+        // 名称
+        name: '单挑',
+        // 路径
+        path: '/emojiBuild',
+        //匹配字 多个
+        match: ["乌鸦仔","单挑"],
+        //描述
+        des: "乌鸦仔+(2个参数用-连接,例如:乌鸦仔-有种出去单挑!)",
+        //     参数
+        params: {
+            // 资源编号
+            id: 463,
+            // 资源名
+            name: "dantiao",
+            // 资源类型
+            type: "gif",
+            //     默认文字
+            subTitle: "乌鸦仔-有种出去单挑"
+        }
+    },
+    {
+        // 编号
+        id: 35,
+        // 名称
+        name: '华强',
+        // 路径
+        path: '/emojiBuild',
+        //匹配字 多个
+        match: ["华强"],
+        //描述
+        des: "华强+文字",
+        //     参数
+        params: {
+            // 资源编号
+            id: 527,
+            // 资源名
+            name: "huaqiang",
+            // 资源类型
+            type: "gif",
+            //     默认文字
+            subTitle: "陈坚强你再嚣张试试?"
+        }
+    },
+    {
+        // 编号
+        id: 36,
+        // 名称
+        name: '食屎啦你',
+        // 路径
+        path: '/emojiBuild',
+        //匹配字 多个
+        match: ["食屎啦你"],
+        //描述
+        des: "食屎啦你+文字",
+        //     参数
+        params: {
+            // 资源编号
+            id: 579,
+            // 资源名
+            name: "shishilani",
+            // 资源类型
+            type: "gif",
+            //     默认文字
+            subTitle: "食屎啦你"
+        }
+    },
+    {
+        // 编号
+        id: 37,
+        // 名称
+        name: '炒粉',
+        // 路径
+        path: '/emojiBuild',
+        //匹配字 多个
+        match: ["炒粉"],
+        //描述
+        des: "炒粉+文字",
+        //     参数
+        params: {
+            // 资源编号
+            id: 1896,
+            // 资源名
+            name: "chaofen",
+            // 资源类型
+            type: "gif",
+            //     默认文字
+            subTitle: "落魄美工 在线炒粉"
+        }
+    },
 ]
