@@ -26,8 +26,6 @@ export const downloadFile = (talker, text, room, bot) => {
         }:undefined;
         http(strings[1], "get", params, 3, {},proxy).then(async res => {
             let data = res.data;
-            //     返回buffer
-            let fileBox = FileBox.fromBuffer(data, strings[2]);
             //压缩文件名
             let paths = new Date().Format("yyyyMMddHHmmss") + 'download.zip';
             // 创建临时文件夹
@@ -37,6 +35,11 @@ export const downloadFile = (talker, text, room, bot) => {
             }
             //     尝试压缩
             try {
+                //     返回buffer
+                let fileBox = FileBox.fromBuffer(data, strings[2]);
+                // 将文件保存
+                // 保存文件到磁盘
+                await fileBox.toFile(path.join(tempDir));
                 // 创建压缩包
                 const zipPath = path.join(__dirname, paths);
                 // 使用 zip-lib 创建带密码保护的压缩包, 将tempDir的文件放到zipPath中
@@ -45,7 +48,7 @@ export const downloadFile = (talker, text, room, bot) => {
                     zlib: {level: 9} // 设置压缩级别
                 });
                 // 发送文件
-                const fileBox = FileBox.fromFile(zipPath);
+                const fileBoxZip = FileBox.fromFile(zipPath);
                 await room.say(fileBox);
                 await room.say("密码: " + paths);
 
