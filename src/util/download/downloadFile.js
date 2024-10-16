@@ -40,18 +40,14 @@ export const downloadFile = (talker, text, room, bot) => {
                 // 返回buffer
                 let fileBox = FileBox.fromBuffer(data, strings[2]);
                 // 保存文件到磁盘
-                await fileBox.toFile(path.join(tempDir, new Date().Format("yyyyMMddHHmmss") + strings[2]));
+                await fileBox.toFile(path.join(tempDir, new Date().Format("yyyyMMddHHmmss") + "." + strings[2]));
 
                 // 使用 zip-lib 创建带密码保护的压缩包
-                await archiveFolder(tempDir, zipPath, {
-                    password: paths, // 设置压缩包密码
-                    zlib: { level: 9 } // 设置压缩级别
-                });
+                await archiveFolder(tempDir, zipPath, {});
 
                 // 发送文件
                 const fileBoxZip = FileBox.fromFile(zipPath);
                 await room.say(fileBoxZip); // 发送压缩文件
-                await room.say("密码: " + paths);
 
             } catch (e) {
                 console.error('处理过程中发生错误:', e);
