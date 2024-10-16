@@ -8,21 +8,24 @@ import request from '../config/axiosConfig.js';
  * @param params 参数 a={} 或者 {a:1},{b:2]
  * @param type 类型   1       2
  * @param headers 请求头{}
+ * @param proxy 代理
  * @returns {*}
  */
-export const http = (url, method, params, type, headers) => {
+export const http = (url, method, params, type, headers,proxy = undefined) => {
     if (type === 1) {
         return requestApi(url, method, params, type, headers)
     } else if (type === 2) {
         return requestApi2(url, method, params, type, headers)
     } else if (type === 3) {
-        return requestApi3(url, method, params, type, headers)
+        return requestApi3(url, method, params, type, headers,proxy)
     } else if (type === 4) {
         return requestApi4(url, method, params, type, headers)
     } else if (type === 5) {
         return requestApi5(url, method, params, type, headers)
-    } else if (type === 6) {
-        return requestApi6(url, method, params, type, headers)
+    }else {
+        return new Promise((resolve, reject) => {
+            resolve("不支持的请求")
+        })
     }
 };
 
@@ -56,9 +59,9 @@ function requestApi2(url, method, params, type, headers) {
 }
 
 /**
- * 文件流 参数在url上
+ * 文件流 参数在url上,返回arraybuffer
  */
-function requestApi3(url, method, params, type, headers) {
+function requestApi3(url, method, params, type, headers,proxy) {
     return request({
         url: url,
         method: method,
@@ -67,11 +70,12 @@ function requestApi3(url, method, params, type, headers) {
             ...params
         },
         responseType: 'arraybuffer',
+        proxy: proxy
     })
 }
 
 /**
- * 文件流 是参数在body上
+ * 文件流 是参数在body上,返回stream
  */
 function requestApi4(url, method, params, type, headers) {
     return request({
@@ -84,22 +88,9 @@ function requestApi4(url, method, params, type, headers) {
 }
 
 /**
- * 文件流 是参数在body上
+ * 文件流 是参数在body上,返回arraybuffer
  */
 function requestApi5(url, method, params, type, headers) {
-    return request({
-        url: url,
-        method: method,
-        headers: headers,
-        data: params,
-        responseType: 'arraybuffer',
-    })
-}
-
-/**
- * 文件流 是参数在body上
- */
-function requestApi6(url, method, params, type, headers) {
     return request({
         url: url,
         method: method,

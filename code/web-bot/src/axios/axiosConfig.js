@@ -8,7 +8,7 @@
 import axios from 'axios';
 import {ElMessage} from "element-plus";
 //默认超时时间
-axios.defaults.timeout = 60000;
+axios.defaults.timeout = 120000;
 //返回其他状态码
 axios.defaults.validateStatus = function (status) {
     return status >= 200 && status <= 500;

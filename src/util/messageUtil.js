@@ -15,6 +15,7 @@ import {getPm2Info} from "./spawn/spawnMain.js";
 import {chineseTxtRead, chineseTxtWrite} from "./hanyu/chineseTxtReadMain.js";
 import {unifiedVideo} from "./unifiedVideo/unifiedVideo.js";
 import {getSystemInfo} from "./systemInfo/systemInfo.js";
+import {downloadFile} from "./download/downloadFile.js";
 
 // 自定义更据消息回复事件
 export function myOnMessage(roomName, message, room, bot) {
@@ -33,7 +34,10 @@ export function myOnMessage(roomName, message, room, bot) {
     // 自定义收发接口 来自webapi实现的
     myDivMessageResponseMain(text, room, bot,talker);
     // 表情包制作接口
-    pluginsInit(message, room, bot)
+    let isPluginFlag = pluginsInit(message, room, bot)
+    if(isPluginFlag){
+        return;
+    }
     // 获取所有接口名称
     if (text.includes("#获取信息A")) {
         getUserInfo(talker, message, room, bot)
@@ -55,6 +59,11 @@ export function myOnMessage(roomName, message, room, bot) {
     // }
     if (text.includes("https://www.youtube.com")) {
         unifiedVideo(talker,text,room,bot)
+        return;
+    }
+    // 如果是下载文件指令 并且是3个参数那么则进行下载
+    if (text.includes("下载文件") && text.split("-").length >= 3) {
+        downloadFile(talker,text,room,bot)
         return;
     }
     // 获取当前设备信息
@@ -272,13 +281,13 @@ export function myOnMessage(roomName, message, room, bot) {
                 const fileBox = FileBox.fromBuffer(res.data, "1.png")
                 room.say(fileBox)
             } else if (apiItem.type === 4) {
-                const fileBox = FileBox.fromUrl(res.data.text, "1.png")
+                const fileBox = FileBox.fromUrl(res.data.text, {name:"1.png"})
                 room.say(fileBox)
             } else if (apiItem.type === 5) {
-                const fileBox = FileBox.fromUrl(res.data.data.image, "1.png")
+                const fileBox = FileBox.fromUrl(res.data.data.image, {name:"1.png"})
                 room.say(fileBox)
             } else if (apiItem.type === 6) {
-                const fileBox = FileBox.fromUrl(res.data.data.data[0], "1.png")
+                const fileBox = FileBox.fromUrl(res.data.data.data[0], {name:"1.png"})
                 room.say(fileBox)
             } else if (apiItem.type === 7) {
                 room.say(res.data, talker)

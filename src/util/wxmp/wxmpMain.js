@@ -16,6 +16,10 @@ export const getUserInfo = (talker, message, room, bot) => {
     str += "城市: " + talker.province() + talker.city() + "\n"
     str += "签名: " + talker.payload.signature + "\n"
     room.say(str)
+    talker.avatar().then(avatar => {
+        let fileBox = FileBox.fromBuffer(avatar.data,"avatar.png")
+        room.say(fileBox)
+    });
 }
 /**
  * 获取微信用户信息

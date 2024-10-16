@@ -19,7 +19,7 @@ export const pluginsInit = (message, room, bot) => {
     // }
     if (text.includes("#插件菜单")) {
         getMenu(room, bot);
-        return;
+        return true;
     }
     // 遍历 emojiApi 列表
     // emojiApi.forEach(emoji => {
@@ -40,11 +40,13 @@ export const pluginsInit = (message, room, bot) => {
                     const splitText = text.substring(matchIndex + m.length);
                     log.info("插件关键字: " + splitText)
                     getEmoji(emoji, room, bot, splitText);
-                    return; // 假设只需要处理第一个匹配到的 emoji
+                     // 假设只需要处理第一个匹配到的 emoji
+                    return true;
                 }
             }
         }
     }
+    return false;
 
 }
 /**
