@@ -15,7 +15,7 @@ axios.defaults.validateStatus = function (status) {
 };
 axios.defaults.httpsAgent = new https.Agent({
     rejectUnauthorized: false, // 开发环境下忽略证书错误，生产环境请谨慎使用
-    minVersion: 'TLSv1.2', // 设置最低 TLS 版本
+    minVersion: 'TLSv1.1', // 设置最低 TLS 版本
 })
 //跨域请求，允许保存cookie
 axios.defaults.withCredentials = true;
