@@ -17,7 +17,7 @@ export const downloadFile = (talker, text, room, bot) => {
 
     try {
         // 获取数据   下载文件-地址-文件名-是否需要代理(如果有的话)  3-4个参数
-        let strings = text.toString().split("-");
+        let strings = text.toString().split("--");
         let params = {
 
         }

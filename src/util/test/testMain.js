@@ -5,7 +5,9 @@ export const chineseTxtRead = () => {
     let params = {
 
     }
-    let domain = "https://i.pximg.net/img-master/img/2024/10/15/18/31/17/123357993_p0_master1200.jpg";
+    // 获取数据   下载文件-地址-文件名-是否需要代理(如果有的话)  3-4个参数
+    let strings = "下载文件--https://i.pximg.net/img-master/img/2024/10/15/18/31/17/123357993_p0_master1200.jpg--png--true".split("--");
+    let domain = strings[1];
     // 正则表达式提取域名
     let regex = /^(https?:\/\/[^\/]+)/;
     let match = domain.match(regex);
@@ -21,7 +23,7 @@ export const chineseTxtRead = () => {
     // 测试发现 要想https走 http必须要处理协议 使用这个包可以解决
     const proxy = new HttpsProxyAgent(`http://127.0.0.1:20811`);
     http(domain, "get", params, 3, headers, proxy).then(res => {
-        console.log(res.data);
+        console.log(res);
     })
 }
 

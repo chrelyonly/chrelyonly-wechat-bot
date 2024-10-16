@@ -62,7 +62,7 @@ export function myOnMessage(roomName, message, room, bot) {
         return;
     }
     // 如果是下载文件指令 并且是3个参数那么则进行下载
-    if (text.includes("下载文件") && text.split("-").length >= 3) {
+    if (text.includes("下载文件") && text.split("--").length >= 3) {
         downloadFile(talker,text,room,bot)
         return;
     }
