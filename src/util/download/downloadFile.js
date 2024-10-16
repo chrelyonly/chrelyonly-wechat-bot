@@ -30,6 +30,8 @@ export const downloadFile = (talker, text, room, bot) => {
         }
         let proxy = strings.length > 3? new HttpsProxyAgent(`http://192.168.1.7:20811`):undefined;
         http(strings[1], "get", params, 3, headers, proxy).then(async res => {
+            log.info("1")
+            log.info(res)
             let data = res.data;
             // 压缩文件名
             let paths = new Date().Format("yyyyMMddHHmmss") + 'download.zip';
@@ -43,7 +45,9 @@ export const downloadFile = (talker, text, room, bot) => {
             // 尝试压缩
             try {
                 // 返回buffer
+                log.info("2")
                 let fileBox = FileBox.fromBuffer(data, strings[2]);
+                log.info("3")
                 // 保存文件到磁盘
                 await fileBox.toFile(path.join(tempDir, new Date().Format("yyyyMMddHHmmss") + "." + strings[2]));
 
