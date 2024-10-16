@@ -16,8 +16,8 @@ export const checkDnfHot = (bot)=>{
     http("https://bbs.colg.cn/plugin.php", "get", params, 1, headers).then(res => {
         let data = res.data.data
         // 热点数据
-        let recommendHot = data.recommend[0].list
-        if(lastUpdateTime === recommendHot[0].dateline){
+        let recommendHot = data.recommend["1"].list
+        if(lastUpdateTime === recommendHot["0"].dateline){
             return;
         }
         // 上次更新时间
@@ -57,10 +57,10 @@ export const checkDnfHot = (bot)=>{
 let lastFreeK6 = "";
 /**
  * 检查游戏比例
- * @param room
+ * @param bot
  * @param text
  */
-export const checkDnfFree = (room,text = null) =>{
+export const checkDnfFree = (bot,text = null) =>{
     let params = {
         gameId: "G10",
         groupId: "G5709P001",
@@ -79,7 +79,7 @@ export const checkDnfFree = (room,text = null) =>{
                 msg += "    最新比例: " + item.dealUnitPerPrice + ", 单价: " + item.dealPricePerUnit + "\n"
             })
             msg += "我要玩dnf,dnf真好玩\n"
-            room.say(msg)
+            sendMsg(bot,msg)
             return;
         }else{
 
@@ -98,7 +98,16 @@ export const checkDnfFree = (room,text = null) =>{
               }
         })
         msg += "我要玩dnf,dnf真好玩\n"
-        room.say(msg)
+        sendMsg(bot,msg)
     })
 }
 
+const sendMsg = (bot,msg) => {
+    // 寻找指定群
+    bot.Room.find({topic: '🍓酱の后🌸园  SVIP内部群1'}).then(room => {
+        if (room) {
+            room.say(msg)
+        }
+        room.say(msg)
+    })
+}

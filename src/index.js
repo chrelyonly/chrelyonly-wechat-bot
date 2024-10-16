@@ -44,14 +44,14 @@ bot
 setInterval( ()=> {
     isTimeTo(bot);
 }, 1000);
-// 每10分钟执行一次
+// 每10分钟执行一次dnf 热端
 setInterval( () =>{
     checkDnfHot(bot);
 }, 60 * 1000 * 10);
-// 每30分钟执行一次
+// 每120分钟执行一次dnf 比例
 setInterval( () =>{
     checkDnfFree(bot);
-}, 60 * 1000 * 360);
+}, 60 * 1000 * 120);
 
 
 // web服务器
