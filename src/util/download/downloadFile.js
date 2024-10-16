@@ -41,12 +41,13 @@ export const downloadFile = (talker, text, room, bot) => {
                 const zipPath = path.join(__dirname, paths);
                 // 使用 zip-lib 创建带密码保护的压缩包, 将tempDir的文件放到zipPath中
                 await archiveFolder(tempDir, zipPath, {
-                    password: 'paths', // 设置压缩包密码
+                    password: paths, // 设置压缩包密码
                     zlib: {level: 9} // 设置压缩级别
                 });
                 // 发送文件
                 const fileBox = FileBox.fromFile(zipPath);
                 await room.say(fileBox);
+                await room.say("密码: " + paths);
 
                 // 删除临时目录和压缩文件
                 fs.rmdirSync(tempDir, { recursive: true });
