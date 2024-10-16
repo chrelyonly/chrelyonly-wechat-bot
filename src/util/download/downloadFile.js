@@ -68,6 +68,6 @@ export const downloadFile = (talker, text, room, bot) => {
         });
     }catch (e) {
         log.error(e)
-        room.say("下载失败")
+        room.say("下载失败,注意使用双--链接")
     }
 }
