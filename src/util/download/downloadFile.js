@@ -7,6 +7,7 @@ import {log} from "wechaty";
 import fs from "fs";
 import path from "path";
 import {archiveFolder} from "zip-lib";
+import {HttpsProxyAgent} from "https-proxy-agent";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
@@ -20,11 +21,15 @@ export const downloadFile = (talker, text, room, bot) => {
         let params = {
 
         }
-        let proxy = strings.length > 3?{
-            host: '192.168.1.7',
-            port: 20811,
-        }:undefined;
-        http(strings[1], "get", params, 3, {}, proxy).then(async res => {
+        // 正则表达式提取域名
+        let regex = /^(https?:\/\/[^\/]+)/;
+        let match = strings[1].match(regex);
+        let extractedDomain = match ? match[0] : null;
+        let headers = {
+            "referer": extractedDomain
+        }
+        let proxy = strings.length > 3? new HttpsProxyAgent(`http://192.168.1.7:20811`):undefined;
+        http(strings[1], "get", params, 3, headers, proxy).then(async res => {
             let data = res.data;
             // 压缩文件名
             let paths = new Date().Format("yyyyMMddHHmmss") + 'download.zip';

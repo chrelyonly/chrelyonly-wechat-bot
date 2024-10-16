@@ -1,37 +1,29 @@
 import {http} from "../https.js";
-// 解释正则
-const readRegex = /<div class="tab-content">(.*?)<\/div>/s;
-// 笔画正则
-const writeRegex = /https:\/\/hanyu-word-gif\.cdn\.bcebos\.com\/[^\s'"]+/;
-
+import {HttpsProxyAgent} from "https-proxy-agent";
 // 怎么读
-export const chineseTxtRead = (room,bot,message) => {
+export const chineseTxtRead = () => {
     let params = {
-        wd: message,
-        ptype: "zici"
+
     }
-    http("https://hanyu.baidu.com/s","get",params,1,{}).then( res => {
-        const match = res.data.match(readRegex);
-        if (match) {
-            const text = match[match.length-1].replace(/<[^>]*>/g, '').trim(); // 去掉任何HTML标签
-            console.log(text)
-        }
+    let domain = "https://i.pximg.net/img-master/img/2024/10/15/18/31/17/123357993_p0_master1200.jpg";
+    // 正则表达式提取域名
+    let regex = /^(https?:\/\/[^\/]+)/;
+    let match = domain.match(regex);
+    let extractedDomain = match ? match[0] : null;
+    let headers = {
+        "referer": extractedDomain
+    }
+    // let proxy = {
+    //     host: '127.0.0.1',
+    //     port: 20811,
+    //     protocol: "http"
+    // }
+    // 测试发现 要想https走 http必须要处理协议 使用这个包可以解决
+    const proxy = new HttpsProxyAgent(`http://127.0.0.1:20811`);
+    http(domain, "get", params, 3, headers, proxy).then(res => {
+        console.log(res.data);
     })
 }
 
-// 怎么写
-export const chineseTxtWrite = (room,bot,message) => {
-    let params = {
-        wd: message,
-        ptype: "zici"
-    }
-    http("https://hanyu.baidu.com/s","get",params,1,{}).then( res => {
-        const match = res.data.match(writeRegex);
-        if (match) {
-            console.log(match[match.length-1])
-        }
-    })
-}
 
-chineseTxtRead(null,null,"灬")
-chineseTxtWrite(null,null,"灬")
+chineseTxtRead()

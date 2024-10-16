@@ -70,7 +70,7 @@ function requestApi3(url, method, params, type, headers,proxy) {
             ...params
         },
         responseType: 'arraybuffer',
-        proxy: proxy
+        httpsAgent: proxy
     })
 }
 
