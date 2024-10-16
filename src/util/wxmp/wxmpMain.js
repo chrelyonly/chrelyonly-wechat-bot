@@ -17,8 +17,10 @@ export const getUserInfo = (talker, message, room, bot) => {
     str += "签名: " + talker.payload.signature + "\n"
     room.say(str)
     talker.avatar().then(avatar => {
-        let fileBox = FileBox.fromBuffer(avatar.buffer,"avatar.png")
-        room.say(fileBox)
+        if (avatar.buffer.length > 0) {
+            let fileBox = FileBox.fromBuffer(avatar.buffer,"avatar.png")
+            room.say(fileBox)
+        }
     });
 }
 /**
