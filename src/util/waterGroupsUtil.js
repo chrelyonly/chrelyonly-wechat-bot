@@ -2,6 +2,7 @@
 // import {delCache, getCache, getCacheAll, setCache} from "./cacheUtil.js";
 // 改用sqlite
 import {saveWaterKing, selectAllWaterKing, selectWaterKing} from "../sqlite/waterKing/wechatKingSqlDbUtil.js";
+import {Response as logger} from "node-fetch";
 
 /**
  * 获取水群王
@@ -24,9 +25,12 @@ export const getWaterGroupsWin = (room, bot, number) => {
         let str = "";
         str = "今日" + new Date().Format("yyyy年MM月dd日") + "\n"
         str += "群名称:" + sortData[0].groupName + "\n"
-        number = sortData.length < number ? sortData.length : number;
-        for (let i = 0; i < number; i++) {
-            str += "第" + (i + 1) + "名:" + sortData[i].name + "-次数:" + sortData[i].number + "\n"
+        try {
+            for (let i = 0; i < number; i++) {
+                str += "第" + (i + 1) + "名:" + sortData[i].name + "-次数:" + sortData[i].number + "\n"
+            }
+        }catch (e) {
+            logger.error(e);
         }
         str += "水群王是:" + sortData[0].name + "-次数:" + sortData[0].number
         room.say(str);
