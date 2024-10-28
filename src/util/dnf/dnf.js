@@ -58,9 +58,10 @@ let lastFreeK6 = "";
 /**
  * 检查游戏比例
  * @param bot
+ * @param room
  * @param text
  */
-export const checkDnfFree = (bot,text = null) =>{
+export const checkDnfFree = (bot,room,text = null) =>{
     let params = {
         gameId: "G10",
         groupId: "G5709P001",
@@ -79,7 +80,8 @@ export const checkDnfFree = (bot,text = null) =>{
                 msg += "    最新比例: " + item.dealUnitPerPrice + ", 单价: " + item.dealPricePerUnit + "\n"
             })
             msg += "我要玩dnf,dnf真好玩\n"
-            sendMsg(bot,msg)
+            // sendMsg(bot,msg)
+            room.say(msg)
             return;
         }else{
 

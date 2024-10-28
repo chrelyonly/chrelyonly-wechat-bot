@@ -101,7 +101,7 @@ export function myOnMessage(roomName, message, room, bot) {
     }
     // dnf游戏比例
     if (text.includes("比例")) {
-        checkDnfFree(bot,1)
+        checkDnfFree(bot,room,1)
         return;
     }
     // 水群王

@@ -49,9 +49,9 @@ setInterval( () =>{
     checkDnfHot(bot);
 }, 60 * 1000 * 10);
 // 每120分钟执行一次dnf 比例
-setInterval( () =>{
-    checkDnfFree(bot);
-}, 60 * 1000 * 120);
+// setInterval( () =>{
+//     checkDnfFree(bot,null);
+// }, 60 * 1000 * 120);
 
 
 // web服务器
