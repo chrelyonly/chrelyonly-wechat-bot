@@ -24,8 +24,8 @@ export const getWaterGroupsWin = (room, bot, number) => {
         let str = "";
         str = "今日" + new Date().Format("yyyy年MM月dd日") + "\n"
         str += "群名称:" + sortData[0].groupName + "\n"
-        number = sortData.length < number ? sortData.length : number;
-        for (let i = 0; i < number; i++) {
+        // number = sortData.length < number ? sortData.length : number;
+        for (let i = 0; i < sortData.length; i++) {
             str += "第" + (i + 1) + "名:" + sortData[i].name + "-次数:" + sortData[i].number + "\n"
         }
         str += "水群王是:" + sortData[0].name + "-次数:" + sortData[0].number
