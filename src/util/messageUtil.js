@@ -16,7 +16,6 @@ import {chineseTxtRead, chineseTxtWrite} from "./hanyu/chineseTxtReadMain.js";
 import {unifiedVideo} from "./unifiedVideo/unifiedVideo.js";
 import {getSystemInfo} from "./systemInfo/systemInfo.js";
 import {downloadFile} from "./download/downloadFile.js";
-import {log} from "wechaty";
 
 // 自定义更据消息回复事件
 export function myOnMessage(roomName, message, room, bot) {
@@ -107,18 +106,7 @@ export function myOnMessage(roomName, message, room, bot) {
     }
     // 水群王
     if (text.includes("#水群王")) {
-        let data = text.split("-")[0]
-        let number = 10;
-        // 校验日期格式
-        try {
-            if (data.length > 1) {
-                number = data[1]
-            }
-        }catch (e) {
-            log.error(e);
-            number = 10
-        }
-        getWaterGroupsWin(room, bot, number)
+        getWaterGroupsWin(room, bot, 10)
         return;
     }
     // redis
