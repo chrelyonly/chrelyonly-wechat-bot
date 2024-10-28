@@ -35,9 +35,9 @@ export function myOnMessage(roomName, message, room, bot) {
     myDivMessageResponseMain(text, room, bot,talker);
     // 表情包制作接口
     let isPluginFlag = pluginsInit(message, room, bot)
-    if(isPluginFlag){
-        return;
-    }
+    // if(isPluginFlag){
+    //     // return;
+    // }
     // 获取所有接口名称
     if (text.includes("#获取信息A")) {
         getUserInfo(talker, message, room, bot)
@@ -164,10 +164,10 @@ export function myOnMessage(roomName, message, room, bot) {
         return;
     }
     // 打印服务器信息
-    if (text.includes("我的服务器")) {
-        vpsMain(room)
-        return;
-    }
+    // if (text.includes("我的服务器")) {
+    //     vpsMain(room)
+    //     return;
+    // }
     // 水群王
     if (text.includes("#导出聊天记录")) {
         let date = text.split("#导出聊天记录")[1]

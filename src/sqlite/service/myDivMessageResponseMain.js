@@ -12,7 +12,7 @@ export const myDivMessageResponseMain = (message, room, bot,talker)=>{
         for (let i = 0; i < res.data.length; i++) {
             let item = res.data[i]
             //     判断是否出现了关键字
-            if(item.keyword.includes(message)) {
+            if(message.includes(item.keyword)) {
                 // 查询自定义回复
                 selectMessageKeywordsResponseList(item.id).then( res2=>{
                     if (res2.length === 0) {

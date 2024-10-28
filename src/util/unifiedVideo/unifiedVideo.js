@@ -1,6 +1,7 @@
 import {http} from "../https.js";
 import {FileBox} from "file-box";
 import {log} from "wechaty";
+import {HttpsProxyAgent} from "https-proxy-agent";
 
 
 export const unifiedVideo = (talker, text, room, bot) => {
@@ -21,7 +22,8 @@ export const unifiedVideo = (talker, text, room, bot) => {
         let params = {
 
         }
-        http(res.data.url,"get",params,3,{}).then(res2 => {
+        let proxy = new HttpsProxyAgent(`http://192.168.1.7:20811`);
+        http(res.data.url,"get",params,3,{},proxy).then(res2 => {
             log.info("下载成功");
             let fileBox = FileBox.fromBuffer(res2.data,"video" + new Date().getTime() + ".mp4");
             room.say(fileBox)
