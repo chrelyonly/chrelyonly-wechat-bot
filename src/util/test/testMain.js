@@ -1,24 +1,19 @@
 import {http} from "../https.js";
 import {HttpsProxyAgent} from "https-proxy-agent";
 // 怎么读
-export const chineseTxtRead = () => {
-    // 获取数据   下载文件-地址-文件名-是否需要代理(如果有的话)  3-4个参数
-    let strings = "下载文件--https://i.pximg.net/img-master/img/2024/10/15/18/31/17/123357993_p0_master1200.jpg--png--true".toString().split("--");
-    let params = {
-
-    }
-    // 正则表达式提取域名
-    let regex = /^(https?:\/\/[^\/]+)/;
-    let match = strings[1].match(regex);
-    let extractedDomain = match ? match[0] : null;
-    let headers = {
-        "referer": extractedDomain
-    }
-    let proxy = strings.length > 3? new HttpsProxyAgent(`http://127.0.0.1:20811`):undefined;
-    http(strings[1], "get", params, 3, headers, proxy).then( async res => {
-        console.log(res);
-    })
-}
-
-
-chineseTxtRead()
+// export const chineseTxtRead = (room,bot,message) => {
+//     let params = {
+//         wd: message,
+//         ptype: "zici"
+//     }
+//     http("https://hanyu.baidu.com/s","get",params,1,{}).then( res => {
+//         const match = res.data.match(readRegex);
+//         if (match) {
+//             let tempText = match[match.length-1].replace(/<[^>]*>/g, '').trim(); // 去掉任何HTML标签
+//             tempText = tempText.replaceAll(" ","").trim();
+//             console.log(tempText)
+//         }
+//     })
+// }
+//
+// chineseTxtRead()
