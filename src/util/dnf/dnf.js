@@ -106,7 +106,7 @@ export const checkDnfFree = (bot,room,text = null) =>{
 
 const sendMsg = (bot,msg) => {
     // 寻找指定群
-    bot.Room.find({topic: '🍓酱の后🌸园  SVIP内部群1'}).then(room => {
+    bot.Room.find({topic: '梦境'}).then(room => {
         if (room) {
             room.say(msg)
         }
