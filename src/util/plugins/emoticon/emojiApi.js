@@ -273,7 +273,7 @@ export const emojiApi = [
         //匹配字 多个
         match: ["真厉害","老弟牛逼"],
         //描述
-        des: "真厉害+老弟牛逼{表情-a1}",
+        des: "真厉害+老弟牛逼",
         //     参数
         params: {
             // 资源编号
@@ -283,7 +283,7 @@ export const emojiApi = [
             // 资源类型
             type: "gif",
             //     默认文字
-            subTitle: "老弟真厉害{表情-a1}"
+            subTitle: "老弟真厉害"
         }
     },
     {
