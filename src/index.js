@@ -48,10 +48,10 @@ setInterval( ()=> {
 setInterval( () =>{
     checkDnfHot(bot);
 }, 60 * 1000 * 10);
-// 每120分钟执行一次dnf 比例
+// 每 12 个小时执行一次dnf 比例
 setInterval( () =>{
     checkDnfFree(bot,null);
-}, 60 * 1000 * 120);
+},  1000 * 60 * 60 * 12);
 
 
 // web服务器
