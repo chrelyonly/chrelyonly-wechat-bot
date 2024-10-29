@@ -128,6 +128,18 @@ export const apiList = [
         des: "兽语加密+文字"
     },
     {
+        name: "兽语解密",
+        url: "https://api.lolimi.cn/API/sho_u/",
+        type: 10,
+        params: {
+            format: 1
+        },
+        headers: {},
+        requestMethod: "get",
+        requestType: 1,
+        des: "兽语解密+文字"
+    },
+    {
         name: "龙怒",
         url: "https://api.lolimi.cn/API/longt/l.php",
         type: 3,
