@@ -93,12 +93,12 @@ export function onMessage(message, bot) {
                 log.info("不支持的消息类型")
                 return;
             }
-            if(msg === "系统开机"){
+            if(msg === "开机"){
                 botStatus = "on";
                 room.say("机器人已开启\n当前时间:\n" + new Date().Format("yyyy-MM-dd HH:mm:ss"))
                 return;
             }
-            if(msg === "系统关机"){
+            if(msg === "关机"){
                 botStatus = "off";
                 room.say("睡觉觉啦\n当前时间:\n" + new Date().Format("yyyy-MM-dd HH:mm:ss"))
                 return;
