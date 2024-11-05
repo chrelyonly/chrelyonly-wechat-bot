@@ -16,6 +16,7 @@ const timestamp = () =>{
     return new Date().Format("YYYYMMDDHHmmss");
 }
 
+// 这里太多异步操作,不想写箭头函数
 export const downloadFile = async (talker, text, room, bot) => {
     log.info("尝试下载文件.....");
     let tempDir;
