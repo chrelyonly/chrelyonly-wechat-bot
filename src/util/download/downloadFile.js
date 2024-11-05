@@ -1,79 +1,62 @@
-import {fileURLToPath} from "node:url";
-import {dirname} from "node:path";
-import {http} from "../https.js";
-import {FileBox} from "file-box";
-import {log} from "wechaty";
-
+import { fileURLToPath } from "node:url";
+import { dirname } from "node:path";
+import { http } from "../https.js";
+import { FileBox } from "file-box";
+import { log } from "wechaty";
 import fs from "fs";
 import path from "path";
-import {archiveFolder} from "zip-lib";
-import {HttpsProxyAgent} from "https-proxy-agent";
+import { archiveFolder } from "zip-lib";
+import { HttpsProxyAgent } from "https-proxy-agent";
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
+const timestamp = () => new Date().toISOString().replace(/[-:.TZ]/g, '').slice(0, 14);
 
-// 尝试在下文件并返回压缩包
-export const downloadFile = (talker, text, room, bot) => {
-    log.info("尝试下载文件.....")
+export const downloadFile = async (talker, text, room, bot) => {
+    log.info("尝试下载文件.....");
+    let tempDir;
+    let zipPath;
     try {
-        // 获取数据   下载文件-地址-文件名-是否需要代理(如果有的话)  3-4个参数
-        let strings = text.toString().split("--");
-        let params = {
+        const strings = text.toString().split("--");
+        const url = new URL(strings[1]);
+        const headers = { "referer": url.origin };
 
-        }
-        // 正则表达式提取域名
-        let regex = /^(https?:\/\/[^\/]+)/;
-        let match = strings[1].match(regex);
-        let extractedDomain = match ? match[0] : null;
-        let headers = {
-            "referer": extractedDomain
-        }
-        let proxy = strings.length > 3? new HttpsProxyAgent(`http://192.168.1.7:20811`):undefined;
-        http(strings[1], "get", params, 3, headers, proxy).then(async res => {
-            log.info("下载图片...")
-            let data = res.data;
-            // 压缩文件名
-            let paths = new Date().Format("yyyyMMddHHmmss") + 'download.zip';
-            // 创建临时文件夹
-            const tempDir = path.join(__dirname, 'temp');
-            if (!fs.existsSync(tempDir)) {
-                fs.mkdirSync(tempDir);
-            }
-            // 创建压缩包
-            const zipPath = path.join(__dirname, paths);
-            // 尝试压缩
+        const proxyUrl = strings.length > 3 ? process.env.PROXY_URL || 'http://192.168.1.7:20811' : undefined;
+        const proxy = proxyUrl ? new HttpsProxyAgent(proxyUrl) : undefined;
+
+        const res = await http(strings[1], "get", {}, 3, headers, proxy);
+        log.info("下载图片...");
+
+        tempDir = path.join(__dirname, 'temp');
+        await fs.promises.mkdir(tempDir, { recursive: true });
+
+        zipPath = path.join(__dirname, `${timestamp()}download.zip`);
+        const fileBox = FileBox.fromBuffer(res.data, strings[2]);
+
+        log.info("保存图片...");
+        await fileBox.toFile(path.join(tempDir, `${timestamp()}.${strings[2]}`));
+
+        log.info("压缩文件...");
+        await archiveFolder(tempDir, zipPath);
+
+        const fileBoxZip = FileBox.fromFile(zipPath);
+        log.info("发送图片...");
+        await room.say(fileBoxZip);
+
+    } catch (e) {
+        log.error('处理过程中发生错误:', e);
+        room.say("下载失败,请检查链接格式是否正确");
+    } finally {
+        // 清理临时文件
+        const cleanup = async () => {
             try {
-                // 返回buffer
-                let fileBox = FileBox.fromBuffer(data, strings[2]);
-                log.info("保存图片...")
-                // 保存文件到磁盘
-                await fileBox.toFile(path.join(tempDir, new Date().Format("yyyyMMddHHmmss") + "." + strings[2]));
-
-                // 使用 zip-lib 创建带密码保护的压缩包
-                await archiveFolder(tempDir, zipPath, {});
-
-                // 发送文件
-                const fileBoxZip = FileBox.fromFile(zipPath);
-                log.info("发送图片...")
-                await room.say(fileBoxZip); // 发送压缩文件
-
-            } catch (e) {
-                console.error('处理过程中发生错误:', e);
-            } finally {
-                // 删除临时目录和压缩文件
-                if (fs.existsSync(tempDir)) {
-                    fs.rmSync(tempDir, { recursive: true });
-                }
-                if (fs.existsSync(zipPath)) {
-                    fs.unlinkSync(zipPath);
-                }
+                await fs.promises.rm(tempDir, { recursive: true });
+                await fs.promises.unlink(zipPath);
+            } catch (cleanupError) {
+                log.error('清理文件时出错:', cleanupError);
             }
-        },err=>{
-            log.error(err)
-            room.say("下载失败,注意使用双--链接")
-        });
-    }catch (e) {
-        log.error(e)
-        room.say("下载失败,注意使用双--链接")
+        };
+        await cleanup();
     }
-}
+};
