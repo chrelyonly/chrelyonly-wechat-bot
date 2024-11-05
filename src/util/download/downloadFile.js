@@ -22,7 +22,7 @@ export const downloadFile = async (talker, text, room, bot) => {
         const url = new URL(strings[1]);
         const headers = { "referer": url.origin };
 
-        const proxyUrl = strings.length > 3 ? process.env.PROXY_URL || 'http://192.168.1.7:20811' : undefined;
+        const proxyUrl = strings.length > 3 ? 'http://192.168.1.7:20811' : undefined;
         const proxy = proxyUrl ? new HttpsProxyAgent(proxyUrl) : undefined;
 
         const res = await http(strings[1], "get", {}, 3, headers, proxy);
