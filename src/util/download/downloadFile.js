@@ -68,6 +68,9 @@ export const downloadFile = (talker, text, room, bot) => {
                     fs.unlinkSync(zipPath);
                 }
             }
+        },err=>{
+            log.error(err)
+            room.say("下载失败,注意使用双--链接")
         });
     }catch (e) {
         log.error(e)
