@@ -14,7 +14,7 @@ const __dirname = dirname(__filename);
 
 // 尝试在下文件并返回压缩包
 export const downloadFile = (talker, text, room, bot) => {
-
+    log.info("尝试下载文件.....")
     try {
         // 获取数据   下载文件-地址-文件名-是否需要代理(如果有的话)  3-4个参数
         let strings = text.toString().split("--");
