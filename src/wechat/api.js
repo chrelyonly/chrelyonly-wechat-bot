@@ -93,6 +93,14 @@ export function onMessage(message, bot) {
                 log.info("不支持的消息类型")
                 return;
             }
+            // 保存水群次数
+            saveWaterGroups(res, room, talker, 1)
+            // log.info('消息id:',message.id)
+            // log.info('消息类型:',txtType)
+            // log.info('群名称:',res + ",收到群消息:" + talker.name() + ",他/她/它说:" + msg)
+
+
+
             if(msg === "开机"){
                 botStatus = "on";
                 room.say("机器人已开启\n当前时间:\n" + new Date().Format("yyyy-MM-dd HH:mm:ss"))
@@ -107,11 +115,7 @@ export function onMessage(message, bot) {
             if(botStatus === "off"){
                 return;
             }
-            // 保存水群次数
-            saveWaterGroups(res, room, talker, 1)
-            // log.info('消息id:',message.id)
-            // log.info('消息类型:',txtType)
-            // log.info('群名称:',res + ",收到群消息:" + talker.name() + ",他/她/它说:" + msg)
+
             // 6 正常发送的图片
             if (txtType === 6) {
                 // 保存缓存
