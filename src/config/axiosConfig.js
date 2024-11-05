@@ -15,7 +15,18 @@ const createAxiosInstance = (config = {}) => {
         config => {
             return config;
         },
-        error => Promise.reject(error)
+        error => {
+            // 打印请求错误，包括请求地址、参数和请求头
+            console.error('请求错误:', {
+                url: error.config.url,
+                method: error.config.method,
+                headers: error.config.headers,
+                params: error.config.params,
+                data: error.config.data,
+                message: error.message,
+            });
+            return Promise.reject(error)
+        }
     );
 
     // 响应拦截器
@@ -23,11 +34,30 @@ const createAxiosInstance = (config = {}) => {
         res => {
             const status = res.status;
             if (status !== 200) {
+                // 打印响应错误
+                console.error(`响应错误: ${status}`, res.data, {
+                    url: res.config.url,
+                    method: res.config.method,
+                    headers: res.config.headers,
+                    params: res.config.params,
+                    data: res.config.data,
+                });
                 return Promise.reject(new Error(res.data));
             }
             return res;
         },
-        error => Promise.reject(new Error(error))
+        error => {
+            // 捕获并打印错误日志，包括请求的详细信息
+            console.error('请求异常:', {
+                url: error.config?.url,
+                method: error.config?.method,
+                headers: error.config?.headers,
+                params: error.config?.params,
+                data: error.config?.data,
+                message: error.message,
+            });
+            return Promise.reject(new Error(error))
+        }
     );
 
     return instance;
