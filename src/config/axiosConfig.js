@@ -1,36 +1,35 @@
-/**
- * 全站http配置
- *
- * axios参数说明
- * isSerialize是否开启form表单提交
- * isToken是否需要token
- */
 import axios from 'axios';
-// import https from 'https';
-// import http from "http";
-//默认超时时间
-axios.defaults.timeout = 60000;
-//返回其他状态码
-axios.defaults.validateStatus = function (status) {
-    return status >= 200 && status <= 500;
+
+// 创建独立的 axios 实例
+const createAxiosInstance = (config = {}) => {
+    const instance = axios.create({
+        timeout: 30000,
+        validateStatus: status => status >= 200 && status <= 500,
+        withCredentials: true,
+        ...config,  // 支持传入其他自定义配置
+    });
+
+    // 请求拦截器
+    instance.interceptors.request.use(
+        config => {
+            return config;
+        },
+        error => Promise.reject(error)
+    );
+
+    // 响应拦截器
+    instance.interceptors.response.use(
+        res => {
+            const status = res.status;
+            if (status !== 200) {
+                return Promise.reject(new Error(res.data));
+            }
+            return res;
+        },
+        error => Promise.reject(new Error(error))
+    );
+
+    return instance;
 };
-//跨域请求，允许保存cookie
-axios.defaults.withCredentials = true;
-//http request拦截
-axios.interceptors.request.use(config => {
-    return config
-}, error => {
-    return Promise.reject(error)
-});
-//http response 拦截
-axios.interceptors.response.use(res => {
-    //获取状态码
-    const status = res.status;
-    if (status !== 200) {
-        return Promise.resolve(new Error(res.data))
-    }
-    return res;
-}, error => {
-    return Promise.reject(new Error(error));
-});
-export default axios;
+
+export default createAxiosInstance();
