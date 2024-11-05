@@ -6,7 +6,8 @@ const createAxiosInstance = (config = {}) => {
         timeout: 30000,
         validateStatus: status => status >= 200 && status <= 500,
         withCredentials: true,
-        ...config,  // 支持传入其他自定义配置
+        ...config,
+        // 支持传入其他自定义配置
     });
 
     // 请求拦截器

@@ -54,7 +54,7 @@ function requestApi2(url, method, params, type, headers) {
         url: url,
         method: method,
         headers: headers,
-        data: params
+        data: params,
     })
 }
 
@@ -70,7 +70,19 @@ function requestApi3(url, method, params, type, headers,proxy) {
             ...params
         },
         responseType: 'arraybuffer',
-        httpsAgent: proxy
+        httpsAgent: proxy,
+
+        // 这里以后可能会以参数传进来.............................
+        onDownloadProgress: progressEvent  => {
+            const { loaded, total } = progressEvent;
+            const progress = Math.round((loaded * 100) / total); // 计算进度百分比
+            console.log(`下载进度: ${progress}%`);
+        },
+        onUploadProgress: progressEvent => {
+            const { loaded, total } = progressEvent;
+            const progress = Math.round((loaded * 100) / (total || 0));  // 计算进度百分比
+            console.log(`上传进度: ${progress}%`);
+        },
     })
 }
 
@@ -83,7 +95,18 @@ function requestApi4(url, method, params, type, headers) {
         method: method,
         headers: headers,
         data: params,
-        responseType: 'stream'
+        responseType: 'stream',
+        // 这里以后可能会以参数传进来.............................
+        onDownloadProgress: progressEvent  => {
+            const { loaded, total } = progressEvent;
+            const progress = Math.round((loaded * 100) / total); // 计算进度百分比
+            console.log(`下载进度: ${progress}%`);
+        },
+        onUploadProgress: progressEvent => {
+            const { loaded, total } = progressEvent;
+            const progress = Math.round((loaded * 100) / (total || 0));  // 计算进度百分比
+            console.log(`上传进度: ${progress}%`);
+        },
     })
 }
 
@@ -97,5 +120,16 @@ function requestApi5(url, method, params, type, headers) {
         headers: headers,
         data: params,
         responseType: 'arraybuffer',
+        // 这里以后可能会以参数传进来.............................
+        onDownloadProgress: progressEvent  => {
+            const { loaded, total } = progressEvent;
+            const progress = Math.round((loaded * 100) / total); // 计算进度百分比
+            console.log(`下载进度: ${progress}%`);
+        },
+        onUploadProgress: progressEvent => {
+            const { loaded, total } = progressEvent;
+            const progress = Math.round((loaded * 100) / (total || 0));  // 计算进度百分比
+            console.log(`上传进度: ${progress}%`);
+        },
     })
 }
