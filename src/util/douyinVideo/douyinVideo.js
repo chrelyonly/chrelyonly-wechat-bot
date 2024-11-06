@@ -23,9 +23,13 @@ export const douyinVideo = (talker, text, room, bot) => {
     }
     let headers = {
     }
-    http(api, "get", params, 1, headers).then(res => {
-        let fileBox = FileBox.fromUrl(res.data.data.url, {name: "oduyin.mp5"});
-        room.say(fileBox)
+    http(api, "get", params, 1, {}).then(res => {
+
+        log.info(res.data.data.url)
+        http(res.data.data.url, "get", {}, 3, {}).then(res2 => {
+            let fileBox = FileBox.fromBuffer(res2.data, "oduyin.mp4");
+            room.say(fileBox)
+        })
     }, err => {
         log.error(err)
         room.say("解析失败，请检查链接是否正确")
