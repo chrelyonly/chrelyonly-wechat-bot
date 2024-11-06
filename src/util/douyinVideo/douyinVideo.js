@@ -1,7 +1,7 @@
 import {http} from "../https.js";
 import {FileBox} from "file-box";
 import {log} from "wechaty";
-
+import "../newdate.js"
 
 /**
  * 返回匹配的域名
@@ -21,13 +21,15 @@ export const douyinVideo = (talker, text, room, bot) => {
     let params = {
         url: urls[0]
     }
-    let headers = {
-    }
     http(api, "get", params, 1, {}).then(res => {
 
         log.info(res.data.data.url)
-        http(res.data.data.url, "get", {}, 3, {}).then(res2 => {
-            let fileBox = FileBox.fromBuffer(res2.data, "oduyin.mp4");
+
+        let headers = {
+            Referer: res.data.data.url
+        }
+        http(res.data.data.url, "get", {}, 3, headers).then(res2 => {
+            let fileBox = FileBox.fromBuffer(res2.data, new Date().Format("yyyyMMddHHmmss") + "oduyin.mp4");
             room.say(fileBox)
         })
     }, err => {

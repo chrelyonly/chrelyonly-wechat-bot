@@ -1,12 +1,13 @@
 import "../newdate.js"
+import {http} from "../https.js";
+import {FileBox} from "file-box";
 
-function extractUrl(text) {
-    const regex = /https?:\/\/\S+/g;  // 匹配http或https开头的URL
-    return text.match(regex);  // 返回所有匹配的URL
+function text() {
+    let headers = {
+        Referer: "https://v3-web.douyinvod.com/b8a067a8bdd777466a4d8f58281e3045/672af6ad/video/tos/cn/tos-cn-ve-15/owNeIAySqOgTkBUAsXBaEI5LgQfKAzAAAvzCLh/?a=6383&ch=26&cr=3&dr=0&lr=all&cd=0%7C0%7C0%7C3&cv=1&br=656&bt=656&cs=0&ds=4&ft=pEaFx4hZffPdh6~kv1zNvAq-antLjrK5Xr6NRkaHxmBEljVhWL6&mime_type=video_mp4&qs=0&rc=OTc2NzY6PGU7aDM5NWg3NUBpM2Y5OGg6Zmo0cjMzNGkzM0AzYWMtMzRhXmIxMDA1XjQvYSNpczQ2cjQwZi1gLS1kLS9zcw%3D%3D&btag=c0000e00010000&cquery=100K_100o_100w_100B_100H&dy_q=1730858095&feature_id=46a7bb47b4fd1280f3d3825bf2b29388&l=202411060954551F63A7BC0B5FBA5D3699"
+    }
+    http("https://v3-web.douyinvod.com/b8a067a8bdd777466a4d8f58281e3045/672af6ad/video/tos/cn/tos-cn-ve-15/owNeIAySqOgTkBUAsXBaEI5LgQfKAzAAAvzCLh/?a=6383&ch=26&cr=3&dr=0&lr=all&cd=0%7C0%7C0%7C3&cv=1&br=656&bt=656&cs=0&ds=4&ft=pEaFx4hZffPdh6~kv1zNvAq-antLjrK5Xr6NRkaHxmBEljVhWL6&mime_type=video_mp4&qs=0&rc=OTc2NzY6PGU7aDM5NWg3NUBpM2Y5OGg6Zmo0cjMzNGkzM0AzYWMtMzRhXmIxMDA1XjQvYSNpczQ2cjQwZi1gLS1kLS9zcw%3D%3D&btag=c0000e00010000&cquery=100K_100o_100w_100B_100H&dy_q=1730858095&feature_id=46a7bb47b4fd1280f3d3825bf2b29388&l=202411060954551F63A7BC0B5FBA5D3699", "get", {}, 3, headers).then(res2 => {
+        console.log(res2);
+    })
 }
-
-// 示例用法
-const inputText = "3.58 复制打开抖音，看看【爱莉爱莉爱的作品】爱莉翻唱⟪雾里⟫‶你在雾里，我看不清你″# 崩坏3... https://v.douyin.com/iALmU4AB/ 01/07 vFu:/ t@e.bN";
-const urls = extractUrl(inputText);
-
-console.log(urls[0]);  // 输出：["https://v.douyin.com/iAL5b9aq/"]
+text();
