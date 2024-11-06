@@ -27,7 +27,7 @@ export const douyinVideo = (talker, text, room, bot) => {
     log.info(urls[0])
     http(api, "get", params, 1, headers).then(res => {
         log.info("解析结果")
-        log.info(res)
+        log.info(JSON.stringify(res))
         let fileBox = FileBox.fromUrl(res.data.data.url, {name: "oduyin.mp4"});
         room.say(fileBox)
     }, err => {
