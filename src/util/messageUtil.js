@@ -16,6 +16,7 @@ import {chineseTxtRead, chineseTxtWrite} from "./hanyu/chineseTxtReadMain.js";
 import {unifiedVideo} from "./unifiedVideo/unifiedVideo.js";
 import {getSystemInfo} from "./systemInfo/systemInfo.js";
 import {downloadFile} from "./download/downloadFile.js";
+import {caixukun} from "./caixukun/caixukun.js";
 
 
 
@@ -87,6 +88,11 @@ export function myOnMessage(roomName, message, room, bot) {
     // 涩图
     if (text.includes("涩图")) {
         r18(room, bot)
+        return;
+    }
+    // 小黑子真过分
+    if (text.includes("小黑子") || text.includes("黑粉") || text.includes("蔡徐坤") || text.includes("坤坤")) {
+        caixukun(room)
         return;
     }
     // 汉语拼音
