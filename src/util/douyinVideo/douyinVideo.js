@@ -22,13 +22,18 @@ export const douyinVideo = (talker, text, room, bot) => {
         url: urls[0]
     }
     http(api, "get", params, 1, {}).then(res => {
-
         log.info(res.data.data.url)
 
         let headers = {
             Referer: res.data.data.url
         }
         http(res.data.data.url, "get", {}, 3, headers).then(res2 => {
+            // let msg = "";
+            // msg += "解析成功: \n";
+            // msg += "标题: " + res.data.data.title + "\n";
+            // msg += "音乐地址: " + res.data.data.music_url + "\n";
+            // msg += "作者: " + res.data.data.author + "\n";
+            // room.say(msg)
             let fileBox = FileBox.fromBuffer(res2.data, new Date().Format("yyyyMMddHHmmss") + "oduyin.mp4");
             room.say(fileBox)
         })
