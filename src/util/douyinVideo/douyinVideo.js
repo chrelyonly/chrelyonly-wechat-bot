@@ -3,17 +3,28 @@ import {FileBox} from "file-box";
 import {log} from "wechaty";
 
 
+/**
+ * 返回匹配的域名
+ * @param text
+ * @returns {*}
+ */
+function extractUrl(text) {
+    const regex = /https?:\/\/\S+/g;  // 匹配http或https开头的URL
+    return text.match(regex);  // 返回所有匹配的URL
+}
+
 export const douyinVideo = (talker, text, room, bot) => {
 //     进行视频解析
-    let api = "https://douyin.dy114.com/parse/index";
+    let api = "https://api.pearktrue.cn/api/video/douyin/";
     let params = {
         pageUrl: text,
     }
+    const urls = extractUrl(text);
     let headers = {
-        "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"
+        url: urls[0]
     }
-    http(api, "post", params, 2, headers).then(res => {
-        let fileBox = FileBox.fromUrl(res.data.data.data.voideurl, {name: "oduyin.mp4"});
+    http(api, "get", params, 1, headers).then(res => {
+        let fileBox = FileBox.fromUrl(res.data.data.url, {name: "oduyin.mp4"});
         room.say(fileBox)
     }, err => {
         log.error(err)
