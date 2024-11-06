@@ -1,43 +1,34 @@
+import "../newdate.js"
+import {http} from "../https.js";
 // 游戏状态
 export let globalGameStatus = false;
-// 当前游戏
 let toGame = "";
-// 当前游戏状态
 let toGameStatus = false;
-// 支持的游戏列表
 const supportedGames = ["开始驾照考试"];
 
-// 题库（可以根据实际情况扩展）
-const questionBank = [
-    {
-        "id": "33885",
-        "question": "以欺骗、贿赂等不正当手段取得机动车登记的，申请人多久不得申请机动车登记？",
-        "options": "A:三年内, B:终身, C:五年内, D:一年内",
-        "imageurl": "",
-        "analysis": "以欺骗、贿赂等手段取得机动车登记，是违法行为，会被收缴登记证书，三年内不得再次申请机动车登记。《道路交通安全法实施条例》第一百零三条：以欺骗、贿赂等不正当手段取得机动车登记或者驾驶许可的，收缴机动车登记证书、号牌、行驶证或者机动车驾驶证，撤销机动车登记或者机动车驾驶许可；申请人在3年内不得申请机动车登记或者机动车驾驶许可。",
-        "key": "a",
-        "A": "三年内",
-        "B": "终身",
-        "C": "五年内",
-        "D": "一年内"
-    },
-    // 添加更多问题
-];
-
-// 当前题目索引
 let currentQuestionIndex = 0;
-
-// 玩家信息
-let gamePoint = [
-    {
-        gameId: "",   // 玩家ID（或用户名）
-        gameName: "",  // 玩家名称
-        point: 0,      // 当前分数
-    }
-];
-
-// 全局答题计数器
+let gamePoint = [];
 let totalAnsweredQuestions = 0;
+let lastInfo = {}
+/**
+ * 从网络获取下一道题目
+ * 假设每次调用此函数会从网络返回一题
+ */
+const fetchQuestion = async () => {
+    try {
+        // 模拟API请求，假设返回的数据格式与题库一致
+        let res = await http("https://api.yujn.cn/api/kemu.php?type=json", "get", {}, 1, {});
+        // 返回获取到的题目
+        lastInfo = res.data;
+        return res.data;
+    } catch (error) {
+        console.error("获取题目失败", error);
+        return null; // 返回null表示请求失败
+    }
+}
+const lastQuestion = () => {
+    return lastInfo;
+}
 
 /**
  * 回到上一个游戏中
@@ -68,7 +59,7 @@ export const joinGame = (message, room, talker, text) => {
  * @param talker 机器人回复对象
  * @param text 用户输入的答案
  */
-const startDrivingTest = (message, room, talker, text) => {
+const startDrivingTest = async (message, room, talker, text) => {
     // 查找玩家信息（假设玩家信息通过 talker 获取）
     let player = gamePoint.find(p => p.gameId === talker.id);
     if (!player) {
@@ -82,7 +73,12 @@ const startDrivingTest = (message, room, talker, text) => {
     }
 
     // 获取当前题目
-    const currentQuestion = questionBank[currentQuestionIndex];
+    const currentQuestion = lastQuestion();
+
+    if (!currentQuestion) {
+        room.say("无法获取新的题目，请稍后再试。");
+        return;
+    }
 
     // 判断答案是否正确
     if (currentQuestion.key === text.toLowerCase()) {
@@ -90,7 +86,9 @@ const startDrivingTest = (message, room, talker, text) => {
         room.say("恭喜你，答对了！获得一分");
         room.say(`题目解析：${currentQuestion.analysis}`);
     } else {
+        room.say("你的答案，" + text.toLowerCase());
         room.say("回答错误，请再试一次！");
+        return;
     }
 
     // 更新全局答题计数器
@@ -100,9 +98,8 @@ const startDrivingTest = (message, room, talker, text) => {
     if (totalAnsweredQuestions >= 10) {
         endGame(message, room);
     } else {
-        // 更新题目索引，给出下一题
-        currentQuestionIndex++;
-        nextQuestion(message, room);
+        // 给出下一题
+        await nextQuestion(message, room);
     }
 };
 
@@ -111,16 +108,18 @@ const startDrivingTest = (message, room, talker, text) => {
  * @param message 消息对象
  * @param room 房间对象
  */
-const nextQuestion = (message, room) => {
-    // 确保还有问题可以给出
-    if (currentQuestionIndex < questionBank.length) {
-        const nextQuestion = questionBank[currentQuestionIndex];
-        room.say(`下一题：${nextQuestion.question}`);
-        room.say(`选项：${nextQuestion.A}, ${nextQuestion.B}, ${nextQuestion.C}, ${nextQuestion.D}`);
-    } else {
-        room.say("所有题目已答完！");
+const nextQuestion = async (message, room) => {
+    // 获取下一道题
+    const nextQuestion = await fetchQuestion();
+
+    if (!nextQuestion) {
+        room.say("无法获取新的题目，请稍后再试。");
         endGame(message, room);
+        return;
     }
+
+    room.say(`下一题：${nextQuestion.question}`);
+    room.say(`选项：${nextQuestion.options}`);
 };
 
 /**
@@ -143,7 +142,7 @@ const endGame = (message, room) => {
  * @param room 房间对象
  * @param bot 机器人回复对象
  */
-export const startGame = (room, bot) => {
+export const startGame = async (room, bot) => {
     globalGameStatus = true;
     toGame = "驾照考试";
     toGameStatus = true;
@@ -151,6 +150,48 @@ export const startGame = (room, bot) => {
     room.say("驾照考试游戏已开始！你可以开始答题。");
 
     // 给出第一题
-    nextQuestion(room, room);
+    await nextQuestion(room, room);
 };
+
+// 模拟开始游戏
+startGame({
+    say: (msg) => {
+        console.log("模拟回复:" + msg);
+    }
+},{}).then( res=>{
+    // 模拟答题
+    joinGame({},{
+        say: (msg) => {
+            console.log("模拟答题:" + msg);
+        }
+    },{
+        id: 1,
+        name: ()=>{ return "cm" }
+    },"B");
+    joinGame({},{
+        say: (msg) => {
+            console.log("模拟答题:" + msg);
+        }
+    },{
+        id: 1,
+        name: ()=>{ return "cm" }
+    },"A");
+    joinGame({},{
+        say: (msg) => {
+            console.log("模拟答题:" + msg);
+        }
+    },{
+        id: 1,
+        name: ()=>{ return "cm" }
+    },"C");
+    joinGame({},{
+        say: (msg) => {
+            console.log("模拟答题:" + msg);
+        }
+    },{
+        id: 1,
+        name: ()=>{ return "cm" }
+    },"D");
+
+})
 

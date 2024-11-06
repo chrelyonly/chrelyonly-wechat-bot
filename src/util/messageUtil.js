@@ -17,12 +17,23 @@ import {unifiedVideo} from "./unifiedVideo/unifiedVideo.js";
 import {getSystemInfo} from "./systemInfo/systemInfo.js";
 import {downloadFile} from "./download/downloadFile.js";
 
+
+
+
+
+
 // 自定义更据消息回复事件
 export function myOnMessage(roomName, message, room, bot) {
     // 根据消息内容回复
     let text = message.text();
     // 获取发送者
     let talker = message.talker()
+
+    // 判断游戏状态
+    // if (globalGameStatus){
+    //     // 进入游戏
+    //     joinGame(message, room, talker,text);
+    // }
     if (text.includes("#菜单")) {
         let menu = "菜单：\n";
         for (let i = 0; i < getAllApiName().length; i++) {
