@@ -158,11 +158,11 @@ export function myOnMessage(roomName, message, room, bot) {
         return;
     }
     // ssl
-    if (text.includes("ssl")) {
-        let msg = "ssl申请工具\n食用教程\nhttps://temp-img.chrelyonly.cn/ssl\n下载地址: \nhttp://47.102.159.60:11725/down/XWm4GaT0AELA";
-        room.say(msg)
-        return;
-    }
+    // if (text.includes("ssl")) {
+    //     let msg = "ssl申请工具\n食用教程\nhttps://temp-img.chrelyonly.cn/ssl\n下载地址: \nhttp://47.102.159.60:11725/down/XWm4GaT0AELA";
+    //     room.say(msg)
+    //     return;
+    // }
     // 软通牒
     if (text.includes("uiso") || text.includes("软通牒")) {
         let msg = "uiso下载地址: \nhttp://47.102.159.60:11725/down/iJNz3Pkbj7wK";
