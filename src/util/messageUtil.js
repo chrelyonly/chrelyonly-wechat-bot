@@ -91,7 +91,7 @@ export function myOnMessage(roomName, message, room, bot) {
         return;
     }
     // 小黑子真过分
-    if (text.includes("小黑子") || text.includes("黑粉") || text.includes("蔡徐坤") || text.includes("坤坤")) {
+    if (text.includes("黑粉") || text.includes("蔡徐坤") || text.includes("坤坤")) {
         caixukun(room)
         return;
     }
