@@ -103,7 +103,7 @@ export function onMessage(message, bot) {
 
             if(msg === "开机"){
                 botStatus = "on";
-                room.say("机器人已开启\n当前时间:\n" + new Date().Format("yyyy-MM-dd HH:mm:ss"))
+                room.say("起床床啦\n当前时间:\n" + new Date().Format("yyyy-MM-dd HH:mm:ss"))
                 return;
             }
             if(msg === "关机"){
