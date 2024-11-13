@@ -128,13 +128,13 @@ export const emojiApi = [
         // 编号
         id: 8,
         // 名称
-        name: '床边的狗',
+        name: '窗边的狗',
         // 路径
         path: '/emojiBuild',
         //匹配字 多个
-        match: ["床边的狗"],
+        match: ["窗边的狗"],
         //描述
-        des: "床边的狗+文字",
+        des: "窗边的狗+文字",
         //     参数
         params: {
 
