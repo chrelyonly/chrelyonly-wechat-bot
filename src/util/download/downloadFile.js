@@ -29,22 +29,24 @@ export const downloadFile = async (talker, text, room) => {
         log.info("下载图片完成...");
 
         // 保存临时文件
-        const tempDir = path.join(STATIC_DIR, `${timestamp()}temp`);
+        const paths = `${timestamp()}temp`;
+        const tempDir = path.join(STATIC_DIR, paths);
         await fs.promises.mkdir(tempDir, { recursive: true });
-        const filePath = path.join(tempDir, `${timestamp()}.${strings[2]}`);
+        const paths1 = `${timestamp()}.${strings[2]}`;
+        const filePath = path.join(tempDir, paths1);
         const fileBox = FileBox.fromBuffer(res.data, strings[2]);
         await fileBox.toFile(filePath);
         log.info("文件已保存:", filePath);
 
         // 压缩文件
-        const zipPath = path.join(STATIC_DIR, `${timestamp()}download.zip`);
-        await archiveFolder(tempDir, zipPath);
-        log.info("文件已压缩:", zipPath);
+        // const zipPath = path.join(STATIC_DIR, `${timestamp()}download.zip`);
+        // await archiveFolder(tempDir, zipPath);
+        // log.info("文件已压缩:", zipPath);
 
         // 发送文件
         // const fileBoxZip = FileBox.fromFile(zipPath);
         // await room.say(fileBoxZip);
-        log.info("文件已转存: 点击下载 https://bot-api.dj.non-human-research-center.top/static/temp/download/" + zipPath);
+        log.info("文件已转存: 点击下载 https://bot-api.dj.non-human-research-center.top/static/temp/download/" + paths + paths1);
 
     } catch (e) {
         log.error("处理过程中发生错误:", e);
