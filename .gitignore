@@ -26,3 +26,4 @@ yarn-error.log*
 *.lock
 cm.memory-card.json.js
 *.memory-card*
+static/temp
