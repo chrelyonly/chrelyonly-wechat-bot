@@ -47,6 +47,7 @@ export const downloadFile = async (talker, text, room) => {
         // const fileBoxZip = FileBox.fromFile(zipPath);
         // await room.say(fileBoxZip);
         log.info("文件已转存: 点击下载 https://bot-api.dj.non-human-research-center.top/temp/download/" + paths + paths1);
+        room.say("文件已转存: 点击下载 https://bot-api.dj.non-human-research-center.top/temp/download/" + paths + paths1);
 
     } catch (e) {
         log.error("处理过程中发生错误:", e);
