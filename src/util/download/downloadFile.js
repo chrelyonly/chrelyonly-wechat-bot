@@ -44,8 +44,10 @@ export const downloadFile = async (talker, text, room) => {
         // log.info("文件已压缩:", zipPath);
 
         // 发送文件
-        log.info("文件已转存: 点击下载 https://bot-api.dj.non-human-research-center.top/temp/download/" + paths + "/" + paths1);
-        room.say("文件已转存: 点击下载 https://bot-api.dj.non-human-research-center.top/temp/download/" + paths + "/" + paths1);
+        log.info("文件已转存地址1: 点击下载 https://bot-api.dj.non-human-research-center.top/temp/download/" + paths + "/" + paths1);
+        room.say("文件已转存地址1: 点击下载 https://bot-api.dj.non-human-research-center.top/temp/download/" + paths + "/" + paths1);
+        log.info("文件已转存地址2: 点击下载 https://web-bot.frp.chrelyonly.cn/temp/download/" + paths + "/" + paths1);
+        room.say("文件已转存地址2: 点击下载 https://web-bot.frp.chrelyonly.cn/temp/download/" + paths + "/" + paths1);
         const fileBoxZip = FileBox.fromFile(filePath);
         await room.say(fileBoxZip);
 
