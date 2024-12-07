@@ -1,6 +1,6 @@
-import {Database} from "../sqliteMain.js";
-import {messageKeywordsDbPath, messageKeywordsResponse} from "./myDivMessageResponseSqlDbUtil.js";
-import {R} from "../../web/util/R.js";
+import { Database } from "../sqliteMain.js";
+import { messageKeywordsDbPath, messageKeywordsResponse } from "./myDivMessageResponseSqlDbUtil.js";
+import { R } from "../../web/util/R.js";
 
 /**
  * 新增修改保存关键字
@@ -12,92 +12,97 @@ import {R} from "../../web/util/R.js";
  * @param open 开关 01
  * @param id id如果有的话
  */
-export const saveOrUpdateMessageKeywords = async (sort,label,keyword,open,id) => {
-    return new Promise(async (resolve, reject) => {
-        await messageKeywordsResponse()
-        const db = new Database(messageKeywordsDbPath());
-        try {
-            // 先查询判断是否存在
-            await selectMessageKeywords(keyword).then(async (res) => {
-                // 如果修改成已经存在的关键字
-                if (res && (res.id !== id)) {
-                    resolve(R.fail("当前已经存在关键字:" + keyword))
-                    return;
-                }
-                if (id) {
-                    // 存在则更新
-                    await db.update(`UPDATE messageKeywords
-                                     SET sort       = ?,
-                                         label      = ?,
-                                         keyword    = ?,
-                                         updateTime = ?,
-                                         open       = ?
-                                     WHERE id = ?`, [sort, label, keyword, new Date().Format("yyyy-MM-dd HH:mm:ss"), open, id]);
-                } else {
-                    // 不存在则插入
-                    await db.insert(`INSERT INTO messageKeywords (sort, label, keyword, updateTime, createTime, open, time)
-                                     VALUES (?, ?, ?, ?, ?, ?,
-                                             ?)`, [sort, label, keyword, new Date().Format("yyyy-MM-dd HH:mm:ss"), new Date().Format("yyyy-MM-dd HH:mm:ss"), open, new Date().Format("yyyyMMddHHmmss")]);
-                }
-            })
-            resolve(R.success("操作成功"))
-        } catch (err) {
-            console.error('操作失败', err);
-            reject(R.fail("操作失败" + err))
-        } finally {
-            // 关闭数据库连接
-            await db.close();
-        }
-    })
-}
+export const saveOrUpdateMessageKeywords = (sort, label, keyword, open, id) => {
+    return new Promise((resolve, reject) => {
+        messageKeywordsResponse().then(() => {
+            const db = new Database(messageKeywordsDbPath());
+            selectMessageKeywords(keyword)
+                .then(res => {
+                    if (res && res.id !== id) {
+                        resolve(R.fail("当前已经存在关键字:" + keyword));
+                        return;
+                    }
+
+                    const currentTime = new Date().toISOString().replace("T", " ").slice(0, 19);
+                    if (id) {
+                        db.update(
+                            `UPDATE messageKeywords SET sort = ?, label = ?, keyword = ?, updateTime = ?, open = ? WHERE id = ?`,
+                            [sort, label, keyword, currentTime, open, id]
+                        )
+                            .then(() => resolve(R.success("操作成功")))
+                            .catch(err => reject(R.fail("操作失败:" + err)));
+                    } else {
+                        db.insert(
+                            `INSERT INTO messageKeywords (sort, label, keyword, updateTime, createTime, open, time)
+                             VALUES (?, ?, ?, ?, ?, ?, ?)`,
+                            [sort, label, keyword, currentTime, currentTime, open, Date.now().toString()]
+                        )
+                            .then(() => resolve(R.success("操作成功")))
+                            .catch(err => reject(R.fail("操作失败:" + err)));
+                    }
+                })
+                .catch(err => reject(R.fail("操作失败:" + err)))
+                .finally(() => db.close());
+        });
+    });
+};
 
 /**
  * 删除
  */
-export const delMessageKeywords = async (id) => {
-    await messageKeywordsResponse()
-    const db = new Database(messageKeywordsDbPath());
-    try {
-        return await db.selectOne(`delete from messagekeywords where id IN(?)`, [id]);
-    } catch (err) {
-        console.error('操作失败', err);
-    } finally {
-        // 关闭数据库连接
-        await db.close();
-    }
-}
+export const delMessageKeywords = (id) => {
+    return new Promise((resolve, reject) => {
+        messageKeywordsResponse().then(() => {
+            const db = new Database(messageKeywordsDbPath());
+            db.selectOne(`DELETE FROM messagekeywords WHERE id IN(?)`, [id])
+                .then(res => resolve(res))
+                .catch(err => reject(err))
+                .finally(() => db.close());
+        });
+    });
+};
 
 /**
  * 查询关键字,单条
  */
-export const selectMessageKeywords = async (keyword) => {
-    await messageKeywordsResponse()
-    const db = new Database(messageKeywordsDbPath());
-    try {
-        return await db.selectOne(`SELECT * FROM messageKeywords WHERE keyword like ?`, ["%" + keyword + "%"]);
-    } catch (err) {
-        console.error('操作失败', err);
-    } finally {
-        // 关闭数据库连接
-        await db.close();
-    }
-}
+export const selectMessageKeywords = (keyword) => {
+    return new Promise((resolve, reject) => {
+        messageKeywordsResponse().then(() => {
+            const db = new Database(messageKeywordsDbPath());
+            db.selectOne(`SELECT * FROM messageKeywords WHERE keyword LIKE ?`, [`%${keyword}%`])
+                .then(resolve)
+                .catch(err => {
+                    console.error("操作失败", err);
+                    reject(err);
+                })
+                .finally(() => db.close());
+        });
+    });
+};
 
 /**
  * 查询关键字,list
  */
-export const selectMessageKeywordList = async (current, size) => {
-    await messageKeywordsResponse();
-    const db = new Database(messageKeywordsDbPath());
-    const offset = (current - 1) * size; // 计算偏移量
-    try {
-        let count = await db.count(`SELECT count(*) as count FROM messageKeywords `, [])
-        let data =  await db.selectAll(`SELECT * FROM messageKeywords LIMIT ?, ?`, [offset, size]);
-        return {count:count[0]['count'],data:data}
-    } catch (err) {
-        console.error('操作失败', err);
-    } finally {
-        // 关闭数据库连接
-        await db.close();
-    }
-}
+export const selectMessageKeywordList = (current, size) => {
+    return new Promise((resolve, reject) => {
+        messageKeywordsResponse().then(() => {
+            const db = new Database(messageKeywordsDbPath());
+            const offset = (current - 1) * size;
+            db.count(`SELECT count(*) as count FROM messageKeywords`, [])
+                .then(countResult => {
+                    const count = countResult[0]["count"];
+                    db.selectAll(`SELECT * FROM messageKeywords LIMIT ?, ?`, [offset, size])
+                        .then(data => resolve({ count, data }))
+                        .catch(err => {
+                            console.error("查询数据失败", err);
+                            reject(err);
+                        })
+                        .finally(() => db.close());
+                })
+                .catch(err => {
+                    console.error("查询总数失败", err);
+                    reject(err);
+                });
+        });
+    });
+};
