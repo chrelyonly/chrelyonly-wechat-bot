@@ -106,7 +106,11 @@ export const saveWaterKing = (groupName, nameId, name, roomId, number) => {
  * 查询水群王记录
  */
 export const selectWaterKing = (nameId, roomId) => {
-    return executeDbQuery(db => db.selectOne('SELECT * FROM waterKing WHERE nameId = ? AND roomId = ? AND dateDay = ?', [nameId, roomId, new Date().Format('yyyyMMdd')]), []);
+    return new Promise((resolve, reject) => {
+        sqlDbUtilInit().then(()=>{
+            resolve(executeDbQuery(db => db.selectOne('SELECT * FROM waterKing WHERE nameId = ? AND roomId = ? AND dateDay = ?', [nameId, roomId, new Date().Format('yyyyMMdd')]), []))
+        })
+    })
 };
 
 /**
