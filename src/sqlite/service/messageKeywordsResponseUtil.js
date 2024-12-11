@@ -35,12 +35,16 @@ export const saveOrUpdateMessageKeywordsResponse = (sort, level, parentId, conte
 };
 
 export const delMessageKeywords = (id) => {
-    messageKeywordsResponse().then(() => {
-        const db = new Database(messageKeywordsResponseDbPath());
-        db.selectOne(`DELETE FROM messageKeywordsResponse WHERE id IN(?)`, [id])
-            .then(res => console.log("删除成功", res))
-            .catch(err => console.error("操作失败", err))
-            .finally(() => db.close());
+    return new Promise((resolve, reject) => {
+        messageKeywordsResponse().then(() => {
+            const db = new Database(messageKeywordsResponseDbPath());
+            db.selectOne(`DELETE FROM messageKeywordsResponse WHERE id IN(?)`, [id])
+                .then(res => {
+                    resolve(R.success("操作成功"));
+                })
+                .catch(err => console.error("操作失败", err))
+                .finally(() => db.close());
+        });
     });
 };
 

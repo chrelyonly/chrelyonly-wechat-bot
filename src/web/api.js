@@ -4,7 +4,7 @@ import {
     messageKeywordsApiSubmit
 } from "./messageKeywordsApi/messageKeywordsApi.js";
 import {
-    messageKeywordsResponseApiList,
+    messageKeywordsResponseApiList, messageKeywordsResponseApiRemove,
     messageKeywordsResponseApiSubmit
 } from "./messageKeywordsResponseApi/messageKeywordsResponseApi.js";
 
@@ -19,4 +19,5 @@ export const webApi = (webApp,bot) => {
 //   注册messageKeywordsResponse value接口
     messageKeywordsResponseApiList(webApp)
     messageKeywordsResponseApiSubmit(webApp)
+    messageKeywordsResponseApiRemove(webApp)
 }

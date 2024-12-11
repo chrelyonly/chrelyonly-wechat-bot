@@ -1,4 +1,5 @@
 import {
+    delMessageKeywords,
     saveOrUpdateMessageKeywordsResponse,
     selectMessageKeywordsResponseList,
     selectMessageKeywordsResponsePage
@@ -59,6 +60,30 @@ export const messageKeywordsResponseApiDebug = (app) => {
             // },err=>{
             //     res.send(err)
             // })
+        }catch (error) {
+            console.log(error);
+            res.send(R.fail(error.message))
+        }
+    });
+}
+
+
+/**
+ * 操作接口
+ */
+export const messageKeywordsResponseApiRemove = (app) => {
+    app.post('/messageKeywordsResponse/remove', (req, res) => {
+        try {
+            let {id} = req.body;
+            if(!id){
+                res.send(R.fail("参数错误未找到"))
+                return
+            }
+            delMessageKeywords(id).then((response ) => {
+                res.send(response)
+            },err=>{
+                res.send(err)
+            })
         }catch (error) {
             console.log(error);
             res.send(R.fail(error.message))
